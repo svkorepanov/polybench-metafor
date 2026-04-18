@@ -1,0 +1,3 @@
+*.o
+*.exe
+*.preproc.f90
