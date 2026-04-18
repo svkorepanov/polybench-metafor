@@ -1,29 +1,42 @@
-#!/bin/sh
-## create_pped_version.sh for  in /Users/pouchet
-##
-## Made by Louis-Noel Pouchet
-## Contact: <pouchet@cse.ohio-state.edu>
-##
-## Started on  Mon Oct 31 16:20:01 2011 Louis-Noel Pouchet
-## Last update Mon Oct 31 20:42:35 2011 Louis-Noel Pouchet
-##
+#!/bin/bash
 
 if [ $# -lt 1 ]; then
-    echo "Usage: create_pped_version.sh <file.F90> [gcc -E flags]";
-    exit 1;
-fi;
-args="$2";
-file="$1";
-head -n 8 $file | sed 's/F90/f90/' > .__poly_top.f;
-tail -n +9 $file > .__poly_bottom.F;
-filename=`echo "$file" | sed -e "s/\(.*\).F90/\1/1"`;
-filenameorig=`basename $file`;
-benchdir=`dirname "$file"`;
-gcc -E .__poly_bottom.F -I$benchdir $args 2>/dev/null > .__tmp_poly.f
-#echo "gcc -E .__poly_bottom.f -I$benchdir -Iutilities $args 2>/tmp/moh > .__tmp_poly.f"
-sed -e "/^[ ]*$/d" .__tmp_poly.f | sed -e '/^#/d' | sed -e "s~.__poly_bottom.f~$filenameorig~g" > .__poly_bottom.f;
-cat .__poly_top.f > $filename.preproc.f90;
-#echo "#include <polybench.h>\n" >> $filename.preproc.c;
-cat .__poly_bottom.f >> $filename.preproc.f90;
-rm -f .__tmp_poly.f .__poly_bottom.f .__poly_top.f .__poly_bottom.F ;
+    echo "Usage: $0 <file.F> [preprocessor flags]"
+    exit 1
+fi
 
+file="$1"
+args="$2"
+
+filename=$(echo "$file" | sed 's/\.[^.]*$//')
+head -n 8 "$file" > .__poly_top.f
+tail -n +9 "$file" > .__poly_bottom.F
+benchdir=$(dirname "$file")
+
+# 1. Run the preprocessor
+# We use 'cpp' to avoid the f951 dependency issue found earlier
+cpp -P -traditional-cpp .__poly_bottom.F -I "$benchdir" $args > .__tmp_poly.f
+
+if [ $? -ne 0 ]; then
+    echo "  [!] Error: Preprocessing failed for $file"
+    rm -f .__tmp_poly.f .__poly_bottom.f .__poly_top.f .__poly_bottom.F
+    exit 1
+fi
+
+# 2. Clean up and Modernize the code
+# - Remove preprocessor markers and empty lines
+# - Replace IARGC() with COMMAND_ARGUMENT_COUNT()
+# - Replace '' with ' ' (a space) to fix the empty character constant error
+# - Replace GETARG with GET_COMMAND_ARGUMENT for standard compliance
+#-e "s/''/' '/g" \
+sed -e '/^#/d' \
+    -e '/^[ ]*$/d' \
+    -e 's/IARGC()/COMMAND_ARGUMENT_COUNT()/gI' \
+    -e 's/CALL GETARG/CALL GET_COMMAND_ARGUMENT/gI' \
+    .__tmp_poly.f > .__poly_bottom.f
+
+# 3. Assemble
+cat .__poly_top.f > "${filename}.preproc.f90"
+cat .__poly_bottom.f >> "${filename}.preproc.f90"
+
+rm -f .__tmp_poly.f .__poly_bottom.f .__poly_top.f .__poly_bottom.F
