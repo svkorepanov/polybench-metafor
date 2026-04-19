@@ -1,3 +1,4 @@
 *.o
 *.exe
 *.preproc.f90
+*.output.txt

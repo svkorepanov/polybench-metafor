@@ -8,7 +8,7 @@ UTILITIES_DIR="$(pwd)/utilities"
 
 # IMPORTANT: These must match the flags you used during preprocessing
 # Especially -DPOLYBENCH_TIME
-PARGS="-DPOLYBENCH_TIME -DMINI_DATASET -DPOLYBENCH_DUMP_ARRAYS"
+PARGS="-DMINI_DATASET -DPOLYBENCH_DUMP_ARRAYS"
 
 echo "Step 1: Compiling C utilities..."
 $CC -c $PARGS "$UTILITIES_DIR/fpolybench.c" -I "$UTILITIES_DIR" -o "$UTILITIES_DIR/fpolybench.o"
