@@ -23,7 +23,7 @@ echo "Using script: $LARA_SCRIPT"
 echo "------------------------------------------------"
 
 # 1. Find all preprocessed Fortran files
-find . -type f -name "*.preproc.f90" | while read -r bench_file; do
+find . -path "*/woven_code" -prune -o -type f -name "*.preproc.f90" -print | while read -r bench_file; do
     
     # Get absolute paths (required because we change directories)
     abs_bench_path=$(realpath "$bench_file")
