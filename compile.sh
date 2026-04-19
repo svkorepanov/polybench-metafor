@@ -6,12 +6,17 @@ CC="clang-22" # Or 'clang'
 OPTIMIZATION="-O3"
 UTILITIES_DIR="$(pwd)/utilities"
 
+# --- OPENMP FLAGS ---
+# Add -fopenmp to both Fortran and C flags
+FFLAGS="$OPTIMIZATION -fopenmp"
+CFLAGS="-O3 -fopenmp"
+
 # IMPORTANT: These must match the flags you used during preprocessing
 # Especially -DPOLYBENCH_TIME
 PARGS="-DMINI_DATASET -DPOLYBENCH_DUMP_ARRAYS"
 
 echo "Step 1: Compiling C utilities..."
-$CC -c $PARGS "$UTILITIES_DIR/fpolybench.c" -I "$UTILITIES_DIR" -o "$UTILITIES_DIR/fpolybench.o"
+$CC -c $PARGS $CFLAGS "$UTILITIES_DIR/fpolybench.c" -I "$UTILITIES_DIR" -o "$UTILITIES_DIR/fpolybench.o"
 
 if [ $? -ne 0 ]; then
     echo "Error: Failed to compile fpolybench.c"
@@ -30,7 +35,7 @@ find . -name "*.preproc.f90" | while read -r bench_file; do
     echo "Building: $exe_name"
     
     # We link the fpolybench.o we created in Step 1
-    $FC $OPTIMIZATION "$bench_file" "$UTILITIES_DIR/fpolybench.o" -I "$UTILITIES_DIR" -o "$exe_name"
+    $FC $FFLAGS $OPTIMIZATION "$bench_file" "$UTILITIES_DIR/fpolybench.o" -I "$UTILITIES_DIR" -o "$exe_name"
     
     if [ $? -eq 0 ]; then
         ((count++))
