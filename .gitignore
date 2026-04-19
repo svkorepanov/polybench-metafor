@@ -2,3 +2,4 @@
 *.exe
 *.preproc.f90
 *.output.txt
+woven_code/

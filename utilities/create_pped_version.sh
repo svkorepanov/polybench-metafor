@@ -33,6 +33,8 @@ sed -e '/^#/d' \
     -e '/^[ ]*$/d' \
     -e 's/IARGC()/COMMAND_ARGUMENT_COUNT()/gI' \
     -e 's/CALL GETARG/CALL GET_COMMAND_ARGUMENT/gI' \
+    -e 's/!\$pragma scop/      CONTINUE\n      !DIR$ scop/gI' \
+    -e 's/!$pragma endscop/!DIR$ end scop/gI' \
     -e '/implicit none/d' \
     .__tmp_poly.f > .__poly_bottom.f
 
