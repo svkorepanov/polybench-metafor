@@ -13,7 +13,7 @@ CFLAGS="-O3 -fopenmp"
 
 # IMPORTANT: These must match the flags you used during preprocessing
 # Especially -DPOLYBENCH_TIME
-PARGS="-DMINI_DATASET -DPOLYBENCH_DUMP_ARRAYS"
+PARGS="-DSMALL_DATASET -DPOLYBENCH_DUMP_ARRAYS"
 
 echo "Step 1: Compiling C utilities..."
 $CC -c $PARGS $CFLAGS "$UTILITIES_DIR/fpolybench.c" -I "$UTILITIES_DIR" -o "$UTILITIES_DIR/fpolybench.o"
@@ -28,21 +28,18 @@ echo "------------------------------------------------"
 
 count=0
 # Loop through the preprocessed files
-find . -name "*.preproc.f90" | while read -r bench_file; do
-    # Create an output name: e.g., correlation.preproc.f90 -> correlation.exe
+while read -r bench_file; do
     exe_name="${bench_file%.preproc.f90}.exe"
-    
     echo "Building: $exe_name"
     
-    # We link the fpolybench.o we created in Step 1
     $FC $FFLAGS $OPTIMIZATION "$bench_file" "$UTILITIES_DIR/fpolybench.o" -I "$UTILITIES_DIR" -o "$exe_name"
     
     if [ $? -eq 0 ]; then
         ((count++))
     else
-        echo "  [!] Failed to compile $bench_file"
+        echo "   [!] Failed to compile $bench_file"
     fi
-done
+done < <(find . -name "*.preproc.f90")
 
 echo "------------------------------------------------"
 echo "Done! Compiled $count benchmarks."

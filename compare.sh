@@ -8,8 +8,8 @@ missing=0
 echo "Output Comparison: Original vs. Woven (Metafor)"
 echo "------------------------------------------------"
 
-# Find all woven_code directories
-find . -type d -name "woven_code" | while read -r woven_dir; do
+# Fix: Use process substitution to keep variables in the current shell
+while read -r woven_dir; do
     # Get the parent directory (e.g., .../3mm)
     parent_dir=$(dirname "$woven_dir")
     
@@ -30,19 +30,15 @@ find . -type d -name "woven_code" | while read -r woven_dir; do
     fi
     
     # 2. Compare the files
-    # Note: If the files ONLY contain the execution time, they will always mismatch.
-    # To ignore the timing line (if it starts with a number or 'time:'), 
-    # you can use 'diff -I' or 'grep -v'
     if diff -q "$orig_file" "$woven_file" > /dev/null; then
         echo "MATCH"
         ((matches++))
     else
         echo "MISMATCH"
         ((mismatches++))
-        # Optional: Uncomment the line below to see exactly what changed:
-        # diff "$orig_file" "$woven_file" | head -n 5
+        # Optional: diff "$orig_file" "$woven_file" | head -n 5
     fi
-done
+done < <(find . -type d -name "woven_code")
 
 echo "------------------------------------------------"
 echo "Results: $matches Matches, $mismatches Mismatches, $missing Missing."
