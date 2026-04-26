@@ -8,7 +8,7 @@ UTILITIES_DIR="$(pwd)/utilities"
 
 # --- OPENMP FLAGS ---
 # Add -fopenmp to both Fortran and C flags
-FFLAGS="$OPTIMIZATION -fopenmp"
+FFLAGS="$OPTIMIZATION -fopenmp -Wno-ignored-directive"
 CFLAGS="-O3 -fopenmp"
 
 # IMPORTANT: These must match the flags you used during preprocessing
