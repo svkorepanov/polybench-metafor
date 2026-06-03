@@ -8,8 +8,8 @@ UTILITIES_DIR="$(pwd)/utilities"
 
 # --- OPENMP FLAGS ---
 # Add -fopenmp to both Fortran and C flags
-FFLAGS="$OPTIMIZATION -fopenmp -Wno-ignored-directive"
-CFLAGS="-O3 -fopenmp"
+FFLAGS="$OPTIMIZATION -fopenmp -Wno-ignored-directive -L/usr/lib/llvm-20/lib"
+CFLAGS="-O3 -fopenmp -I/usr/lib/gcc/x86_64-linux-gnu/15/include"
 
 # IMPORTANT: These must match the flags you used during preprocessing
 # Especially -DPOLYBENCH_TIME
