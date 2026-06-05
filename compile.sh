@@ -13,7 +13,7 @@ CFLAGS="-O3 -fopenmp -I/usr/lib/gcc/x86_64-linux-gnu/15/include"
 
 # IMPORTANT: These must match the flags you used during preprocessing
 # Especially -DPOLYBENCH_TIME
-PARGS="-DSMALL_DATASET -DPOLYBENCH_DUMP_ARRAYS"
+PARGS="-DLARGE_DATASET -DPOLYBENCH_TIME"
 
 echo "Step 1: Compiling C utilities..."
 $CC -c $PARGS $CFLAGS "$UTILITIES_DIR/fpolybench.c" -I "$UTILITIES_DIR" -o "$UTILITIES_DIR/fpolybench.o"
