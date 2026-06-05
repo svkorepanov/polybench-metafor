@@ -16,10 +16,11 @@ get_timer() {
     grep -oE '[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?' "$1" | tail -n 1
 }
 
-# Function to strip the last number/word from the file for functional comparison
-# Uses perl to handle the very last "word" regardless of newlines or spaces
+# Function to strip the last number from the file for functional comparison.
+# Handles both POLYBENCH_DUMP_ARRAYS (number preceded by whitespace) and
+# POLYBENCH_TIME-only mode (bare number on its own line, no leading whitespace).
 strip_timer() {
-    perl -0777 -pe 's/\s+[\d.eE+-]+\s*$/\n/' "$1"
+    perl -0777 -pe 's/\s*[\d.eE+-]+\s*$/\n/' "$1"
 }
 
 while read -r woven_dir; do
