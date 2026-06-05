@@ -1,5 +1,13 @@
 # TODO: Loop Unrolling — factor=4 — LARGE_DATASET
 
+## Blacklisted benchmarks
+
+| Benchmark | Reason |
+|---|---|
+| `fdtd-apml` | OOM at LARGE_DATASET (~4.3 GB required, 3.8 GB available, no swap). Blacklisted in `execute.sh`. |
+
+---
+
 ## Prerequisite
 
 Complete `../tiling-tile32-large-dataset/todo.md` first (steps 1–5).

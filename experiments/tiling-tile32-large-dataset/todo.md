@@ -1,5 +1,16 @@
 # TODO: Loop Tiling — tile=32 — LARGE_DATASET
 
+## Blacklisted benchmarks
+
+| Benchmark | Reason |
+|---|---|
+| `fdtd-apml` | Allocates 4×513³ double arrays ≈ 4.3 GB at LARGE_DATASET. Machine has 3.8 GB RAM, no swap. OOM-killed by Linux kernel every time. Blacklisted in `execute.sh`. |
+
+`execute.sh` skips blacklisted benchmarks and reports them in the summary line.
+To remove the blacklist for a smaller dataset, clear `BLACKLIST=""` in `execute.sh`.
+
+---
+
 ## Current state (as of 2026-06-05)
 
 | Step | Status |
@@ -8,8 +19,8 @@
 | compile.sh set to LARGE_DATASET + POLYBENCH_TIME | DONE |
 | `./preproc.sh` — 30 benchmarks preprocessed | DONE |
 | Baseline `./compile.sh` — 30 originals compiled | DONE |
-| Baseline `./execute.sh` — 28/30 ran (covariance, correlation missing) | PARTIAL |
-| `./weave-transpiler.sh tilingGeneric` — 28/30 transformed | DONE |
+| Baseline `./execute.sh` — 28/29 ran (covariance, correlation missing; fdtd-apml blacklisted) | PARTIAL |
+| `./weave-transpiler.sh tilingGeneric` — 28/30 transformed (atax, bicg: parser bug) | DONE |
 | Compile tiled + execute tiled + compare | PENDING |
 | unrollGeneric experiment | PENDING (do after tiling) |
 
