@@ -49,5 +49,5 @@ Adding `-DPOLYBENCH_TIME` makes the timing column in compare.sh meaningful.
 | Experiment | Transform | Dataset | Correct | Mismatch | Skipped | Notes |
 |---|---|---|---|---|---|---|
 | [tiling-tile32-small-dataset](tiling-tile32-small-dataset/analysis.md) | tilingGeneric (tile=32) | SMALL | 26/28 | trmm, reg_detect | atax, bicg (parser bug) | 1.00x speedup — dataset too small to see cache effects |
-| [unroll-factor4-small-dataset](unroll-factor4-small-dataset/analysis.md) | unrollGeneric (factor=4) | SMALL | 8/28 | all accumulation kernels | atax, bicg (parser bug) | emitter bug: missing parentheses in cleanup loop bound causes off-by-one; re-executes last iter on all accumulation loops |
+| [unroll-factor4-small-dataset](unroll-factor4-small-dataset/analysis.md) | unrollGeneric (factor=4) | SMALL | 24/28 (after LoopUnroll.ts fix) | dynprog, lu (compound lo), adi (reverse-index body) | atax, bicg (parser: NamedConstantDef) | 3 remaining failures all caused by emitter not parenthesizing compound right-operands of subtraction |
 | [tiling-tile32-large-dataset](tiling-tile32-large-dataset/analysis.md) | tilingGeneric (tile=32) | LARGE (2000×2000) | 27/27 timing-only | — | fdtd-apml (OOM, 4.3 GB), atax/bicg (parser bug) | mvt 7.2×, floyd-warshall 2.2×, gemver 3.5×; stencils/lu regress (wrong tile shape); gemm slightly slower (vectoriser conflict) |

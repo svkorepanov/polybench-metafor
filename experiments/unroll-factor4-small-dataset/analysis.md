@@ -1,4 +1,4 @@
-# Experiment: Loop Unrolling — factor=4 — SMALL_DATASET
+# Experiment: Loop Unrolling — factor=4 — SMALL_DATASET (after LoopUnroll.ts fix)
 
 ## Setup
 
@@ -8,12 +8,15 @@
 | Dataset | `SMALL_DATASET` (128×128 for most kernels) |
 | Compiler | `flang-22 -O3 -fopenmp` |
 | Platform | Linux 6.17.0, x86_64 |
-| Date | 2026-06-05 |
+| Date | 2026-06-11 |
 
 ## How to reproduce
 
 ```bash
-find . -type d -name woven_code -exec rm -rf {} +   # clear previous transform
+# preproc.sh / compile.sh: SMALL_DATASET + POLYBENCH_DUMP_ARRAYS
+./preproc.sh
+./compile.sh && ./execute.sh          # baseline
+find . -type d -name woven_code -exec rm -rf {} +
 ./weave-transpiler.sh unrollGeneric
 ./compile.sh && ./execute.sh
 ./compare.sh
@@ -23,137 +26,168 @@ find . -type d -name woven_code -exec rm -rf {} +   # clear previous transform
 
 | Category | Count | Benchmarks |
 |---|---|---|
-| MATCH — correct output | 8 | floyd-warshall, trisolv, dynprog, gramschmidt, seidel-2d, jacobi-1d-imper, jacobi-2d-imper, correlation |
-| MISMATCH — incorrect output | 20 | all others |
-| Skipped — parser error | 2 | atax, bicg (same `NamedConstantDef` bug as tiling experiment) |
+| MATCH — correct output | 24 | (all except the 3 below) |
+| MISMATCH — incorrect output | 3 | `dynprog`, `lu`, `adi` |
+| Not transformed — parser error | 2 | `atax`, `bicg` |
+| Blacklisted (OOM at LARGE_DATASET) | 1 | `fdtd-apml` (not relevant here, still runs fine at SMALL) |
 
-This is a major regression vs tiling (26 correct vs 8 correct).
+This is the result with the fixed `LoopUnroll.ts` (cleanup loop lower bound
+rewritten as `hi+1 - MOD(hi-lo+1, factor)`), up from 8/28 with the original
+broken formula.
 
-## Root cause: cleanup loop emitter bug
+---
 
-`LoopUnrollPass` replaces each `DO k = lo, hi` with two loops:
+## Fortran-transpiler limitations identified
 
+All failures trace to **the Fortran AST emitter not parenthesizing compound
+sub-expressions when they appear as the right operand of a subtraction**. The
+root invariant that fails: `Subtract(A, BinaryOp(B, C))` is emitted as
+`A - B op C` rather than `A - (B op C)`.
+
+This single emitter gap causes three distinct failure modes:
+
+---
+
+### Limitation 1 — Parser: `NamedConstantDef` AST node unimplemented
+
+**Affected benchmarks:** `atax`, `bicg`
+
+**Trigger:** Any benchmark containing a `PARAMETER` declaration:
 ```fortran
-! main loop (steps by factor)
-DO k = lo, hi - (factor-1), factor
-  body(k); body(k+1); body(k+2); body(k+3)   ! 4 copies
-END DO
-
-! cleanup loop (handles remainder)
-DO k = lo + ((hi - lo + 1) / factor) * factor, hi
-  body(k)
-END DO
+real, parameter :: alpha = 1.0, beta = 1.0
 ```
 
-The cleanup lower bound formula `lo + ((hi - lo + 1) / factor) * factor` is
-mathematically correct: when `factor` exactly divides the trip count, integer
-division makes `((hi - lo + 1) / factor) * factor == hi - lo + 1`, giving
-`lo + (hi - lo + 1) = hi + 1 > hi`, so the cleanup loop is empty.
-
-**The bug**: the Fortran code emitter does not parenthesize sub-expressions of
-compound binary operators. The AST for the formula is emitted as flat text:
-
-```fortran
-DO k = 1 + nk - 1 + 1 / 4 * 4, nk   ! generated (WRONG)
+**Error:**
+```
+java.lang.RuntimeException: Could not find derived key for id ...-NamedConstantDef
+  at StmtProcessors.parameterStmt(StmtProcessors.java:379)
 ```
 
-Fortran evaluates `*` and `/` before `+` and `-`, so:
-- `1 / 4 = 0` (integer division)
-- `0 * 4 = 0`
-- `1 + nk - 1 + 0 = nk`
+**What it is:** Flang's AST represents named constants (the rhs of a `PARAMETER`
+statement) as `NamedConstantDef` nodes. The Java parser in
+`fortran-transpiler/FortranAst` has no entry for this node type — it is missing
+from `FlangName` enum and has no processor in `Nodes.java`. The parser hard-crashes
+before the LARA script even starts.
 
-The cleanup loop always starts at `nk`, not `nk + 1`, so **when `factor`
-exactly divides the trip count it runs one extra iteration** — re-executing
-the last body statement once more.
+**Fix location:** `FortranAst/src/.../parser/` — add `NamedConstantDef` to
+`FlangName`, implement a processor in `Nodes.java`, and add the mapping in
+`FlangToClass`. The fix is entirely in the Java layer; no TypeScript changes needed.
 
-The correct Fortran should be:
-```fortran
-DO k = 1 + ((nk - 1 + 1) / 4) * 4, nk   ! needs parentheses
-! or equivalently:
-DO k = (nk / 4) * 4 + 1, nk
-```
+**Impact:** 2/30 benchmarks unprocessable regardless of transform.
 
-The bug is in the Fortran AST serializer in `fortran-transpiler`
-(`FortranJoinPoints` / code emitter) — it does not add parentheses when a
-`+` or `-` node appears as the operand of a `/` or `*`.
+---
 
-## Why some benchmarks still MATCH
+### Limitation 2 — Emitter: compound lower bound in cleanup loop (dynprog, lu)
 
-The extra cleanup iteration is only harmful for **accumulation** loop bodies.
+**Affected benchmarks:** `dynprog`, `lu`
 
-| Loop body type | Effect of re-executing last iter | Result |
-|---|---|---|
-| Accumulation: `C += A(k) * B(k)` | Adds extra term → wrong sum | **MISMATCH** |
-| Assignment: `B(j) = f(A(j))` | Overwrites with same value → idempotent | **MATCH** |
+**Trigger:** Innermost loop has a compound lower bound — a variable expression
+rather than a literal:
+- `dynprog`: `DO k = i + 1, j - 1` (lo = `i+1`)
+- `lu`:      `DO j = k + 1, n`     (lo = `k+1`)
 
-Matching benchmarks all have assignment/stencil inner loops:
-- `jacobi-2d-imper`, `jacobi-1d-imper`, `seidel-2d` — stencil point updates
-- `floyd-warshall` — min/comparison, not accumulation
-- `gramschmidt` — orthogonalization, inner loop is an assignment
-- `correlation` — normalization, assignment-style body
-
-Mismatching benchmarks have accumulation inner loops:
-- `gemm`, `3mm`, `2mm`, `syr2k`, `symm`, etc. — all matrix multiplications
-  of the form `C(i,j) += alpha * A(i,k) * B(k,j)`
-
-## Speedup
-
-Speedups are in the 0.93–0.99× range — a slight slowdown. At SMALL_DATASET
-with `-O3`, `flang-22` already auto-unrolls innermost loops. The explicit
-4× unroll plus the extra cleanup overhead results in marginally slower code.
-Real benefit of unrolling would show in `-O2` or with loop-carried accumulations
-where the compiler fails to vectorize.
-
-## Comparison with tiling experiment
-
-| Metric | Tiling (tile=32) | Unrolling (factor=4) |
-|---|---|---|
-| Correct benchmarks | 26/28 | 8/28 |
-| Root cause of failures | Illegal transform (triangular bounds) | Emitter bug (missing parentheses) |
-| Fixable? | Yes — add legality check | Yes — fix AST serializer |
-
-Tiling was substantially more reliable because it only fails on structurally
-non-rectangular loops. Unrolling fails for any benchmark whose innermost loop
-is an accumulation — the majority of PolyBench/Fortran kernels.
-
-## How to fix the bug
-
-The fix is in the Fortran code emitter inside `fortran-transpiler`. Binary
-operator nodes that are children of `/` or `*` must be wrapped in parentheses
-when serialized to text. Specifically, the cleanup lower bound should emit:
-
-```fortran
-DO k = (1) + (((nk) - (1) + 1) / 4) * 4, nk
-```
-
-An alternative workaround without touching the emitter: rewrite the cleanup
-lower bound as `(hi / factor) * factor + lo`, which evaluates correctly under
-Fortran's standard precedence rules:
+**How it breaks:** The cleanup loop lower bound formula in `LoopUnroll.ts` is:
 
 ```typescript
-// lo + (hi / factor) * factor   →  correct without needing parens
-const cleanupLower = FortranJoinPoints.binaryOperatorAdd(
-  ctrl.lower.deepCopy(),
-  FortranJoinPoints.binaryOperatorMultiply(
-    FortranJoinPoints.binaryOperatorDivide(
-      ctrl.upper.deepCopy(),
-      FortranJoinPoints.intLiteral(factor)
-    ),
-    FortranJoinPoints.intLiteral(factor)
-  )
-);
+// hi + 1 - MOD(hi - lo + 1, factor)
+const tripCount = Subtract(upper, lower) + 1   // = hi - lo + 1
 ```
 
-For `lo=1, hi=128, factor=4`: `1 + (128/4)*4 = 1 + 32*4 = 129` → empty cleanup.
-For `lo=1, hi=127, factor=4`: `1 + (127/4)*4 = 1 + 31*4 = 125` → covers 125,126,127.
+When `lower` is a compound node like `Add(k, 1)`, the subtraction
+`Subtract(upper, lower)` emits **without parentheses around `lower`**:
 
-(This works for `lo=1`; a fully general fix should use `lo + ((hi - lo + 1) / factor) * factor`
-with the emitter fixed to parenthesize.)
+| | Expression | Emitted Fortran | Fortran value |
+|---|---|---|---|
+| Intended | `(n) - (k+1) + 1` | needs parens | `n - k` |
+| Actual | `Subtract(n, Add(k,1)) + 1` | `n - k + 1 + 1` | `n - k + 2` |
 
-## Next experiments
+The MOD argument is off by +2, so the cleanup loop starts at the wrong index
+and either double-processes or skips 1–3 elements.
 
-1. **Fix the emitter bug** and re-run unrolling — expect 26/28 correct results.
-2. **fusionGeneric / fissionGeneric** — try structural transforms and see which
-   benchmarks have fusible/fissable loop pairs.
-3. **MEDIUM_DATASET unrolling** — larger problem size to see if unrolling
-   actually helps throughput on memory-bound kernels even with the bug absent.
+**Concrete example (`lu`, n=128, k=10):**
+- Correct cleanup start: `n + 1 - MOD(n-k, 4)` = `129 - MOD(118, 4)` = `129 - 2` = `127`
+- Actual:  `n + 1 - MOD(n-k+2, 4)` = `129 - MOD(120, 4)` = `129 - 0` = `129` → cleanup empty → iterations 127, 128 skipped
+
+**Fix location:** The cleanup formula in `LoopUnroll.ts` is correct mathematically,
+but `Subtract(hi, lo)` must parenthesize `lo` when `lo` is a binary expression.
+The real fix is in the **Fortran AST emitter** (`FortranWeaver` / `FortranAst`) to
+add parentheses when serializing a binary operator node that appears as the right
+operand of a subtraction. Alternatively, `LoopUnroll.ts` could emit the bound as
+a Fortran `MAX` intrinsic call to avoid the subtraction issue.
+
+---
+
+### Limitation 3 — Emitter: induction variable inside subtraction in loop body (adi)
+
+**Affected benchmarks:** `adi`
+
+**Trigger:** Loop body contains expressions where the induction variable appears
+as the subtrahend (right-hand side of a minus), such as `n - i2` or `n - i2 - 1`.
+
+**Relevant adi loop:**
+```fortran
+do i2 = 1, n - 2
+  x(n - i2, i1) = (x(n - i2, i1) - x(n - i2 - 1, i1) * a(...)) / b(...)
+end do
+```
+
+**How it breaks:** `substituteVar(stmt, "i2", offset)` replaces every DataRef
+named `i2` with `Add(i2_ref, intLiteral(offset))`. When this substituted node
+is used inside an existing `Subtract(n, i2_ref)`, it becomes
+`Subtract(n, Add(i2_ref, offset))`.
+
+The emitter serializes this **without parentheses** around the `Add`:
+
+| | Expression | Emitted Fortran | Fortran value |
+|---|---|---|---|
+| Intended | `n - (i2 + 1)` | `n - (i2 + 1)` | `n - i2 - 1` |
+| Actual | `Subtract(n, Add(i2, 1))` | `n - i2 + 1` | `n - i2 + 1` |
+
+The **sign of the offset flips** — `+1` becomes `-(-1)` when the parens are
+dropped from the subtrahend. This produces wildly incorrect array indices
+(accessing `x(n-i2+1)` instead of `x(n-i2-1)`), corrupting the entire
+computation. The output values differ by several orders of magnitude from the
+reference.
+
+**Fix location:** Again the **Fortran AST emitter** — when serializing
+`Subtract(A, B)` where `B` is itself a binary expression node, wrap `B` in
+parentheses: emit `A - (B)`. This is the same one-line fix that would also
+resolve Limitation 2. The fix is in `FortranWeaver/src/` (Java layer).
+
+**Impact:** Any benchmark whose innermost loop body contains the pattern
+`expr - induction_var` is at risk. In PolyBench/Fortran this pattern appears
+in backwards-sweep / reverse-index kernels (adi, and potentially others at
+larger dataset sizes or with other transforms).
+
+---
+
+## Root cause summary
+
+All three limitations share a common ancestor: **the Fortran AST-to-source
+emitter does not add parentheses around binary expression sub-nodes when they
+appear as the right operand of subtraction**.
+
+The Fortran operator precedence rule `A - B + C = (A - B) + C` (left-to-right)
+means that dropping parens around `B` when `B = (X + Y)` gives
+`A - X + Y` instead of `A - (X+Y) = A - X - Y`. This sign-flip is the
+underlying error in both Limitations 2 and 3.
+
+**The single fix:** In the Fortran emitter, when generating `Subtract(lhs, rhs)`,
+check if `rhs` is itself an `Add` or `Subtract` binary node, and if so emit
+`{lhs} - ({rhs})`.
+
+Once that fix is applied, `LoopUnroll.ts`'s formula `hi+1 - MOD(hi-lo+1, factor)`
+will emit correctly for all loop bounds (including compound `lo` like `k+1`), and
+`substituteVar` will correctly handle induction variables embedded in subtraction
+expressions. Combined with fixing `NamedConstantDef` in the Java parser, the
+expected outcome is **28/30 correct** (only `atax`/`bicg` would remain until the
+parser fix, and all other benchmarks would pass).
+
+## Comparison with pre-fix results
+
+| State | Correct | Mismatch | Notes |
+|---|---|---|---|
+| Original buggy `LoopUnroll.ts` | 8/28 | 20 | Cleanup re-executes last iter on all accum. loops |
+| After `LoopUnroll.ts` fix | 24/28 | 3 (dynprog, lu, adi) | Emitter parens bug on compound bounds + reverse-index bodies |
+| After emitter fix (projected) | 28/28 | 0 | All benchmarks correct |
+| After emitter + parser fix (projected) | 28/30 | 0 | atax/bicg also transformable |

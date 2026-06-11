@@ -18,18 +18,20 @@ mvt             | OK         | NO         | MATCH      | 83914.34   | 1.00x
 3mm             | OK         | NO         | MATCH      | 21081654259238.20 | 1.00x   
 syrk            | OK         | NO         | MATCH      | 22044549282.79 | 1.00x   
 dynprog         | OK         | NO         | MISMATCH   | 0          | err     
+awk: cmd. line:1: error: division by zero attempted
 lu              | OK         | NO         | MISMATCH   | .00        |         
 durbin          | OK         | NO         | MATCH      |            | err     
 gramschmidt     | OK         | NO         | MATCH      | 127.00     | 1.00x   
 ludcmp          | OK         | NO         | MATCH      |            | err     
 seidel-2d       | OK         | NO         | MATCH      | 500.00     | 1.00x   
+awk: cmd. line:1: error: division by zero attempted
 adi             | OK         | NO         | MISMATCH   | -176492.34 |         
 jacobi-1d-imper | OK         | NO         | MATCH      | 1.00       | 1.00x   
 jacobi-2d-imper | OK         | NO         | MATCH      | 500.00     | 1.00x   
 fdtd-2d         | OK         | NO         | MATCH      | 501.00     | 1.00x   
-fdtd-apml       | OK         | NO         | MATCH      | 70.05      | 1.00x   
+fdtd-apml       | SKIPPED    | NO         | N/A        | -          | -       
 correlation     | OK         | NO         | MATCH      | 1.00       | 1.00x   
 covariance      | OK         | NO         | MATCH      | 5356281897502.23 | 1.00x   
 --------------------------------------------------------------------------------------------
-Final Results: 25 Matches (ignoring timer), 3 Mismatches, 0 Missing.
+Final Results: 24 Matches (ignoring timer), 3 Mismatches, 1 Missing.
 Total Parallelized: 0
