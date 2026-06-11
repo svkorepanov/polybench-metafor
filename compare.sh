@@ -8,7 +8,7 @@ parallel_count=0
 
 echo "Output Comparison: Original vs. Woven (Metafor)"
 echo "--------------------------------------------------------------------------------------------"
-printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "Benchmark" "Status" "Parallel?" "Result" "Orig Time" "Speedup"
+printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "Benchmark" "Status" "Transform?" "Result" "Orig Time" "Speedup"
 echo "--------------------------------------------------------------------------------------------"
 
 # Function to extract the last number in a file (handles scientific notation like 1.2e-05)
@@ -31,14 +31,16 @@ while read -r woven_dir; do
     woven_file="$woven_dir/$bench_name.output.txt"
     
     if grep -riq "!\$OMP" "$woven_dir"; then
-        omp_status="YES"
+        transform_status="OMP"
         ((parallel_count++))
+    elif grep -qiE "^\s+DO [a-zA-Z][a-zA-Z0-9]* = [^,]+,[^,]+,[^,]+$" "$woven_dir"/*.f90 2>/dev/null; then
+        transform_status="TILED"
     else
-        omp_status="NO"
+        transform_status="NO"
     fi
-    
+
     if [[ ! -f "$orig_file" || ! -f "$woven_file" ]]; then
-        printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "$bench_name" "SKIPPED" "$omp_status" "N/A" "-" "-"
+        printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "$bench_name" "SKIPPED" "$transform_status" "N/A" "-" "-"
         ((missing++))
         continue
     fi
@@ -64,10 +66,10 @@ while read -r woven_dir; do
         ((mismatches++))
     fi
 
-    printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "$bench_name" "OK" "$omp_status" "$res_msg" "$t_orig" "$speedup"
+    printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "$bench_name" "OK" "$transform_status" "$res_msg" "$t_orig" "$speedup"
 
 done < <(find . -type d -name "woven_code")
 
 echo "--------------------------------------------------------------------------------------------"
 echo "Final Results: $matches Matches (ignoring timer), $mismatches Mismatches, $missing Missing."
-echo "Total Parallelized: $parallel_count"
+echo "Total Parallelized/Transformed: $parallel_count"
