@@ -48,6 +48,6 @@ Adding `-DPOLYBENCH_TIME` makes the timing column in compare.sh meaningful.
 
 | Experiment | Transform | Dataset | Correct | Mismatch | Skipped | Notes |
 |---|---|---|---|---|---|---|
-| [tiling-tile32-small-dataset](tiling-tile32-small-dataset/analysis.md) | tilingGeneric (tile=32) | SMALL | 26/28 | trmm, reg_detect | atax, bicg (parser bug) | 1.00x speedup — dataset too small to see cache effects |
+| [tiling-tile32-small-dataset](tiling-tile32-small-dataset/analysis.md) | tilingGeneric (tile=32) | SMALL | **30/30** (after legality fix) | — | — | triangular-loop legality check added to LoopTilingPass; trmm/(j,k) and reg_detect/(i,cnt) tiled instead |
 | [unroll-factor4-small-dataset](unroll-factor4-small-dataset/analysis.md) | unrollGeneric (factor=4) | SMALL | **30/30** (after parenExpr fix) | — | — | parenExpr wrapping in LoopUnroll.ts fixes compound bounds + reverse-index bodies; staging PR #48 fixed atax/bicg parser |
 | [tiling-tile32-large-dataset](tiling-tile32-large-dataset/analysis.md) | tilingGeneric (tile=32) | LARGE (2000×2000) | 27/27 timing-only | — | fdtd-apml (OOM, 4.3 GB), atax/bicg (parser bug) | mvt 7.2×, floyd-warshall 2.2×, gemver 3.5×; stencils/lu regress (wrong tile shape); gemm slightly slower (vectoriser conflict) |

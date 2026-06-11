@@ -128,6 +128,28 @@ The `MIN()` guard handles non-divisible bounds correctly. Innermost loops are
 not tiled (only the two outermost loop dimensions per nest are tiled), which is
 the standard 2D tiling strategy.
 
+## Final results after legality fix (branch `fix/emitter-paren-binop`)
+
+| State | Correct | Mismatch | Notes |
+|---|---|---|---|
+| Original LoopTilingPass | 26/28 | trmm, reg_detect | No triangular-loop legality check |
+| After legality fix | **30/30** | **0** | All benchmarks correct |
+
+The fix adds a check in `LoopTilingPass._findTileablePairs()`: for each candidate
+pair `(outer, inner)`, search all loops in inner's subtree for bounds containing
+a `DataRef` with name equal to the outer loop variable. If found, skip the pair.
+
+**trmm**: The `(i, j)` pair is now rejected (k's bound `i-1` references `i`).
+The `(j, k)` pair is tiled instead — the k loop's bounds don't reference `j`, and
+tiling `(j, k)` is safe since different j values write to independent `b(j,i)` cells.
+
+**reg_detect**: The `(j, i)` pair is rejected (i's lower bound is `j`). The `(i, cnt)`
+pair is still tiled — cnt's bounds don't reference i, and the assignment
+`diff(cnt,i,j) = sumTang(i,j)` has no cross-iteration dependencies.
+
+**atax + bicg**: Now transform correctly on this branch (staging PR #48 fixed
+the `NamedConstantDef` parser crash).
+
 ## Next experiments
 
 1. **MEDIUM_DATASET / LARGE_DATASET** — repeat with a larger problem size to
