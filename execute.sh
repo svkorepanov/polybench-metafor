@@ -3,10 +3,13 @@
 echo "Running Suite..."
 echo "------------------------------------------------"
 
-# Space-separated list of benchmark names to skip entirely.
-# Add entries here when a benchmark exceeds available RAM at the current dataset size.
-# fdtd-apml: allocates 4×513³ doubles (~4.3 GB) at LARGE_DATASET — exceeds 3.8 GB RAM.
-BLACKLIST="fdtd-apml"
+# fdtd-apml OOM check: at LARGE_DATASET it allocates 4×513³ doubles (~4.3 GB),
+# exceeding this machine's 3.8 GB RAM. At SMALL_DATASET it uses 64³ arrays (~2 MB)
+# and runs fine. Detect the compiled size from the preprocessed source.
+FDTD_DIM=$(grep -m1 "allocate(ex(" stencils/fdtd-apml/fdtd-apml.preproc.f90 2>/dev/null \
+           | grep -oE "[0-9]+" | head -1)
+BLACKLIST=""
+[ "${FDTD_DIM:-0}" -ge 256 ] && BLACKLIST="fdtd-apml"
 
 count=0
 skipped=0

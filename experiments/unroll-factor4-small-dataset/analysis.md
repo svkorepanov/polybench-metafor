@@ -183,11 +183,17 @@ expressions. Combined with fixing `NamedConstantDef` in the Java parser, the
 expected outcome is **28/30 correct** (only `atax`/`bicg` would remain until the
 parser fix, and all other benchmarks would pass).
 
-## Comparison with pre-fix results
+## Final results after parenExpr fix (branch `fix/emitter-paren-binop`)
 
 | State | Correct | Mismatch | Notes |
 |---|---|---|---|
 | Original buggy `LoopUnroll.ts` | 8/28 | 20 | Cleanup re-executes last iter on all accum. loops |
-| After `LoopUnroll.ts` fix | 24/28 | 3 (dynprog, lu, adi) | Emitter parens bug on compound bounds + reverse-index bodies |
-| After emitter fix (projected) | 28/28 | 0 | All benchmarks correct |
-| After emitter + parser fix (projected) | 28/30 | 0 | atax/bicg also transformable |
+| After `LoopUnroll.ts` MOD fix | 24/28 | 3 (dynprog, lu, adi) | Emitter parens bug on compound bounds + reverse-index bodies |
+| After parenExpr fix | **30/30** | **0** | All benchmarks correct and transformable |
+
+The `fix/emitter-paren-binop` branch (based on `origin/staging`) achieves 30/30 because:
+1. **parenExpr(ctrl.lower)** in tripCount fixes dynprog + lu — `n - (k+1) + 1` instead of `n - k + 2`
+2. **parenExpr(Add(ref, offset))** in `substituteVar` fixes adi — `x(n - (i2+1))` instead of `x(n - i2 + 1)`
+3. **Staging PR #48** (`parameter-attr`) fixed `NamedConstantDef` parser crash — atax + bicg now transformable
+4. **fdtd-apml** is no longer unconditionally blacklisted — `execute.sh` now detects
+   the compiled array size and only blacklists it when ≥ 256 (LARGE_DATASET)
