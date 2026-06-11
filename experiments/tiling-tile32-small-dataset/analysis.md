@@ -21,13 +21,15 @@
 ./compare.sh
 ```
 
-## Results summary
+## Results summary (current state, branch `fix/emitter-paren-binop`)
 
 | Category | Count | Benchmarks |
 |---|---|---|
-| MATCH — correct output | 26 | (see table below) |
-| MISMATCH — incorrect output | 2 | `trmm`, `reg_detect` |
-| Skipped — parser error | 2 | `atax`, `bicg` |
+| MATCH — correct output | 28 | all except the two below |
+| MISMATCH — **triangular bounds** | 2 | `trmm`, `reg_detect` |
+| Not tiled — no eligible 2-deep nest | 12 | `atax`, `bicg`, `cholesky`, `trisolv`, `gesummv`, `durbin`, `gramschmidt`, `ludcmp`, `adi`¹, `jacobi-1d-imper`, + see notes |
+
+¹ `adi` shows TILED because multi-letter variables (`i1i1`, `i2i2`) produce tile loops, but its primary sweep kernels have `do i2 = 2, n` (linear bounds) and are tileable.
 
 ## Speedup
 
@@ -44,55 +46,81 @@ To see real tiling gains, rerun with MEDIUM_DATASET or LARGE_DATASET (see
 `gemm`, `syr2k`, `symm`, and `3mm` are the most likely candidates for speedup
 at larger sizes.
 
-## Mismatches explained
+## Mismatches explained — triangular bounds
 
-### `trmm` — illegal tiling of triangular loop
+Both mismatching benchmarks have **triangular loop nests**: bounds of an inner
+(or descendant) loop depend on the value of an outer loop variable. Tiling the
+outer loop changes which iterations are valid for the dependent inner loop,
+producing incorrect results.
 
-`trmm` contains a triangular loop nest:
+### `trmm` — triangular k loop, tiling is not applicable
+
 ```fortran
-do i = 1, ni
-  do j = 1, i       ! upper bound depends on outer variable
-    A(j,i) = ...
+subroutine kernel_trmm(ni, alpha, a, b)
+  do i = 2, ni
+    do j = 1, ni
+      do k = 1, i - 1   ! ← triangular: upper bound = i - 1
+        b(j, i) = b(j, i) + alpha * a(k, i) * b(k, j)
+      end do
+    end do
+  end do
 ```
 
-Tiling a loop whose bounds depend on the outer loop variable is not legal — the
-iteration order changes, so elements are read before they are written. The tiled
-version produces catastrophically wrong output (extreme floating-point overflow
-visible in the `results.txt` "Orig Time" column). **Tiling is not applicable to
-`trmm` without legality checking.**
+`LoopTilingPass` tiles the `(i, j)` pair (the outermost 2-deep perfect nest).
+After tiling, strip-mine loops iterate `i` in 32-wide tiles: within a tile,
+`i` varies from `ii` to `MIN(ii+31, ni)`. The k loop's upper bound `i-1` is
+different for each i value within the tile, but the tiled structure reads
+`b(k, j)` for k values that belong to i values ALSO within the tile — some
+of those `b` values have not yet been written in the correct final form.
+This produces catastrophically wrong output (extreme floating-point overflow).
 
-`cholesky` and `trisolv` have similar triangular structure but happened to
-produce MATCH here — likely because their kernel accesses are structured such
-that re-ordering within a 32-wide tile is coincidentally neutral at this data
-size. They should be treated as suspect regardless.
+**Tiling is not applicable to `trmm`.** The `(i, j)` pair appears rectangular
+but the body's dependence on `i` through `k < i` makes the transformation
+semantically incorrect. A legality check would need to scan descendant loops
+for bounds referencing the outer variable.
 
-### `reg_detect` — mismatch + spurious speedup
+### `reg_detect` — triangular i loop, tiling is not applicable
 
-`reg_detect` shows MISMATCH and a 1516× "speedup." Both are artifacts:
-- The "speedup" comes from a near-zero woven execution time vs. a
-  non-zero original time. The benchmark's live-out values include loop-count
-  integers rather than floating-point arrays, making compare.sh's time-parsing
-  read a counter value as "time."
-- The output MISMATCH needs further investigation. The `reg_detect` kernel uses
-  a reduction-like pattern over a jagged structure; incorrect tiling could
-  change the reduction order beyond floating-point tolerance.
-
-## Parser failures (atax, bicg)
-
-These two benchmarks use a Fortran `PARAMETER` statement in the form:
 ```fortran
-real, parameter :: alpha = 1.0, beta = 1.0
+subroutine kernel_reg_detect(...)
+  do j = 1, maxgrid
+    do i = j, maxgrid   ! ← triangular: lower bound = j (outer variable)
+      do cnt = 1, length
+        diff(cnt, i, j) = sumTang(i, j)
+      end do
+    end do
+  end do
 ```
 
-The Java AST parser in fortran-transpiler does not yet handle the
-`NamedConstantDef` node type and crashes with:
-```
-Could not find derived key for id ...-NamedConstantDef
-```
+`LoopTilingPass` tiles the `(j, i)` pair. The inner loop's **lower bound is
+`j`** (the outer loop variable). After tiling, `j` is strip-mined and the
+inner `i` tile starts at `jj` (the tile start), but the original semantic
+requires `i ≥ j` (the current j value). Within a tile, different `j` values
+require different starting `i` values, but the tiled loop uses a fixed `ii`
+start, violating the triangular access pattern.
 
-This is a bug in the transpiler, not in our scripts. The fix requires adding
-`NamedConstantDef` to `FlangName` enum and implementing its processor in
-`FortranAst/src/.../processors/Nodes.java`.
+The 1516× "speedup" is a timing artifact: the woven benchmark is so corrupted
+that it completes nearly instantly rather than computing meaningfully.
+
+**Tiling is not applicable to `reg_detect`.** The `(j, i)` pair is triangular
+by lower bound.
+
+## Benchmarks not eligible for tiling
+
+The following kernels have no 2-deep perfect loop nest and receive no tiling
+(reported as `SKIPPED` by `tilingGeneric.ts`, `NO` in the `Transform?` column):
+
+| Benchmark | Reason |
+|---|---|
+| `atax` | Two separate single-level loops; no 2-deep perfect nest in kernel |
+| `bicg` | Two-body inner loop (`s(j) +=` and `q(i) +=` together); not a perfect nest |
+| `cholesky` | Triangular structure (`do j = 1, i`); loops are not 2-deep perfect |
+| `trisolv` | Triangular: `do j = 1, i-1`; outer loop body is not a single inner loop |
+| `gesummv` | Two separate accumulations; not a 2-deep perfect nest |
+| `durbin` | Recurrence structure; inner loops have loop-carried dependencies |
+| `gramschmidt` | Orthogonalization; inner loops are separated by assignments |
+| `ludcmp` | LU decomposition with pivot; inner structure not a pure 2-level nest |
+| `jacobi-1d-imper` | 1D stencil; only a single loop dimension in the kernel |
 
 ## Timing notes
 
@@ -128,27 +156,23 @@ The `MIN()` guard handles non-divisible bounds correctly. Innermost loops are
 not tiled (only the two outermost loop dimensions per nest are tiled), which is
 the standard 2D tiling strategy.
 
-## Final results after legality fix (branch `fix/emitter-paren-binop`)
+## Current state (branch `fix/emitter-paren-binop`)
 
-| State | Correct | Mismatch | Notes |
+| State | MATCH | MISMATCH | Notes |
 |---|---|---|---|
-| Original LoopTilingPass | 26/28 | trmm, reg_detect | No triangular-loop legality check |
-| After legality fix | **30/30** | **0** | All benchmarks correct |
+| Original (loop-transformations branch) | 26/28 | trmm, reg_detect | atax/bicg skipped — parser bug |
+| Current (fix/emitter-paren-binop) | **28/30** | trmm, reg_detect | atax/bicg now transform correctly (staging PR #48) |
 
-The fix adds a check in `LoopTilingPass._findTileablePairs()`: for each candidate
-pair `(outer, inner)`, search all loops in inner's subtree for bounds containing
-a `DataRef` with name equal to the outer loop variable. If found, skip the pair.
+A legality check was briefly added to `LoopTilingPass._findTileablePairs()` that
+rejected pairs where descendant loop bounds reference the outer variable. This
+correctly identified trmm/reg_detect as illegal BUT also over-rejected valid
+pairs in other benchmarks, reducing MATCH from 26 → 17. It was reverted.
 
-**trmm**: The `(i, j)` pair is now rejected (k's bound `i-1` references `i`).
-The `(j, k)` pair is tiled instead — the k loop's bounds don't reference `j`, and
-tiling `(j, k)` is safe since different j values write to independent `b(j,i)` cells.
-
-**reg_detect**: The `(j, i)` pair is rejected (i's lower bound is `j`). The `(i, cnt)`
-pair is still tiled — cnt's bounds don't reference i, and the assignment
-`diff(cnt,i,j) = sumTang(i,j)` has no cross-iteration dependencies.
-
-**atax + bicg**: Now transform correctly on this branch (staging PR #48 fixed
-the `NamedConstantDef` parser crash).
+The current approach is **informational only**:
+- `tilingGeneric.ts` logs `TILED` vs `SKIPPED` per kernel using `PassResult.appliedPass`
+- `compare.sh` shows `TILED` / `NO` in the `Transform?` column (was `Parallel?`)
+- trmm and reg_detect are tiled, produce MISMATCH, and are documented here as
+  triangular-bound kernels where tiling is not semantically correct
 
 ## Next experiments
 
