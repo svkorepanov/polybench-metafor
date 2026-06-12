@@ -30,13 +30,21 @@ while read -r woven_dir; do
     orig_file="$parent_dir/$bench_name.output.txt"
     woven_file="$woven_dir/$bench_name.output.txt"
     
-    if grep -riq "!\$OMP" "$woven_dir"; then
+    # Primary source: marker written by weave-transpiler.sh (YES / NO).
+    # Fallback: heuristic detection for OMP pragmas and tiled DO loops
+    # (covers woven_code directories from runs before this marker was introduced).
+    status_file="$woven_dir/.transform-status"
+    if [[ -f "$status_file" ]]; then
+        transform_status=$(tr -d '[:space:]' < "$status_file")
+    elif grep -riq "!\$OMP" "$woven_dir"; then
         transform_status="OMP"
-        ((parallel_count++))
     elif grep -qiE "^\s+DO [a-zA-Z][a-zA-Z0-9]* = [^,]+,[^,]+,[^,]+$" "$woven_dir"/*.f90 2>/dev/null; then
         transform_status="TILED"
     else
         transform_status="NO"
+    fi
+    if [[ "$transform_status" == "YES" || "$transform_status" == "OMP" || "$transform_status" == "TILED" ]]; then
+        ((parallel_count++))
     fi
 
     if [[ ! -f "$orig_file" || ! -f "$woven_file" ]]; then
@@ -72,4 +80,4 @@ done < <(find . -type d -name "woven_code")
 
 echo "--------------------------------------------------------------------------------------------"
 echo "Final Results: $matches Matches (ignoring timer), $mismatches Mismatches, $missing Missing."
-echo "Total Parallelized/Transformed: $parallel_count"
+echo "Total Transformed: $parallel_count"

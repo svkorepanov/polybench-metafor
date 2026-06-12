@@ -44,9 +44,19 @@ while IFS= read -r bench_file; do
     echo "Processing: $bench_file"
 
     cd "$TRANSPILER_ROOT" || exit 1
-    npx metafor classic "$SCRIPT" -p "$abs_bench" -o "$bench_dir"
+    output=$(npx metafor classic "$SCRIPT" -p "$abs_bench" -o "$bench_dir" 2>&1)
     status=$?
+    echo "$output"
     cd "$POLYBENCH_ROOT" || exit 1
+
+    # Write a per-benchmark marker for compare.sh.
+    # All generic scripts print "SKIPPED" when the legality check rejects all loops.
+    # If the output contains no "SKIPPED" line the transform was applied.
+    if echo "$output" | grep -qi "SKIPPED"; then
+        echo "NO"  > "$bench_dir/woven_code/.transform-status"
+    else
+        echo "YES" > "$bench_dir/woven_code/.transform-status"
+    fi
 
     ((total++))
     if [ $status -eq 0 ]; then
