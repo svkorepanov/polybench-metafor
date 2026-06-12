@@ -61,6 +61,14 @@ outer.insert("replace", newCode);
 It does **not** check whether the inner control's bounds reference the outer
 variable (triangular bounds). It also does not perform any dependence analysis.
 
+## Mismatch summary
+
+| Benchmark | Interchanged pair | Root cause | Effect |
+|---|---|---|---|
+| `reg_detect` | `(j, i)` where inner is `do i = j, maxgrid` | Triangular inner bound copied verbatim → outer becomes `do i = j, maxgrid` with `j` undefined | Garbage loop count, wrong output (1516× artifact) |
+| `covariance` | `(j1, j2)` where inner is `do j2 = j1, m` | Triangular inner bound → outer becomes `do j2 = j1, m` with `j1` undefined | Segfault |
+| `trmm` | `(i, j)` — both bounds constant | Evaluation order change: nested `k=1..i-1` reads `b(k,j)` values that have been through extra accumulation rounds from prior `j`-outer iterations | Numerically wrong triangular product |
+
 ## Mismatch cases
 
 ### `reg_detect` — undefined outer variable after interchange
@@ -182,7 +190,35 @@ Interchange produces 2-argument `DO` loops (no step, no OMP directives), so
 `compare.sh` reports `Transform?=NO` for all benchmarks, even those where the
 interchange was applied. This is a known limitation of the detection heuristic.
 
-## Summary table across all transforms (SMALL_DATASET)
+## Cross-transform mismatch overview (SMALL_DATASET)
+
+All mismatches observed across fission, fusion, and interchange experiments
+grouped by benchmark and failure type.
+
+| Transform | Benchmark | Loop structure | Dependency / Failure type | Effect |
+|---|---|---|---|---|
+| **Fission** | `trisolv` | outer `i`, 3 stmts | Loop-carried: `x(j)` read before divided | NaN |
+| **Fission** | `cholesky` | outer `i`, 2 stmts | Loop-carried: `a(j,j)` used before `sqrt` | Wrong factors |
+| **Fission** | `symm` | outer `i`, 2 stmts | Symmetric pair split into independent loops | Wrong values |
+| **Fission** | `lu` | inner loop nest | Loop-carried: pivot row not finalized | Wrong LU |
+| **Fission** | `ludcmp` | inner loop nest | Loop-carried: pivot row not finalized | Wrong LU |
+| **Fission** | `gramschmidt` | outer `k`, 2 stmts | Loop-carried: un-normalized `q` used in later k | Wrong GS |
+| **Fission** | `adi` | outer `t`, 2 stmts | Intra-step: row/col sweeps coupled | Wrong ADI |
+| **Fission** | `fdtd-2d` | outer `t`, 4 stmts | Intra-step: `hz` depends on step-t `ex`/`ey` | Wrong FDTD |
+| **Fission** | `fdtd-apml` | outer `t`, 4 stmts | Intra-step: same as `fdtd-2d` | Wrong FDTD |
+| **Fusion** | `atax` | two inner `j`-loops | Flow dep: `tmp(i)` partial when `y(j)` reads it | Wrong y vector |
+| **Fusion** | `doitgen` | two outer `p`-loops | WAR: `a(p)` written before s-loop finishes reading it | Wrong matrix product |
+| **Fusion** | `gemver` | four outer `i`-loops | Flow dep (×2): partial A when x reads it; partial x when w reads it | Wrong x and w |
+| **Interchange** | `reg_detect` | `(j, i)` with `i = j, maxgrid` | Triangular inner bound → outer `do i = j` with undefined `j` | Garbage output |
+| **Interchange** | `covariance` | `(j1, j2)` with `j2 = j1, m` | Triangular inner bound → outer `do j2 = j1` with undefined `j1` | Segfault |
+| **Interchange** | `trmm` | `(i, j)` rectangular, nested `k=1..i-1` | Evaluation order change: `b(k,j)` has extra accumulations from prior `j` iterations | Wrong triangular product |
+
+**Pattern summary**:
+- Fission failures are all **producer–consumer splits**: fission runs the producing loop to completion for ALL outer iterations before the consumer starts, breaking loop-carried chains.
+- Fusion failures are **incomplete-producer merges**: the first loop hasn't finished producing when the fused second loop starts reading, exposing partial intermediate results.
+- Interchange failures are either **undefined bound variables** (inner bound copies outer variable name verbatim) or **evaluation order violations** in triangular accumulations.
+
+## Summary: MATCH counts across all 5 transforms (SMALL_DATASET)
 
 | Transform | MATCH | MISMATCH | Root cause of failures |
 |---|---|---|---|

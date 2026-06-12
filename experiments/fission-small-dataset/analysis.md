@@ -37,6 +37,20 @@ the existing fix in `LoopUnrollPass`.
 | MATCH — correct output | 21 | see below |
 | MISMATCH — dependency violation | 9 | `trisolv`, `cholesky`, `symm`, `lu`, `gramschmidt`, `ludcmp`, `adi`, `fdtd-2d`, `fdtd-apml` |
 
+## Mismatch summary
+
+| Benchmark | Fissioned loop | Dependency type | What goes wrong |
+|---|---|---|---|
+| `trisolv` | outer `i` → 3 loops | Loop-carried forward-substitution: loop 2 reads `x(j)` before loop 3 divides it | NaN output throughout |
+| `cholesky` | outer `i` → 2 loops | Loop-carried pivot: inner j-loop uses `a(j,j)` before the sqrt in loop 2 has been applied | Wrong Cholesky factors |
+| `symm` | outer `i` → 2 loops | Symmetric pair: `c(i,j)` and `c(j,i)` updates separated into independent loops | Wrong symmetric values |
+| `lu` | inner loop nest | Loop-carried pivot: multiplier row not finalized before update loop runs in next iteration | Wrong LU factors |
+| `ludcmp` | inner loop nest | Same as `lu` | Wrong LU factors |
+| `gramschmidt` | outer `k` → 2 loops | Loop-carried normalization: un-normalized `q` column used in later k iterations | Wrong orthogonalization; 6350× artifact (bad data computed fast) |
+| `adi` | outer `t` → 2 t-loops | Intra-step coupling: row/column sweeps depend on each other within the same time step | Wrong ADI propagation |
+| `fdtd-2d` | outer `t` → 4 t-loops | Intra-step field coupling: `hz` update depends on step-t `ex`/`ey`, not step-(t-1) | Wrong wave propagation |
+| `fdtd-apml` | outer `t` → 4 t-loops | Same as `fdtd-2d` | Wrong wave propagation |
+
 ## Correctness analysis
 
 Loop fission splits a loop with multiple body statements into one loop per
@@ -173,6 +187,34 @@ A correct implementation would require:
 
 Adding a legality check would reduce the MATCH count from 21 to fewer but make
 the applied transformations semantically correct.
+
+## Cross-transform mismatch overview (SMALL_DATASET)
+
+All mismatches observed across fission, fusion, and interchange experiments
+grouped by benchmark and failure type.
+
+| Transform | Benchmark | Loop structure | Dependency / Failure type | Effect |
+|---|---|---|---|---|
+| **Fission** | `trisolv` | outer `i`, 3 stmts | Loop-carried: `x(j)` read before divided | NaN |
+| **Fission** | `cholesky` | outer `i`, 2 stmts | Loop-carried: `a(j,j)` used before `sqrt` | Wrong factors |
+| **Fission** | `symm` | outer `i`, 2 stmts | Symmetric pair split into independent loops | Wrong values |
+| **Fission** | `lu` | inner loop nest | Loop-carried: pivot row not finalized | Wrong LU |
+| **Fission** | `ludcmp` | inner loop nest | Loop-carried: pivot row not finalized | Wrong LU |
+| **Fission** | `gramschmidt` | outer `k`, 2 stmts | Loop-carried: un-normalized `q` used in later k | Wrong GS |
+| **Fission** | `adi` | outer `t`, 2 stmts | Intra-step: row/col sweeps coupled | Wrong ADI |
+| **Fission** | `fdtd-2d` | outer `t`, 4 stmts | Intra-step: `hz` depends on step-t `ex`/`ey` | Wrong FDTD |
+| **Fission** | `fdtd-apml` | outer `t`, 4 stmts | Intra-step: same as `fdtd-2d` | Wrong FDTD |
+| **Fusion** | `atax` | two inner `j`-loops | Flow dep: `tmp(i)` partial when `y(j)` reads it | Wrong y vector |
+| **Fusion** | `doitgen` | two outer `p`-loops | WAR: `a(p)` written before s-loop finishes reading it | Wrong matrix product |
+| **Fusion** | `gemver` | four outer `i`-loops | Flow dep (×2): partial A when x reads it; partial x when w reads it | Wrong x and w |
+| **Interchange** | `reg_detect` | `(j, i)` with `i = j, maxgrid` | Triangular inner bound → outer `do i = j` with undefined `j` | Garbage output |
+| **Interchange** | `covariance` | `(j1, j2)` with `j2 = j1, m` | Triangular inner bound → outer `do j2 = j1` with undefined `j1` | Segfault |
+| **Interchange** | `trmm` | `(i, j)` rectangular, nested `k=1..i-1` | Evaluation order change: `b(k,j)` has extra accumulations from prior `j` iterations | Wrong triangular product |
+
+**Pattern summary**:
+- Fission failures are all **producer–consumer splits**: one loop produces a value that the next loop needs, but fission lets the first loop run to completion for ALL outer iterations before the consumer loop starts, breaking loop-carried read-after-write chains.
+- Fusion failures are **incomplete-producer merges**: the first loop hasn't finished producing (across all iterations) when the fused second loop starts reading.
+- Interchange failures are either **undefined bound variables** (inner bound copies outer variable name verbatim) or **evaluation order violations** in triangular accumulations.
 
 ## Next experiments
 
