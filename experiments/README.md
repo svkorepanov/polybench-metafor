@@ -4,6 +4,10 @@ Each subdirectory is one experiment run: a specific loop transformation applied
 to a specific dataset size, with results and analysis captured at a point in
 time.
 
+## Cross-cutting issues
+
+[`issues/cross-transform-mismatches.md`](issues/cross-transform-mismatches.md) — all 15 correctness failures from fission, fusion, and interchange in one table, with root-cause classification.
+
 ## Directory naming convention
 
 ```
