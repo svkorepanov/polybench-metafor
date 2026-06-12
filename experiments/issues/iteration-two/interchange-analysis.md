@@ -7,7 +7,7 @@
 | Transform | `interchangeGeneric.ts` → `LoopInterchangePass` |
 | Dataset | SMALL_DATASET |
 | Date | 2026-06-12 |
-| Transpiler commit | `76ded39` |
+| Transpiler commit | `967e893` |
 
 ## Changes since iteration 1
 

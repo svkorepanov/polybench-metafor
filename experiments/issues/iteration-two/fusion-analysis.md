@@ -7,14 +7,18 @@
 | Transform | `fusionGeneric.ts` → `LoopFusionPass` |
 | Dataset | SMALL_DATASET |
 | Date | 2026-06-12 |
-| Transpiler commit | `76ded39` |
+| Transpiler commit | `967e893` |
 
 ## Changes since iteration 1
 
-No changes to `LoopFusionPass`. The three failure patterns are documented in
+`LoopFusionPass` itself is unchanged. `fusionGeneric.ts` was updated in `967e893`
+to print `FUSED` / `SKIPPED` based on `result.appliedPass`, enabling the
+`.transform-status` marker written by `weave-transpiler.sh` (YES = transform
+applied; NO = no eligible consecutive loops found). The three failure patterns
+are documented in
 [`../iteration-one/fusion-legality-analysis.md`](../iteration-one/fusion-legality-analysis.md)
 but the legality checks have not yet been implemented. This run confirms the
-issue set is stable.
+issue set is stable with the new YES/NO markers.
 
 ## Result
 
