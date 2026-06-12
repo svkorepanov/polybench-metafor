@@ -5,13 +5,13 @@ Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup
 reg_detect      | OK         | YES        | MATCH      | 4550       | 1.00x   
 floyd-warshall  | OK         | NO         | MATCH      | 2.00       | 1.00x   
 gemm            | OK         | NO         | MATCH      | 22044549282.79 | 1.00x   
-gemver          | OK         | YES        | MISMATCH   | 2781599076737293.00 | 1.00x   
+gemver          | OK         | YES        | MATCH      | 2781599076737293.00 | 1.00x   
 trisolv         | OK         | NO         | MATCH      |            | err     
 cholesky        | OK         | NO         | MATCH      | .01        | 1.00x   
-doitgen         | OK         | YES        | MISMATCH   | 14745.34   | 0.00x   
+doitgen         | OK         | NO         | MATCH      | 14745.34   | 1.00x   
 syr2k           | OK         | YES        | MATCH      | 44088831050.99 | 1.00x   
 symm            | OK         | NO         | MATCH      | 21537985165.50 | 1.00x   
-atax            | OK         | YES        | MISMATCH   | 10875561215686.43 | 1.00x   
+atax            | OK         | NO         | MATCH      | 10875561215686.43 | 1.00x   
 2mm             | OK         | YES        | MATCH      | 123227535355982.91 | 1.00x   
 bicg            | OK         | NO         | MATCH      | 130637371.96 | 1.00x   
 trmm            | OK         | NO         | MATCH      | 290287848918619101610495831116879203439359931392069608413446876350405189155524658642315140032426827527007838688496223782053133937243340661023363752399771164988333816701574601910626678880048177536654801295482972238627726907721077569167221128282182759019301360916956191465633173585913687598091113324347392.00 | 1.00x   
@@ -24,10 +24,10 @@ dynprog         | OK         | NO         | MATCH      | 0          |
 awk: cmd. line:1: error: division by zero attempted
 lu              | OK         | NO         | MATCH      | .00        |         
 durbin          | OK         | NO         | MATCH      |            | err     
-gramschmidt     | OK         | YES        | MATCH      | 127.00     | 1.00x   
-ludcmp          | OK         | YES        | MATCH      |            | err     
+gramschmidt     | OK         | NO         | MATCH      | 127.00     | 1.00x   
+ludcmp          | OK         | NO         | MATCH      |            | err     
 seidel-2d       | OK         | NO         | MATCH      | 500.00     | 1.00x   
-adi             | OK         | YES        | MATCH      | -176492.34 | 0.00x   
+adi             | OK         | NO         | MATCH      | -176492.34 | 0.00x   
 jacobi-1d-imper | OK         | NO         | MATCH      | 1.00       | 1.00x   
 jacobi-2d-imper | OK         | YES        | MATCH      | 500.00     | 1.00x   
 fdtd-2d         | OK         | NO         | MATCH      | 501.00     | 1.00x   
@@ -35,5 +35,5 @@ fdtd-apml       | OK         | NO         | MATCH      | 70.05      | 1.00x
 correlation     | OK         | YES        | MATCH      | 1.00       | 1.00x   
 covariance      | OK         | NO         | MATCH      | 5356281897502.23 | 1.00x   
 --------------------------------------------------------------------------------------------
-Final Results: 27 Matches (ignoring timer), 3 Mismatches, 0 Missing.
-Total Transformed: 13
+Final Results: 30 Matches (ignoring timer), 0 Mismatches, 0 Missing.
+Total Transformed: 8
