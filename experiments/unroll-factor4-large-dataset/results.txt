@@ -1,0 +1,37 @@
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | TILED      | MATCH      | 0.024598   | 0.70x   
+floyd-warshall  | OK         | TILED      | MATCH      | 14.039139  | 1.07x   
+gemm            | OK         | TILED      | MATCH      | 85.517454  | 0.97x   
+gemver          | OK         | TILED      | MATCH      | 1.957269   | 0.97x   
+trisolv         | OK         | TILED      | MATCH      | 0.054628   | 0.96x   
+cholesky        | OK         | TILED      | MATCH      | 2.527623   | 1.14x   
+doitgen         | OK         | TILED      | MATCH      | 6.789102   | 1.26x   
+syr2k           | OK         | TILED      | MATCH      | 24.445730  | 1.02x   
+symm            | OK         | TILED      | MATCH      | 179.607404 | 1.03x   
+atax            | OK         | TILED      | MATCH      | 0.148378   | 1.00x   
+2mm             | OK         | TILED      | MATCH      | 168.424380 | 1.17x   
+bicg            | OK         | TILED      | MATCH      | 0.120672   | 1.06x   
+trmm            | OK         | TILED      | MATCH      | 8.449433   | 0.97x   
+gesummv         | OK         | TILED      | MATCH      | 0.132805   | 0.95x   
+mvt             | OK         | TILED      | MATCH      | 1.822319   | 0.99x   
+3mm             | OK         | TILED      | MATCH      | 253.246998 | 1.10x   
+syrk            | OK         | TILED      | MATCH      | 15.231984  | 0.99x   
+dynprog         | OK         | TILED      | MATCH      | 42.652796  | 0.86x   
+lu              | OK         | TILED      | MATCH      | 3.886078   | 0.79x   
+durbin          | OK         | TILED      | MATCH      | 2.706057   | 1.01x   
+gramschmidt     | OK         | TILED      | MATCH      | 200.540508 | 0.95x   
+ludcmp          | OK         | TILED      | MATCH      | 17.697918  | 0.95x   
+seidel-2d       | OK         | TILED      | MATCH      | 0.977942   | 0.99x   
+adi             | OK         | TILED      | MATCH      | 3.449607   | 0.99x   
+jacobi-1d-imper | OK         | TILED      | MATCH      | 0.119998   | 0.76x   
+jacobi-2d-imper | OK         | TILED      | MATCH      | 0.365129   | 1.07x   
+fdtd-2d         | OK         | TILED      | MATCH      | 1.434420   | 1.00x   
+fdtd-apml       | SKIPPED    | TILED      | N/A        | -          | -       
+correlation     | OK         | TILED      | MATCH      | 81.806112  | 1.00x   
+covariance      | OK         | TILED      | MATCH      | 81.984932  | 0.98x   
+--------------------------------------------------------------------------------------------
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Parallelized/Transformed: 0
