@@ -33,7 +33,7 @@ commit; this run confirms the regression is still present.
 
 Both are the same structural patterns as interchange failures: triangular bounds
 and nested loops with outer-variable bounds. The detection rules documented in
-[`../iteration-one/interchange-legality-analysis.md`](../iteration-one/interchange-legality-analysis.md)
+[`../iteration-1/interchange-legality-analysis.md`](../iteration-1/interchange-legality-analysis.md)
 apply identically to tiling.
 
 ## Raw results
