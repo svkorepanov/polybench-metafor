@@ -43,7 +43,7 @@ for TRANSFORM in tilingGeneric unrollGeneric fusionGeneric fissionGeneric interc
 
     # 4. Compare and save
     echo "--- compare.sh ---" | tee -a "$LOG"
-    ./compare.sh 2>&1 | tee -a "$RESULT_DIR/results.txt"
+    ./compare.sh 2>&1 | tee "$RESULT_DIR/results.txt"
     cat "$RESULT_DIR/results.txt" | tee -a "$LOG"
 
     echo "" >> "$SUMMARY"
