@@ -1,0 +1,2579 @@
+Iteration-4 LARGE_DATASET run started: Sun Jun 14 11:15:56 UTC 2026
+
+==============================
+Transform: tilingGeneric
+Started:   Sun Jun 14 11:15:56 UTC 2026
+==============================
+--- weave-transpiler.sh tilingGeneric ---
+Now using node v22.22.3 (npm v10.9.8)
+Starting fortran-transpiler (transform: tilingGeneric)
+Transpiler root: /root/fortran-transpiler/Fortran-JS
+------------------------------------------------
+Processing: ./medley/reg_detect/reg_detect.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_reg_detect
+Writing file '/root/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/reg_detect/woven_code
+  [OK] reg_detect.preproc.f90
+------------------------------------------------
+Processing: ./medley/floyd-warshall/floyd-warshall.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_floyd_warshall
+Writing file '/root/polybench-metafor/medley/floyd-warshall/woven_code/floyd-warshall.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/floyd-warshall/woven_code
+  [OK] floyd-warshall.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemm/gemm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_gemm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemm/woven_code/gemm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemm/woven_code
+  [OK] gemm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemver/gemver.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_gemver
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemver/woven_code/gemver.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemver/woven_code
+  [OK] gemver.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trisolv/trisolv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_trisolv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code
+  [OK] trisolv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/cholesky/cholesky.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_cholesky
+Writing file '/root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code
+  [OK] cholesky.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/doitgen/doitgen.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_doitgen
+Writing file '/root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code/doitgen.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code
+  [OK] doitgen.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syr2k/syr2k.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_syr2k
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code/syr2k.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code
+  [OK] syr2k.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/symm/symm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_symm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/symm/woven_code/symm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/symm/woven_code
+  [OK] symm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/atax/atax.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_atax
+Writing file '/root/polybench-metafor/linear-algebra/kernels/atax/woven_code/atax.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/atax/woven_code
+  [OK] atax.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/2mm/2mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_2mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/2mm/woven_code/2mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/2mm/woven_code
+  [OK] 2mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/bicg/bicg.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_bicg
+Writing file '/root/polybench-metafor/linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/bicg/woven_code
+  [OK] bicg.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trmm/trmm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_trmm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trmm/woven_code/trmm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trmm/woven_code
+  [OK] trmm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gesummv/gesummv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_gesummv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code
+  [OK] gesummv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/mvt/mvt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[tilingGeneric] TILED (tile=32): kernel_mvt
+Writing file '/root/polybench-metafor/linear-algebra/kernels/mvt/woven_code/mvt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/mvt/woven_code
+  [OK] mvt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/3mm/3mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_3mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/3mm/woven_code/3mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/3mm/woven_code
+  [OK] 3mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syrk/syrk.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_syrk
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syrk/woven_code/syrk.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syrk/woven_code
+  [OK] syrk.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/dynprog/dynprog.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_dynprog
+Writing file '/root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code/dynprog.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code
+  [OK] dynprog.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/lu/lu.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_lu
+Writing file '/root/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/lu/woven_code
+  [OK] lu.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/durbin/durbin.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_durbin
+Writing file '/root/polybench-metafor/linear-algebra/solvers/durbin/woven_code/durbin.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/durbin/woven_code
+  [OK] durbin.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/gramschmidt/gramschmidt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_gramschmidt
+Writing file '/root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code
+  [OK] gramschmidt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/ludcmp/ludcmp.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_ludcmp
+Writing file '/root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code/ludcmp.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code
+  [OK] ludcmp.preproc.f90
+------------------------------------------------
+Processing: ./stencils/seidel-2d/seidel-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_seidel
+Writing file '/root/polybench-metafor/stencils/seidel-2d/woven_code/seidel-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/seidel-2d/woven_code
+  [OK] seidel-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/adi/adi.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_adi
+Writing file '/root/polybench-metafor/stencils/adi/woven_code/adi.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/adi/woven_code
+  [OK] adi.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-1d-imper/jacobi-1d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_jacobi1d
+Writing file '/root/polybench-metafor/stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-1d-imper/woven_code
+  [OK] jacobi-1d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-2d-imper/jacobi-2d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_jacobi_2d_imper
+Writing file '/root/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-2d-imper/woven_code
+  [OK] jacobi-2d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-2d/fdtd-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_fdtd_2d
+Writing file '/root/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-2d/woven_code
+  [OK] fdtd-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-apml/fdtd-apml.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_fdtd_apml
+Writing file '/root/polybench-metafor/stencils/fdtd-apml/woven_code/fdtd-apml.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-apml/woven_code
+  [OK] fdtd-apml.preproc.f90
+------------------------------------------------
+Processing: ./datamining/correlation/correlation.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_correlation
+Writing file '/root/polybench-metafor/datamining/correlation/woven_code/correlation.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/correlation/woven_code
+  [OK] correlation.preproc.f90
+------------------------------------------------
+Processing: ./datamining/covariance/covariance.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_covariance
+Writing file '/root/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/covariance/woven_code
+  [OK] covariance.preproc.f90
+------------------------------------------------
+Done. 30/30 succeeded.
+--- compile.sh ---
+Step 1: Compiling C utilities...
+In file included from /root/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+In file included from /root/polybench-metafor/utilities/fpolybench.c:21:
+/root/polybench-metafor/utilities/fpolybench.h:100:40: warning: empty character constant [-Winvalid-pp-token]
+  100 |       if( IARGC() > 42 .AND.  arg .EQ. '' ) then;  
+      |                                        ^
+6 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+Building: ./medley/reg_detect/reg_detect.exe
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+Building: ./linear-algebra/kernels/symm/symm.exe
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+Building: ./linear-algebra/kernels/atax/atax.exe
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+Building: ./linear-algebra/solvers/lu/lu.exe
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+Building: ./stencils/seidel-2d/seidel-2d.exe
+Building: ./stencils/adi/woven_code/adi.exe
+Building: ./stencils/adi/adi.exe
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+Building: ./datamining/correlation/woven_code/correlation.exe
+Building: ./datamining/correlation/correlation.exe
+Building: ./datamining/covariance/woven_code/covariance.exe
+Building: ./datamining/covariance/covariance.exe
+------------------------------------------------
+Done! Compiled 60 benchmarks.
+--- execute.sh ---
+Running Suite...
+------------------------------------------------
+Processing: reg_detect
+Processing: reg_detect
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: gemm
+Processing: gemm
+Processing: gemver
+Processing: gemver
+Processing: trisolv
+Processing: trisolv
+Processing: cholesky
+Processing: cholesky
+Processing: doitgen
+Processing: doitgen
+Processing: syr2k
+Processing: syr2k
+Processing: symm
+Processing: symm
+Processing: atax
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: bicg
+Processing: bicg
+Processing: trmm
+Processing: trmm
+Processing: gesummv
+Processing: gesummv
+Processing: mvt
+Processing: mvt
+Processing: 3mm
+Processing: 3mm
+Processing: syrk
+Processing: syrk
+Processing: dynprog
+Processing: dynprog
+Processing: lu
+Processing: lu
+Processing: durbin
+Processing: durbin
+Processing: gramschmidt
+Processing: gramschmidt
+Processing: ludcmp
+Processing: ludcmp
+Processing: seidel-2d
+Processing: seidel-2d
+Processing: adi
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: jacobi-2d-imper
+Processing: fdtd-2d
+Processing: fdtd-2d
+Skipping (blacklisted): fdtd-apml
+Skipping (blacklisted): fdtd-apml
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+------------------------------------------------
+Done. Captured 58 benchmark results. Skipped (blacklisted): 2.
+--- compare.sh ---
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | YES        | MATCH      | 0.023604   | 0.98x   
+floyd-warshall  | OK         | YES        | MATCH      | 14.252020  | 2.18x   
+gemm            | OK         | YES        | MATCH      | 89.702865  | 1.04x   
+gemver          | OK         | YES        | MATCH      | 2.086126   | 3.15x   
+trisolv         | OK         | NO         | MATCH      | 0.066356   | 0.84x   
+cholesky        | OK         | NO         | MATCH      | 2.448428   | 0.97x   
+doitgen         | OK         | YES        | MATCH      | 6.239504   | 1.02x   
+syr2k           | OK         | YES        | MATCH      | 25.067175  | 1.11x   
+symm            | OK         | YES        | MATCH      | 190.608301 | 1.02x   
+atax            | OK         | NO         | MATCH      | 0.157640   | 0.94x   
+2mm             | OK         | YES        | MATCH      | 183.380679 | 1.08x   
+bicg            | OK         | NO         | MATCH      | 0.115631   | 0.78x   
+trmm            | OK         | YES        | MATCH      | 9.147042   | 0.58x   
+gesummv         | OK         | NO         | MATCH      | 0.153686   | 1.08x   
+mvt             | OK         | YES        | MATCH      | 2.089316   | 6.68x   
+3mm             | OK         | YES        | MATCH      | 262.647359 | 1.05x   
+syrk            | OK         | YES        | MATCH      | 14.736477  | 1.34x   
+dynprog         | OK         | YES        | MATCH      | 37.852969  | 1.02x   
+lu              | OK         | YES        | MATCH      | 3.635722   | 0.40x   
+durbin          | OK         | NO         | MATCH      | 2.663800   | 0.98x   
+gramschmidt     | OK         | NO         | MATCH      | 212.698320 | 1.08x   
+ludcmp          | OK         | NO         | MATCH      | 17.891252  | 0.92x   
+seidel-2d       | OK         | YES        | MATCH      | 0.992008   | 1.00x   
+adi             | OK         | YES        | MATCH      | 3.461457   | 0.63x   
+jacobi-1d-imper | OK         | NO         | MATCH      | 0.134815   | 1.15x   
+jacobi-2d-imper | OK         | YES        | MATCH      | 0.366371   | 0.49x   
+fdtd-2d         | OK         | YES        | MATCH      | 1.428481   | 0.53x   
+fdtd-apml       | SKIPPED    | YES        | N/A        | -          | -       
+correlation     | OK         | YES        | MATCH      | 87.103238  | 1.01x   
+covariance      | OK         | YES        | MATCH      | 86.919926  | 0.96x   
+--------------------------------------------------------------------------------------------
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Transformed: 21
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | YES        | MATCH      | 0.023604   | 0.98x   
+floyd-warshall  | OK         | YES        | MATCH      | 14.252020  | 2.18x   
+gemm            | OK         | YES        | MATCH      | 89.702865  | 1.04x   
+gemver          | OK         | YES        | MATCH      | 2.086126   | 3.15x   
+trisolv         | OK         | NO         | MATCH      | 0.066356   | 0.84x   
+cholesky        | OK         | NO         | MATCH      | 2.448428   | 0.97x   
+doitgen         | OK         | YES        | MATCH      | 6.239504   | 1.02x   
+syr2k           | OK         | YES        | MATCH      | 25.067175  | 1.11x   
+symm            | OK         | YES        | MATCH      | 190.608301 | 1.02x   
+atax            | OK         | NO         | MATCH      | 0.157640   | 0.94x   
+2mm             | OK         | YES        | MATCH      | 183.380679 | 1.08x   
+bicg            | OK         | NO         | MATCH      | 0.115631   | 0.78x   
+trmm            | OK         | YES        | MATCH      | 9.147042   | 0.58x   
+gesummv         | OK         | NO         | MATCH      | 0.153686   | 1.08x   
+mvt             | OK         | YES        | MATCH      | 2.089316   | 6.68x   
+3mm             | OK         | YES        | MATCH      | 262.647359 | 1.05x   
+syrk            | OK         | YES        | MATCH      | 14.736477  | 1.34x   
+dynprog         | OK         | YES        | MATCH      | 37.852969  | 1.02x   
+lu              | OK         | YES        | MATCH      | 3.635722   | 0.40x   
+durbin          | OK         | NO         | MATCH      | 2.663800   | 0.98x   
+gramschmidt     | OK         | NO         | MATCH      | 212.698320 | 1.08x   
+ludcmp          | OK         | NO         | MATCH      | 17.891252  | 0.92x   
+seidel-2d       | OK         | YES        | MATCH      | 0.992008   | 1.00x   
+adi             | OK         | YES        | MATCH      | 3.461457   | 0.63x   
+jacobi-1d-imper | OK         | NO         | MATCH      | 0.134815   | 1.15x   
+jacobi-2d-imper | OK         | YES        | MATCH      | 0.366371   | 0.49x   
+fdtd-2d         | OK         | YES        | MATCH      | 1.428481   | 0.53x   
+fdtd-apml       | SKIPPED    | YES        | N/A        | -          | -       
+correlation     | OK         | YES        | MATCH      | 87.103238  | 1.01x   
+covariance      | OK         | YES        | MATCH      | 86.919926  | 0.96x   
+--------------------------------------------------------------------------------------------
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Transformed: 21
+Finished: Sun Jun 14 11:59:41 UTC 2026
+
+==============================
+Transform: unrollGeneric
+Started:   Sun Jun 14 11:59:41 UTC 2026
+==============================
+--- weave-transpiler.sh unrollGeneric ---
+Now using node v22.22.3 (npm v10.9.8)
+Starting fortran-transpiler (transform: unrollGeneric)
+Transpiler root: /root/fortran-transpiler/Fortran-JS
+------------------------------------------------
+Processing: ./medley/reg_detect/reg_detect.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_reg_detect
+Writing file '/root/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/reg_detect/woven_code
+  [OK] reg_detect.preproc.f90
+------------------------------------------------
+Processing: ./medley/floyd-warshall/floyd-warshall.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_floyd_warshall
+Writing file '/root/polybench-metafor/medley/floyd-warshall/woven_code/floyd-warshall.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/floyd-warshall/woven_code
+  [OK] floyd-warshall.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemm/gemm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_gemm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemm/woven_code/gemm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemm/woven_code
+  [OK] gemm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemver/gemver.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_gemver
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemver/woven_code/gemver.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemver/woven_code
+  [OK] gemver.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trisolv/trisolv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[unrollGeneric] UNROLLED (factor=4): kernel_trisolv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code
+  [OK] trisolv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/cholesky/cholesky.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_cholesky
+Writing file '/root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code
+  [OK] cholesky.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/doitgen/doitgen.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_doitgen
+Writing file '/root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code/doitgen.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code
+  [OK] doitgen.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syr2k/syr2k.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_syr2k
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code/syr2k.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code
+  [OK] syr2k.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/symm/symm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_symm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/symm/woven_code/symm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/symm/woven_code
+  [OK] symm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/atax/atax.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_atax
+Writing file '/root/polybench-metafor/linear-algebra/kernels/atax/woven_code/atax.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/atax/woven_code
+  [OK] atax.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/2mm/2mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_2mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/2mm/woven_code/2mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/2mm/woven_code
+  [OK] 2mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/bicg/bicg.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_bicg
+Writing file '/root/polybench-metafor/linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/bicg/woven_code
+  [OK] bicg.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trmm/trmm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_trmm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trmm/woven_code/trmm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trmm/woven_code
+  [OK] trmm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gesummv/gesummv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_gesummv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code
+  [OK] gesummv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/mvt/mvt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_mvt
+Writing file '/root/polybench-metafor/linear-algebra/kernels/mvt/woven_code/mvt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/mvt/woven_code
+  [OK] mvt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/3mm/3mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_3mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/3mm/woven_code/3mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/3mm/woven_code
+  [OK] 3mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syrk/syrk.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_syrk
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syrk/woven_code/syrk.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syrk/woven_code
+  [OK] syrk.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/dynprog/dynprog.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_dynprog
+Writing file '/root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code/dynprog.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code
+  [OK] dynprog.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/lu/lu.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_lu
+Writing file '/root/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/lu/woven_code
+  [OK] lu.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/durbin/durbin.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_durbin
+Writing file '/root/polybench-metafor/linear-algebra/solvers/durbin/woven_code/durbin.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/durbin/woven_code
+  [OK] durbin.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/gramschmidt/gramschmidt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_gramschmidt
+Writing file '/root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code
+  [OK] gramschmidt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/ludcmp/ludcmp.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_ludcmp
+Writing file '/root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code/ludcmp.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code
+  [OK] ludcmp.preproc.f90
+------------------------------------------------
+Processing: ./stencils/seidel-2d/seidel-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_seidel
+Writing file '/root/polybench-metafor/stencils/seidel-2d/woven_code/seidel-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/seidel-2d/woven_code
+  [OK] seidel-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/adi/adi.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_adi
+Writing file '/root/polybench-metafor/stencils/adi/woven_code/adi.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/adi/woven_code
+  [OK] adi.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-1d-imper/jacobi-1d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_jacobi1d
+Writing file '/root/polybench-metafor/stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-1d-imper/woven_code
+  [OK] jacobi-1d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-2d-imper/jacobi-2d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_jacobi_2d_imper
+Writing file '/root/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-2d-imper/woven_code
+  [OK] jacobi-2d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-2d/fdtd-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_fdtd_2d
+Writing file '/root/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-2d/woven_code
+  [OK] fdtd-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-apml/fdtd-apml.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_fdtd_apml
+Writing file '/root/polybench-metafor/stencils/fdtd-apml/woven_code/fdtd-apml.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-apml/woven_code
+  [OK] fdtd-apml.preproc.f90
+------------------------------------------------
+Processing: ./datamining/correlation/correlation.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_correlation
+Writing file '/root/polybench-metafor/datamining/correlation/woven_code/correlation.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/correlation/woven_code
+  [OK] correlation.preproc.f90
+------------------------------------------------
+Processing: ./datamining/covariance/covariance.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_covariance
+Writing file '/root/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/covariance/woven_code
+  [OK] covariance.preproc.f90
+------------------------------------------------
+Done. 30/30 succeeded.
+--- compile.sh ---
+Step 1: Compiling C utilities...
+In file included from /root/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+In file included from /root/polybench-metafor/utilities/fpolybench.c:21:
+/root/polybench-metafor/utilities/fpolybench.h:100:40: warning: empty character constant [-Winvalid-pp-token]
+  100 |       if( IARGC() > 42 .AND.  arg .EQ. '' ) then;  
+      |                                        ^
+6 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+Building: ./medley/reg_detect/reg_detect.exe
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+Building: ./linear-algebra/kernels/symm/symm.exe
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+Building: ./linear-algebra/kernels/atax/atax.exe
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+Building: ./linear-algebra/solvers/lu/lu.exe
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+Building: ./stencils/seidel-2d/seidel-2d.exe
+Building: ./stencils/adi/woven_code/adi.exe
+Building: ./stencils/adi/adi.exe
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+Building: ./datamining/correlation/woven_code/correlation.exe
+Building: ./datamining/correlation/correlation.exe
+Building: ./datamining/covariance/woven_code/covariance.exe
+Building: ./datamining/covariance/covariance.exe
+------------------------------------------------
+Done! Compiled 60 benchmarks.
+--- execute.sh ---
+Running Suite...
+------------------------------------------------
+Processing: reg_detect
+Processing: reg_detect
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: gemm
+Processing: gemm
+Processing: gemver
+Processing: gemver
+Processing: trisolv
+Processing: trisolv
+Processing: cholesky
+Processing: cholesky
+Processing: doitgen
+Processing: doitgen
+Processing: syr2k
+Processing: syr2k
+Processing: symm
+Processing: symm
+Processing: atax
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: bicg
+Processing: bicg
+Processing: trmm
+Processing: trmm
+Processing: gesummv
+Processing: gesummv
+Processing: mvt
+Processing: mvt
+Processing: 3mm
+Processing: 3mm
+Processing: syrk
+Processing: syrk
+Processing: dynprog
+Processing: dynprog
+Processing: lu
+Processing: lu
+Processing: durbin
+Processing: durbin
+Processing: gramschmidt
+Processing: gramschmidt
+Processing: ludcmp
+Processing: ludcmp
+Processing: seidel-2d
+Processing: seidel-2d
+Processing: adi
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: jacobi-2d-imper
+Processing: fdtd-2d
+Processing: fdtd-2d
+Skipping (blacklisted): fdtd-apml
+Skipping (blacklisted): fdtd-apml
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+------------------------------------------------
+Done. Captured 58 benchmark results. Skipped (blacklisted): 2.
+--- compare.sh ---
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | YES        | MATCH      | 0.022164   | 0.73x   
+floyd-warshall  | OK         | YES        | MATCH      | 14.578579  | 1.08x   
+gemm            | OK         | YES        | MATCH      | 94.346657  | 1.00x   
+gemver          | OK         | YES        | MATCH      | 2.225576   | 0.92x   
+trisolv         | OK         | YES        | MATCH      | 0.062891   | 1.07x   
+cholesky        | OK         | YES        | MATCH      | 2.857425   | 1.07x   
+doitgen         | OK         | YES        | MATCH      | 6.448074   | 1.01x   
+syr2k           | OK         | YES        | MATCH      | 25.953144  | 1.03x   
+symm            | OK         | YES        | MATCH      | 191.639687 | 1.08x   
+atax            | OK         | YES        | MATCH      | 0.161894   | 1.01x   
+2mm             | OK         | YES        | MATCH      | 190.005565 | 0.97x   
+bicg            | OK         | YES        | MATCH      | 0.114670   | 0.98x   
+trmm            | OK         | YES        | MATCH      | 9.439036   | 1.04x   
+gesummv         | OK         | YES        | MATCH      | 0.160225   | 0.95x   
+mvt             | OK         | YES        | MATCH      | 2.045322   | 0.99x   
+3mm             | OK         | YES        | MATCH      | 290.440326 | 1.03x   
+syrk            | OK         | YES        | MATCH      | 16.768533  | 1.06x   
+dynprog         | OK         | YES        | MATCH      | 42.217791  | 0.88x   
+lu              | OK         | YES        | MATCH      | 3.533691   | 0.83x   
+durbin          | OK         | YES        | MATCH      | 2.862377   | 1.07x   
+gramschmidt     | OK         | YES        | MATCH      | 238.025078 | 1.12x   
+ludcmp          | OK         | YES        | MATCH      | 22.489328  | 1.10x   
+seidel-2d       | OK         | YES        | MATCH      | 1.011042   | 1.01x   
+adi             | OK         | YES        | MATCH      | 3.691576   | 0.90x   
+jacobi-1d-imper | OK         | YES        | MATCH      | 0.156633   | 0.98x   
+jacobi-2d-imper | OK         | YES        | MATCH      | 0.393434   | 1.07x   
+fdtd-2d         | OK         | YES        | MATCH      | 1.537711   | 0.99x   
+fdtd-apml       | SKIPPED    | YES        | N/A        | -          | -       
+correlation     | OK         | YES        | MATCH      | 94.845192  | 1.04x   
+covariance      | OK         | YES        | MATCH      | 84.899393  | 0.94x   
+--------------------------------------------------------------------------------------------
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Transformed: 30
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | YES        | MATCH      | 0.022164   | 0.73x   
+floyd-warshall  | OK         | YES        | MATCH      | 14.578579  | 1.08x   
+gemm            | OK         | YES        | MATCH      | 94.346657  | 1.00x   
+gemver          | OK         | YES        | MATCH      | 2.225576   | 0.92x   
+trisolv         | OK         | YES        | MATCH      | 0.062891   | 1.07x   
+cholesky        | OK         | YES        | MATCH      | 2.857425   | 1.07x   
+doitgen         | OK         | YES        | MATCH      | 6.448074   | 1.01x   
+syr2k           | OK         | YES        | MATCH      | 25.953144  | 1.03x   
+symm            | OK         | YES        | MATCH      | 191.639687 | 1.08x   
+atax            | OK         | YES        | MATCH      | 0.161894   | 1.01x   
+2mm             | OK         | YES        | MATCH      | 190.005565 | 0.97x   
+bicg            | OK         | YES        | MATCH      | 0.114670   | 0.98x   
+trmm            | OK         | YES        | MATCH      | 9.439036   | 1.04x   
+gesummv         | OK         | YES        | MATCH      | 0.160225   | 0.95x   
+mvt             | OK         | YES        | MATCH      | 2.045322   | 0.99x   
+3mm             | OK         | YES        | MATCH      | 290.440326 | 1.03x   
+syrk            | OK         | YES        | MATCH      | 16.768533  | 1.06x   
+dynprog         | OK         | YES        | MATCH      | 42.217791  | 0.88x   
+lu              | OK         | YES        | MATCH      | 3.533691   | 0.83x   
+durbin          | OK         | YES        | MATCH      | 2.862377   | 1.07x   
+gramschmidt     | OK         | YES        | MATCH      | 238.025078 | 1.12x   
+ludcmp          | OK         | YES        | MATCH      | 22.489328  | 1.10x   
+seidel-2d       | OK         | YES        | MATCH      | 1.011042   | 1.01x   
+adi             | OK         | YES        | MATCH      | 3.691576   | 0.90x   
+jacobi-1d-imper | OK         | YES        | MATCH      | 0.156633   | 0.98x   
+jacobi-2d-imper | OK         | YES        | MATCH      | 0.393434   | 1.07x   
+fdtd-2d         | OK         | YES        | MATCH      | 1.537711   | 0.99x   
+fdtd-apml       | SKIPPED    | YES        | N/A        | -          | -       
+correlation     | OK         | YES        | MATCH      | 94.845192  | 1.04x   
+covariance      | OK         | YES        | MATCH      | 84.899393  | 0.94x   
+--------------------------------------------------------------------------------------------
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Transformed: 30
+Finished: Sun Jun 14 12:46:32 UTC 2026
+
+==============================
+Transform: fusionGeneric
+Started:   Sun Jun 14 12:46:32 UTC 2026
+==============================
+--- weave-transpiler.sh fusionGeneric ---
+Now using node v22.22.3 (npm v10.9.8)
+Starting fortran-transpiler (transform: fusionGeneric)
+Transpiler root: /root/fortran-transpiler/Fortran-JS
+------------------------------------------------
+Processing: ./medley/reg_detect/reg_detect.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_reg_detect
+Writing file '/root/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/reg_detect/woven_code
+  [OK] reg_detect.preproc.f90
+------------------------------------------------
+Processing: ./medley/floyd-warshall/floyd-warshall.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_floyd_warshall
+Writing file '/root/polybench-metafor/medley/floyd-warshall/woven_code/floyd-warshall.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/floyd-warshall/woven_code
+  [OK] floyd-warshall.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemm/gemm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_gemm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemm/woven_code/gemm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemm/woven_code
+  [OK] gemm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemver/gemver.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_gemver
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemver/woven_code/gemver.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemver/woven_code
+  [OK] gemver.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trisolv/trisolv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_trisolv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code
+  [OK] trisolv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/cholesky/cholesky.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_cholesky
+Writing file '/root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code
+  [OK] cholesky.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/doitgen/doitgen.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_doitgen
+Writing file '/root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code/doitgen.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code
+  [OK] doitgen.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syr2k/syr2k.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_syr2k
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code/syr2k.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code
+  [OK] syr2k.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/symm/symm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_symm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/symm/woven_code/symm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/symm/woven_code
+  [OK] symm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/atax/atax.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_atax
+Writing file '/root/polybench-metafor/linear-algebra/kernels/atax/woven_code/atax.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/atax/woven_code
+  [OK] atax.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/2mm/2mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_2mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/2mm/woven_code/2mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/2mm/woven_code
+  [OK] 2mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/bicg/bicg.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_bicg
+Writing file '/root/polybench-metafor/linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/bicg/woven_code
+  [OK] bicg.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trmm/trmm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_trmm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trmm/woven_code/trmm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trmm/woven_code
+  [OK] trmm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gesummv/gesummv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_gesummv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code
+  [OK] gesummv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/mvt/mvt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[fusionGeneric] FUSED: kernel_mvt
+Writing file '/root/polybench-metafor/linear-algebra/kernels/mvt/woven_code/mvt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/mvt/woven_code
+  [OK] mvt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/3mm/3mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_3mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/3mm/woven_code/3mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/3mm/woven_code
+  [OK] 3mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syrk/syrk.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_syrk
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syrk/woven_code/syrk.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syrk/woven_code
+  [OK] syrk.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/dynprog/dynprog.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_dynprog
+Writing file '/root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code/dynprog.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code
+  [OK] dynprog.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/lu/lu.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_lu
+Writing file '/root/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/lu/woven_code
+  [OK] lu.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/durbin/durbin.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_durbin
+Writing file '/root/polybench-metafor/linear-algebra/solvers/durbin/woven_code/durbin.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/durbin/woven_code
+  [OK] durbin.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/gramschmidt/gramschmidt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_gramschmidt
+Writing file '/root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code
+  [OK] gramschmidt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/ludcmp/ludcmp.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_ludcmp
+Writing file '/root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code/ludcmp.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code
+  [OK] ludcmp.preproc.f90
+------------------------------------------------
+Processing: ./stencils/seidel-2d/seidel-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_seidel
+Writing file '/root/polybench-metafor/stencils/seidel-2d/woven_code/seidel-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/seidel-2d/woven_code
+  [OK] seidel-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/adi/adi.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_adi
+Writing file '/root/polybench-metafor/stencils/adi/woven_code/adi.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/adi/woven_code
+  [OK] adi.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-1d-imper/jacobi-1d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_jacobi1d
+Writing file '/root/polybench-metafor/stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-1d-imper/woven_code
+  [OK] jacobi-1d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-2d-imper/jacobi-2d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_jacobi_2d_imper
+Writing file '/root/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-2d-imper/woven_code
+  [OK] jacobi-2d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-2d/fdtd-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_fdtd_2d
+Writing file '/root/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-2d/woven_code
+  [OK] fdtd-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-apml/fdtd-apml.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_fdtd_apml
+Writing file '/root/polybench-metafor/stencils/fdtd-apml/woven_code/fdtd-apml.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-apml/woven_code
+  [OK] fdtd-apml.preproc.f90
+------------------------------------------------
+Processing: ./datamining/correlation/correlation.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_correlation
+Writing file '/root/polybench-metafor/datamining/correlation/woven_code/correlation.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/correlation/woven_code
+  [OK] correlation.preproc.f90
+------------------------------------------------
+Processing: ./datamining/covariance/covariance.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_covariance
+Writing file '/root/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/covariance/woven_code
+  [OK] covariance.preproc.f90
+------------------------------------------------
+Done. 30/30 succeeded.
+--- compile.sh ---
+Step 1: Compiling C utilities...
+In file included from /root/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+In file included from /root/polybench-metafor/utilities/fpolybench.c:21:
+/root/polybench-metafor/utilities/fpolybench.h:100:40: warning: empty character constant [-Winvalid-pp-token]
+  100 |       if( IARGC() > 42 .AND.  arg .EQ. '' ) then;  
+      |                                        ^
+6 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+Building: ./medley/reg_detect/reg_detect.exe
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+Building: ./linear-algebra/kernels/symm/symm.exe
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+Building: ./linear-algebra/kernels/atax/atax.exe
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+Building: ./linear-algebra/solvers/lu/lu.exe
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+Building: ./stencils/seidel-2d/seidel-2d.exe
+Building: ./stencils/adi/woven_code/adi.exe
+Building: ./stencils/adi/adi.exe
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+Building: ./datamining/correlation/woven_code/correlation.exe
+Building: ./datamining/correlation/correlation.exe
+Building: ./datamining/covariance/woven_code/covariance.exe
+Building: ./datamining/covariance/covariance.exe
+------------------------------------------------
+Done! Compiled 60 benchmarks.
+--- execute.sh ---
+Running Suite...
+------------------------------------------------
+Processing: reg_detect
+Processing: reg_detect
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: gemm
+Processing: gemm
+Processing: gemver
+Processing: gemver
+Processing: trisolv
+Processing: trisolv
+Processing: cholesky
+Processing: cholesky
+Processing: doitgen
+Processing: doitgen
+Processing: syr2k
+Processing: syr2k
+Processing: symm
+Processing: symm
+Processing: atax
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: bicg
+Processing: bicg
+Processing: trmm
+Processing: trmm
+Processing: gesummv
+Processing: gesummv
+Processing: mvt
+Processing: mvt
+Processing: 3mm
+Processing: 3mm
+Processing: syrk
+Processing: syrk
+Processing: dynprog
+Processing: dynprog
+Processing: lu
+Processing: lu
+Processing: durbin
+Processing: durbin
+Processing: gramschmidt
+Processing: gramschmidt
+Processing: ludcmp
+Processing: ludcmp
+Processing: seidel-2d
+Processing: seidel-2d
+Processing: adi
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: jacobi-2d-imper
+Processing: fdtd-2d
+Processing: fdtd-2d
+Skipping (blacklisted): fdtd-apml
+Skipping (blacklisted): fdtd-apml
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+------------------------------------------------
+Done. Captured 58 benchmark results. Skipped (blacklisted): 2.
+--- compare.sh ---
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | YES        | MATCH      | 0.033478   | 1.05x   
+floyd-warshall  | OK         | NO         | MATCH      | 14.979119  | 0.96x   
+gemm            | OK         | NO         | MATCH      | 91.513126  | 0.95x   
+gemver          | OK         | YES        | MATCH      | 1.934952   | 0.91x   
+trisolv         | OK         | NO         | MATCH      | 0.057303   | 0.99x   
+cholesky        | OK         | NO         | MATCH      | 2.581513   | 0.90x   
+doitgen         | OK         | NO         | MATCH      | 6.383376   | 0.88x   
+syr2k           | OK         | YES        | MATCH      | 26.315066  | 1.02x   
+symm            | OK         | NO         | MATCH      | 186.206207 | 1.02x   
+atax            | OK         | NO         | MATCH      | 0.156160   | 1.04x   
+2mm             | OK         | YES        | MATCH      | 193.666421 | 1.05x   
+bicg            | OK         | NO         | MATCH      | 0.144499   | 1.09x   
+trmm            | OK         | NO         | MATCH      | 9.080882   | 1.05x   
+gesummv         | OK         | NO         | MATCH      | 0.142313   | 0.97x   
+mvt             | OK         | YES        | MATCH      | 2.979641   | 1.16x   
+3mm             | OK         | NO         | MATCH      | 273.102587 | 1.01x   
+syrk            | OK         | YES        | MATCH      | 14.745267  | 0.98x   
+dynprog         | OK         | NO         | MATCH      | 37.509443  | 0.92x   
+lu              | OK         | NO         | MATCH      | 4.058400   | 0.84x   
+durbin          | OK         | NO         | MATCH      | 2.678035   | 0.91x   
+gramschmidt     | OK         | NO         | MATCH      | 219.267357 | 1.04x   
+ludcmp          | OK         | NO         | MATCH      | 19.328426  | 1.08x   
+seidel-2d       | OK         | NO         | MATCH      | 1.038842   | 1.03x   
+adi             | OK         | NO         | MATCH      | 3.561022   | 0.96x   
+jacobi-1d-imper | OK         | NO         | MATCH      | 0.147408   | 1.06x   
+jacobi-2d-imper | OK         | YES        | MATCH      | 0.377054   | 1.59x   
+fdtd-2d         | OK         | NO         | MATCH      | 1.408170   | 0.93x   
+fdtd-apml       | SKIPPED    | NO         | N/A        | -          | -       
+correlation     | OK         | YES        | MATCH      | 88.716202  | 1.05x   
+covariance      | OK         | NO         | MATCH      | 89.382612  | 1.00x   
+--------------------------------------------------------------------------------------------
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Transformed: 8
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | YES        | MATCH      | 0.033478   | 1.05x   
+floyd-warshall  | OK         | NO         | MATCH      | 14.979119  | 0.96x   
+gemm            | OK         | NO         | MATCH      | 91.513126  | 0.95x   
+gemver          | OK         | YES        | MATCH      | 1.934952   | 0.91x   
+trisolv         | OK         | NO         | MATCH      | 0.057303   | 0.99x   
+cholesky        | OK         | NO         | MATCH      | 2.581513   | 0.90x   
+doitgen         | OK         | NO         | MATCH      | 6.383376   | 0.88x   
+syr2k           | OK         | YES        | MATCH      | 26.315066  | 1.02x   
+symm            | OK         | NO         | MATCH      | 186.206207 | 1.02x   
+atax            | OK         | NO         | MATCH      | 0.156160   | 1.04x   
+2mm             | OK         | YES        | MATCH      | 193.666421 | 1.05x   
+bicg            | OK         | NO         | MATCH      | 0.144499   | 1.09x   
+trmm            | OK         | NO         | MATCH      | 9.080882   | 1.05x   
+gesummv         | OK         | NO         | MATCH      | 0.142313   | 0.97x   
+mvt             | OK         | YES        | MATCH      | 2.979641   | 1.16x   
+3mm             | OK         | NO         | MATCH      | 273.102587 | 1.01x   
+syrk            | OK         | YES        | MATCH      | 14.745267  | 0.98x   
+dynprog         | OK         | NO         | MATCH      | 37.509443  | 0.92x   
+lu              | OK         | NO         | MATCH      | 4.058400   | 0.84x   
+durbin          | OK         | NO         | MATCH      | 2.678035   | 0.91x   
+gramschmidt     | OK         | NO         | MATCH      | 219.267357 | 1.04x   
+ludcmp          | OK         | NO         | MATCH      | 19.328426  | 1.08x   
+seidel-2d       | OK         | NO         | MATCH      | 1.038842   | 1.03x   
+adi             | OK         | NO         | MATCH      | 3.561022   | 0.96x   
+jacobi-1d-imper | OK         | NO         | MATCH      | 0.147408   | 1.06x   
+jacobi-2d-imper | OK         | YES        | MATCH      | 0.377054   | 1.59x   
+fdtd-2d         | OK         | NO         | MATCH      | 1.408170   | 0.93x   
+fdtd-apml       | SKIPPED    | NO         | N/A        | -          | -       
+correlation     | OK         | YES        | MATCH      | 88.716202  | 1.05x   
+covariance      | OK         | NO         | MATCH      | 89.382612  | 1.00x   
+--------------------------------------------------------------------------------------------
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Transformed: 8
+Finished: Sun Jun 14 13:32:06 UTC 2026
+
+==============================
+Transform: fissionGeneric
+Started:   Sun Jun 14 13:32:06 UTC 2026
+==============================
+--- weave-transpiler.sh fissionGeneric ---
+Now using node v22.22.3 (npm v10.9.8)
+Starting fortran-transpiler (transform: fissionGeneric)
+Transpiler root: /root/fortran-transpiler/Fortran-JS
+------------------------------------------------
+Processing: ./medley/reg_detect/reg_detect.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_reg_detect
+Writing file '/root/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/reg_detect/woven_code
+  [OK] reg_detect.preproc.f90
+------------------------------------------------
+Processing: ./medley/floyd-warshall/floyd-warshall.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_floyd_warshall
+Writing file '/root/polybench-metafor/medley/floyd-warshall/woven_code/floyd-warshall.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/floyd-warshall/woven_code
+  [OK] floyd-warshall.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemm/gemm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_gemm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemm/woven_code/gemm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemm/woven_code
+  [OK] gemm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemver/gemver.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_gemver
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemver/woven_code/gemver.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemver/woven_code
+  [OK] gemver.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trisolv/trisolv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_trisolv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code
+  [OK] trisolv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/cholesky/cholesky.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_cholesky
+Writing file '/root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code
+  [OK] cholesky.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/doitgen/doitgen.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[fissionGeneric] FISSIONED: kernel_doitgen
+Writing file '/root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code/doitgen.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code
+  [OK] doitgen.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syr2k/syr2k.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_syr2k
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code/syr2k.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code
+  [OK] syr2k.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/symm/symm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_symm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/symm/woven_code/symm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/symm/woven_code
+  [OK] symm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/atax/atax.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_atax
+Writing file '/root/polybench-metafor/linear-algebra/kernels/atax/woven_code/atax.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/atax/woven_code
+  [OK] atax.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/2mm/2mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_2mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/2mm/woven_code/2mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/2mm/woven_code
+  [OK] 2mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/bicg/bicg.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_bicg
+Writing file '/root/polybench-metafor/linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/bicg/woven_code
+  [OK] bicg.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trmm/trmm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_trmm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trmm/woven_code/trmm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trmm/woven_code
+  [OK] trmm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gesummv/gesummv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_gesummv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code
+  [OK] gesummv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/mvt/mvt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_mvt
+Writing file '/root/polybench-metafor/linear-algebra/kernels/mvt/woven_code/mvt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/mvt/woven_code
+  [OK] mvt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/3mm/3mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_3mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/3mm/woven_code/3mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/3mm/woven_code
+  [OK] 3mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syrk/syrk.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_syrk
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syrk/woven_code/syrk.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syrk/woven_code
+  [OK] syrk.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/dynprog/dynprog.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_dynprog
+Writing file '/root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code/dynprog.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code
+  [OK] dynprog.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/lu/lu.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_lu
+Writing file '/root/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/lu/woven_code
+  [OK] lu.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/durbin/durbin.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_durbin
+Writing file '/root/polybench-metafor/linear-algebra/solvers/durbin/woven_code/durbin.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/durbin/woven_code
+  [OK] durbin.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/gramschmidt/gramschmidt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_gramschmidt
+Writing file '/root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code
+  [OK] gramschmidt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/ludcmp/ludcmp.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_ludcmp
+Writing file '/root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code/ludcmp.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code
+  [OK] ludcmp.preproc.f90
+------------------------------------------------
+Processing: ./stencils/seidel-2d/seidel-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_seidel
+Writing file '/root/polybench-metafor/stencils/seidel-2d/woven_code/seidel-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/seidel-2d/woven_code
+  [OK] seidel-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/adi/adi.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_adi
+Writing file '/root/polybench-metafor/stencils/adi/woven_code/adi.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/adi/woven_code
+  [OK] adi.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-1d-imper/jacobi-1d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_jacobi1d
+Writing file '/root/polybench-metafor/stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-1d-imper/woven_code
+  [OK] jacobi-1d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-2d-imper/jacobi-2d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_jacobi_2d_imper
+Writing file '/root/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-2d-imper/woven_code
+  [OK] jacobi-2d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-2d/fdtd-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_fdtd_2d
+Writing file '/root/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-2d/woven_code
+  [OK] fdtd-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-apml/fdtd-apml.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_fdtd_apml
+Writing file '/root/polybench-metafor/stencils/fdtd-apml/woven_code/fdtd-apml.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-apml/woven_code
+  [OK] fdtd-apml.preproc.f90
+------------------------------------------------
+Processing: ./datamining/correlation/correlation.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_correlation
+Writing file '/root/polybench-metafor/datamining/correlation/woven_code/correlation.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/correlation/woven_code
+  [OK] correlation.preproc.f90
+------------------------------------------------
+Processing: ./datamining/covariance/covariance.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_covariance
+Writing file '/root/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/covariance/woven_code
+  [OK] covariance.preproc.f90
+------------------------------------------------
+Done. 30/30 succeeded.
+--- compile.sh ---
+Step 1: Compiling C utilities...
+In file included from /root/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+In file included from /root/polybench-metafor/utilities/fpolybench.c:21:
+/root/polybench-metafor/utilities/fpolybench.h:100:40: warning: empty character constant [-Winvalid-pp-token]
+  100 |       if( IARGC() > 42 .AND.  arg .EQ. '' ) then;  
+      |                                        ^
+6 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+Building: ./medley/reg_detect/reg_detect.exe
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+Building: ./linear-algebra/kernels/symm/symm.exe
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+Building: ./linear-algebra/kernels/atax/atax.exe
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+Building: ./linear-algebra/solvers/lu/lu.exe
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+Building: ./stencils/seidel-2d/seidel-2d.exe
+Building: ./stencils/adi/woven_code/adi.exe
+Building: ./stencils/adi/adi.exe
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+Building: ./datamining/correlation/woven_code/correlation.exe
+Building: ./datamining/correlation/correlation.exe
+Building: ./datamining/covariance/woven_code/covariance.exe
+Building: ./datamining/covariance/covariance.exe
+------------------------------------------------
+Done! Compiled 60 benchmarks.
+--- execute.sh ---
+Running Suite...
+------------------------------------------------
+Processing: reg_detect
+Processing: reg_detect
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: gemm
+Processing: gemm
+Processing: gemver
+Processing: gemver
+Processing: trisolv
+Processing: trisolv
+Processing: cholesky
+Processing: cholesky
+Processing: doitgen
+Processing: doitgen
+Processing: syr2k
+Processing: syr2k
+Processing: symm
+Processing: symm
+Processing: atax
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: bicg
+Processing: bicg
+Processing: trmm
+Processing: trmm
+Processing: gesummv
+Processing: gesummv
+Processing: mvt
+Processing: mvt
+Processing: 3mm
+Processing: 3mm
+Processing: syrk
+Processing: syrk
+Processing: dynprog
+Processing: dynprog
+Processing: lu
+Processing: lu
+Processing: durbin
+Processing: durbin
+Processing: gramschmidt
+Processing: gramschmidt
+Processing: ludcmp
+Processing: ludcmp
+Processing: seidel-2d
+Processing: seidel-2d
+Processing: adi
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: jacobi-2d-imper
+Processing: fdtd-2d
+Processing: fdtd-2d
+Skipping (blacklisted): fdtd-apml
+Skipping (blacklisted): fdtd-apml
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+------------------------------------------------
+Done. Captured 58 benchmark results. Skipped (blacklisted): 2.
+--- compare.sh ---
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | YES        | MATCH      | 0.023453   | 1.08x   
+floyd-warshall  | OK         | NO         | MATCH      | 13.842700  | 1.01x   
+gemm            | OK         | NO         | MATCH      | 88.471917  | 0.97x   
+gemver          | OK         | NO         | MATCH      | 1.938435   | 1.01x   
+trisolv         | OK         | NO         | MATCH      | 0.062600   | 1.00x   
+cholesky        | OK         | NO         | MATCH      | 2.691317   | 1.12x   
+doitgen         | OK         | YES        | MATCH      | 6.031963   | 0.91x   
+syr2k           | OK         | NO         | MATCH      | 25.461903  | 1.02x   
+symm            | OK         | YES        | MATCH      | 185.222101 | 0.86x   
+atax            | OK         | YES        | MATCH      | 0.159669   | 0.80x   
+2mm             | OK         | YES        | MATCH      | 175.943937 | 1.10x   
+bicg            | OK         | YES        | MATCH      | 0.113854   | 0.61x   
+trmm            | OK         | NO         | MATCH      | 8.246592   | 1.00x   
+gesummv         | OK         | YES        | MATCH      | 0.136648   | 0.61x   
+mvt             | OK         | NO         | MATCH      | 1.917574   | 1.07x   
+3mm             | OK         | YES        | MATCH      | 269.783294 | 1.02x   
+syrk            | OK         | NO         | MATCH      | 15.720696  | 1.01x   
+dynprog         | OK         | YES        | MATCH      | 41.469170  | 0.95x   
+lu              | OK         | NO         | MATCH      | 4.287074   | 0.95x   
+durbin          | OK         | NO         | MATCH      | 3.212531   | 1.06x   
+gramschmidt     | OK         | NO         | MATCH      | 233.058839 | 1.12x   
+ludcmp          | OK         | NO         | MATCH      | 19.260072  | 1.08x   
+seidel-2d       | OK         | NO         | MATCH      | 1.050398   | 1.02x   
+adi             | OK         | NO         | MATCH      | 3.556369   | 0.96x   
+jacobi-1d-imper | OK         | NO         | MATCH      | 0.146665   | 0.94x   
+jacobi-2d-imper | OK         | NO         | MATCH      | 0.371959   | 1.02x   
+fdtd-2d         | OK         | NO         | MATCH      | 1.524695   | 1.02x   
+fdtd-apml       | SKIPPED    | NO         | N/A        | -          | -       
+correlation     | OK         | YES        | MATCH      | 92.650253  | 1.00x   
+covariance      | OK         | NO         | MATCH      | 91.110168  | 0.96x   
+--------------------------------------------------------------------------------------------
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Transformed: 10
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | YES        | MATCH      | 0.023453   | 1.08x   
+floyd-warshall  | OK         | NO         | MATCH      | 13.842700  | 1.01x   
+gemm            | OK         | NO         | MATCH      | 88.471917  | 0.97x   
+gemver          | OK         | NO         | MATCH      | 1.938435   | 1.01x   
+trisolv         | OK         | NO         | MATCH      | 0.062600   | 1.00x   
+cholesky        | OK         | NO         | MATCH      | 2.691317   | 1.12x   
+doitgen         | OK         | YES        | MATCH      | 6.031963   | 0.91x   
+syr2k           | OK         | NO         | MATCH      | 25.461903  | 1.02x   
+symm            | OK         | YES        | MATCH      | 185.222101 | 0.86x   
+atax            | OK         | YES        | MATCH      | 0.159669   | 0.80x   
+2mm             | OK         | YES        | MATCH      | 175.943937 | 1.10x   
+bicg            | OK         | YES        | MATCH      | 0.113854   | 0.61x   
+trmm            | OK         | NO         | MATCH      | 8.246592   | 1.00x   
+gesummv         | OK         | YES        | MATCH      | 0.136648   | 0.61x   
+mvt             | OK         | NO         | MATCH      | 1.917574   | 1.07x   
+3mm             | OK         | YES        | MATCH      | 269.783294 | 1.02x   
+syrk            | OK         | NO         | MATCH      | 15.720696  | 1.01x   
+dynprog         | OK         | YES        | MATCH      | 41.469170  | 0.95x   
+lu              | OK         | NO         | MATCH      | 4.287074   | 0.95x   
+durbin          | OK         | NO         | MATCH      | 3.212531   | 1.06x   
+gramschmidt     | OK         | NO         | MATCH      | 233.058839 | 1.12x   
+ludcmp          | OK         | NO         | MATCH      | 19.260072  | 1.08x   
+seidel-2d       | OK         | NO         | MATCH      | 1.050398   | 1.02x   
+adi             | OK         | NO         | MATCH      | 3.556369   | 0.96x   
+jacobi-1d-imper | OK         | NO         | MATCH      | 0.146665   | 0.94x   
+jacobi-2d-imper | OK         | NO         | MATCH      | 0.371959   | 1.02x   
+fdtd-2d         | OK         | NO         | MATCH      | 1.524695   | 1.02x   
+fdtd-apml       | SKIPPED    | NO         | N/A        | -          | -       
+correlation     | OK         | YES        | MATCH      | 92.650253  | 1.00x   
+covariance      | OK         | NO         | MATCH      | 91.110168  | 0.96x   
+--------------------------------------------------------------------------------------------
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Transformed: 10
+Finished: Sun Jun 14 14:17:25 UTC 2026
+
+==============================
+Transform: interchangeGeneric
+Started:   Sun Jun 14 14:17:25 UTC 2026
+==============================
+--- weave-transpiler.sh interchangeGeneric ---
+Now using node v22.22.3 (npm v10.9.8)
+Starting fortran-transpiler (transform: interchangeGeneric)
+Transpiler root: /root/fortran-transpiler/Fortran-JS
+------------------------------------------------
+Processing: ./medley/reg_detect/reg_detect.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_reg_detect
+Writing file '/root/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/reg_detect/woven_code
+  [OK] reg_detect.preproc.f90
+------------------------------------------------
+Processing: ./medley/floyd-warshall/floyd-warshall.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_floyd_warshall
+Writing file '/root/polybench-metafor/medley/floyd-warshall/woven_code/floyd-warshall.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/floyd-warshall/woven_code
+  [OK] floyd-warshall.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemm/gemm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_gemm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemm/woven_code/gemm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemm/woven_code
+  [OK] gemm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemver/gemver.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_gemver
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemver/woven_code/gemver.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemver/woven_code
+  [OK] gemver.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trisolv/trisolv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_trisolv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code
+  [OK] trisolv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/cholesky/cholesky.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_cholesky
+Writing file '/root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code
+  [OK] cholesky.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/doitgen/doitgen.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[interchangeGeneric] INTERCHANGED: kernel_doitgen
+Writing file '/root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code/doitgen.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code
+  [OK] doitgen.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syr2k/syr2k.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_syr2k
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code/syr2k.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code
+  [OK] syr2k.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/symm/symm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_symm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/symm/woven_code/symm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/symm/woven_code
+  [OK] symm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/atax/atax.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_atax
+Writing file '/root/polybench-metafor/linear-algebra/kernels/atax/woven_code/atax.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/atax/woven_code
+  [OK] atax.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/2mm/2mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_2mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/2mm/woven_code/2mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/2mm/woven_code
+  [OK] 2mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/bicg/bicg.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_bicg
+Writing file '/root/polybench-metafor/linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/bicg/woven_code
+  [OK] bicg.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trmm/trmm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_trmm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trmm/woven_code/trmm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trmm/woven_code
+  [OK] trmm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gesummv/gesummv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_gesummv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code
+  [OK] gesummv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/mvt/mvt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_mvt
+Writing file '/root/polybench-metafor/linear-algebra/kernels/mvt/woven_code/mvt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/mvt/woven_code
+  [OK] mvt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/3mm/3mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_3mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/3mm/woven_code/3mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/3mm/woven_code
+  [OK] 3mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syrk/syrk.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_syrk
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syrk/woven_code/syrk.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syrk/woven_code
+  [OK] syrk.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/dynprog/dynprog.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_dynprog
+Writing file '/root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code/dynprog.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code
+  [OK] dynprog.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/lu/lu.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_lu
+Writing file '/root/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/lu/woven_code
+  [OK] lu.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/durbin/durbin.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_durbin
+Writing file '/root/polybench-metafor/linear-algebra/solvers/durbin/woven_code/durbin.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/durbin/woven_code
+  [OK] durbin.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/gramschmidt/gramschmidt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_gramschmidt
+Writing file '/root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code
+  [OK] gramschmidt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/ludcmp/ludcmp.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_ludcmp
+Writing file '/root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code/ludcmp.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code
+  [OK] ludcmp.preproc.f90
+------------------------------------------------
+Processing: ./stencils/seidel-2d/seidel-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_seidel
+Writing file '/root/polybench-metafor/stencils/seidel-2d/woven_code/seidel-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/seidel-2d/woven_code
+  [OK] seidel-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/adi/adi.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_adi
+Writing file '/root/polybench-metafor/stencils/adi/woven_code/adi.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/adi/woven_code
+  [OK] adi.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-1d-imper/jacobi-1d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_jacobi1d
+Writing file '/root/polybench-metafor/stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-1d-imper/woven_code
+  [OK] jacobi-1d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-2d-imper/jacobi-2d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_jacobi_2d_imper
+Writing file '/root/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-2d-imper/woven_code
+  [OK] jacobi-2d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-2d/fdtd-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_fdtd_2d
+Writing file '/root/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-2d/woven_code
+  [OK] fdtd-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-apml/fdtd-apml.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_fdtd_apml
+Writing file '/root/polybench-metafor/stencils/fdtd-apml/woven_code/fdtd-apml.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-apml/woven_code
+  [OK] fdtd-apml.preproc.f90
+------------------------------------------------
+Processing: ./datamining/correlation/correlation.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_correlation
+Writing file '/root/polybench-metafor/datamining/correlation/woven_code/correlation.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/correlation/woven_code
+  [OK] correlation.preproc.f90
+------------------------------------------------
+Processing: ./datamining/covariance/covariance.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_covariance
+Writing file '/root/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/covariance/woven_code
+  [OK] covariance.preproc.f90
+------------------------------------------------
+Done. 30/30 succeeded.
+--- compile.sh ---
+Step 1: Compiling C utilities...
+In file included from /root/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+In file included from /root/polybench-metafor/utilities/fpolybench.c:21:
+/root/polybench-metafor/utilities/fpolybench.h:100:40: warning: empty character constant [-Winvalid-pp-token]
+  100 |       if( IARGC() > 42 .AND.  arg .EQ. '' ) then;  
+      |                                        ^
+6 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+Building: ./medley/reg_detect/reg_detect.exe
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+Building: ./linear-algebra/kernels/symm/symm.exe
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+Building: ./linear-algebra/kernels/atax/atax.exe
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+Building: ./linear-algebra/solvers/lu/lu.exe
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+Building: ./stencils/seidel-2d/seidel-2d.exe
+Building: ./stencils/adi/woven_code/adi.exe
+Building: ./stencils/adi/adi.exe
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+Building: ./datamining/correlation/woven_code/correlation.exe
+Building: ./datamining/correlation/correlation.exe
+Building: ./datamining/covariance/woven_code/covariance.exe
+Building: ./datamining/covariance/covariance.exe
+------------------------------------------------
+Done! Compiled 60 benchmarks.
+--- execute.sh ---
+Running Suite...
+------------------------------------------------
+Processing: reg_detect
+Processing: reg_detect
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: gemm
+Processing: gemm
+Processing: gemver
+Processing: gemver
+Processing: trisolv
+Processing: trisolv
+Processing: cholesky
+Processing: cholesky
+Processing: doitgen
+Processing: doitgen
+Processing: syr2k
+Processing: syr2k
+Processing: symm
+Processing: symm
+Processing: atax
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: bicg
+Processing: bicg
+Processing: trmm
+Processing: trmm
+Processing: gesummv
+Processing: gesummv
+Processing: mvt
+Processing: mvt
+Processing: 3mm
+Processing: 3mm
+Processing: syrk
+Processing: syrk
+Processing: dynprog
+Processing: dynprog
+Processing: lu
+Processing: lu
+Processing: durbin
+Processing: durbin
+Processing: gramschmidt
+Processing: gramschmidt
+Processing: ludcmp
+Processing: ludcmp
+Processing: seidel-2d
+Processing: seidel-2d
+Processing: adi
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: jacobi-2d-imper
+Processing: fdtd-2d
+Processing: fdtd-2d
+Skipping (blacklisted): fdtd-apml
+Skipping (blacklisted): fdtd-apml
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+------------------------------------------------
+Done. Captured 58 benchmark results. Skipped (blacklisted): 2.
+--- compare.sh ---
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | NO         | MATCH      | 0.023606   | 1.00x   
+floyd-warshall  | OK         | YES        | MATCH      | 14.689412  | 1.06x   
+gemm            | OK         | YES        | MATCH      | 90.573529  | 1.03x   
+gemver          | OK         | YES        | MATCH      | 1.988730   | 0.50x   
+trisolv         | OK         | NO         | MATCH      | 0.058585   | 1.04x   
+cholesky        | OK         | NO         | MATCH      | 2.260552   | 0.97x   
+doitgen         | OK         | YES        | MATCH      | 6.133754   | 0.95x   
+syr2k           | OK         | NO         | MATCH      | 26.320240  | 1.04x   
+symm            | OK         | YES        | MATCH      | 193.772848 | 0.99x   
+atax            | OK         | NO         | MATCH      | 0.144404   | 0.93x   
+2mm             | OK         | YES        | MATCH      | 177.542339 | 1.14x   
+bicg            | OK         | NO         | MATCH      | 0.123207   | 0.96x   
+trmm            | OK         | NO         | MATCH      | 8.447735   | 1.01x   
+gesummv         | OK         | NO         | MATCH      | 0.142620   | 0.98x   
+mvt             | OK         | YES        | MATCH      | 2.438397   | 1.26x   
+3mm             | OK         | YES        | MATCH      | 258.775443 | 0.99x   
+syrk            | OK         | NO         | MATCH      | 15.475046  | 1.06x   
+dynprog         | OK         | YES        | MATCH      | 38.423344  | 1.03x   
+lu              | OK         | YES        | MATCH      | 4.151458   | 0.07x   
+durbin          | OK         | NO         | MATCH      | 2.787858   | 1.00x   
+gramschmidt     | OK         | NO         | MATCH      | 232.002140 | 1.05x   
+ludcmp          | OK         | NO         | MATCH      | 20.182413  | 1.00x   
+seidel-2d       | OK         | YES        | MATCH      | 1.003632   | 1.00x   
+adi             | OK         | YES        | MATCH      | 3.558101   | 0.08x   
+jacobi-1d-imper | OK         | NO         | MATCH      | 0.127381   | 0.95x   
+jacobi-2d-imper | OK         | YES        | MATCH      | 0.366227   | 0.07x   
+fdtd-2d         | OK         | YES        | MATCH      | 1.483621   | 0.06x   
+fdtd-apml       | SKIPPED    | YES        | N/A        | -          | -       
+correlation     | OK         | YES        | MATCH      | 86.645989  | 0.95x   
+covariance      | OK         | YES        | MATCH      | 95.086348  | 1.08x   
+--------------------------------------------------------------------------------------------
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Transformed: 17
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | NO         | MATCH      | 0.023606   | 1.00x   
+floyd-warshall  | OK         | YES        | MATCH      | 14.689412  | 1.06x   
+gemm            | OK         | YES        | MATCH      | 90.573529  | 1.03x   
+gemver          | OK         | YES        | MATCH      | 1.988730   | 0.50x   
+trisolv         | OK         | NO         | MATCH      | 0.058585   | 1.04x   
+cholesky        | OK         | NO         | MATCH      | 2.260552   | 0.97x   
+doitgen         | OK         | YES        | MATCH      | 6.133754   | 0.95x   
+syr2k           | OK         | NO         | MATCH      | 26.320240  | 1.04x   
+symm            | OK         | YES        | MATCH      | 193.772848 | 0.99x   
+atax            | OK         | NO         | MATCH      | 0.144404   | 0.93x   
+2mm             | OK         | YES        | MATCH      | 177.542339 | 1.14x   
+bicg            | OK         | NO         | MATCH      | 0.123207   | 0.96x   
+trmm            | OK         | NO         | MATCH      | 8.447735   | 1.01x   
+gesummv         | OK         | NO         | MATCH      | 0.142620   | 0.98x   
+mvt             | OK         | YES        | MATCH      | 2.438397   | 1.26x   
+3mm             | OK         | YES        | MATCH      | 258.775443 | 0.99x   
+syrk            | OK         | NO         | MATCH      | 15.475046  | 1.06x   
+dynprog         | OK         | YES        | MATCH      | 38.423344  | 1.03x   
+lu              | OK         | YES        | MATCH      | 4.151458   | 0.07x   
+durbin          | OK         | NO         | MATCH      | 2.787858   | 1.00x   
+gramschmidt     | OK         | NO         | MATCH      | 232.002140 | 1.05x   
+ludcmp          | OK         | NO         | MATCH      | 20.182413  | 1.00x   
+seidel-2d       | OK         | YES        | MATCH      | 1.003632   | 1.00x   
+adi             | OK         | YES        | MATCH      | 3.558101   | 0.08x   
+jacobi-1d-imper | OK         | NO         | MATCH      | 0.127381   | 0.95x   
+jacobi-2d-imper | OK         | YES        | MATCH      | 0.366227   | 0.07x   
+fdtd-2d         | OK         | YES        | MATCH      | 1.483621   | 0.06x   
+fdtd-apml       | SKIPPED    | YES        | N/A        | -          | -       
+correlation     | OK         | YES        | MATCH      | 86.645989  | 0.95x   
+covariance      | OK         | YES        | MATCH      | 95.086348  | 1.08x   
+--------------------------------------------------------------------------------------------
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Transformed: 17
+Finished: Sun Jun 14 15:04:18 UTC 2026
+
+All 5 transforms complete: Sun Jun 14 15:04:18 UTC 2026
+See experiments/issues/iteration-4/results-summary.txt for combined results.

@@ -1,35 +1,37 @@
 Output Comparison: Original vs. Woven (Metafor)
 --------------------------------------------------------------------------------------------
-Benchmark       | Status     | Parallel?  | Result     | Orig Time  | Speedup 
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
 --------------------------------------------------------------------------------------------
-reg_detect      | OK         | NO         | MATCH      | 0.022740   | 11370.00x
-floyd-warshall  | OK         | NO         | MATCH      | 17.876027  | 2.19x   
-gemm            | OK         | NO         | MATCH      | 93.790986  | 0.94x   
-gemver          | OK         | NO         | MATCH      | 2.237685   | 3.54x   
-trisolv         | OK         | NO         | MATCH      | 0.063348   | 0.98x   
-cholesky        | OK         | NO         | MATCH      | 3.048747   | 1.05x   
-doitgen         | OK         | NO         | MATCH      | 6.967865   | 1.12x   
-syr2k           | OK         | NO         | MATCH      | 25.186088  | 1.09x   
-symm            | OK         | NO         | MATCH      | 170.471509 | 1.01x   
-2mm             | OK         | NO         | MATCH      | 186.459590 | 1.07x   
-trmm            | OK         | NO         | MATCH      | 8.850570   | 1.44x   
-gesummv         | OK         | NO         | MATCH      | 0.145119   | 0.90x   
-mvt             | OK         | NO         | MATCH      | 2.366246   | 7.21x   
-3mm             | OK         | NO         | MATCH      | 257.370921 | 1.07x   
-syrk            | OK         | NO         | MATCH      | 15.019054  | 1.31x   
-dynprog         | OK         | NO         | MATCH      | 36.814071  | 646.10x 
-lu              | OK         | NO         | MATCH      | 4.169652   | 0.39x   
-durbin          | OK         | NO         | MATCH      | 3.245573   | 1.06x   
-gramschmidt     | OK         | NO         | MATCH      | 248.416063 | 1.15x   
-ludcmp          | OK         | NO         | MATCH      | 20.247100  | 0.85x   
-seidel-2d       | OK         | NO         | MATCH      | 1.219931   | 0.99x   
-adi             | OK         | NO         | MATCH      | 3.880007   | 0.62x   
-jacobi-1d-imper | OK         | NO         | MATCH      | 0.146206   | 0.91x   
-jacobi-2d-imper | OK         | NO         | MATCH      | 0.405998   | 0.47x   
-fdtd-2d         | OK         | NO         | MATCH      | 1.525377   | 0.44x   
-fdtd-apml       | SKIPPED    | NO         | N/A        | -          | -       
-correlation     | OK         | NO         | MATCH      | 89.937310  | 1.00x   
-covariance      | OK         | NO         | MATCH      | 86.198735  | 0.98x   
+reg_detect      | OK         | YES        | MATCH      | 0.023604   | 0.98x   
+floyd-warshall  | OK         | YES        | MATCH      | 14.252020  | 2.18x   
+gemm            | OK         | YES        | MATCH      | 89.702865  | 1.04x   
+gemver          | OK         | YES        | MATCH      | 2.086126   | 3.15x   
+trisolv         | OK         | NO         | MATCH      | 0.066356   | 0.84x   
+cholesky        | OK         | NO         | MATCH      | 2.448428   | 0.97x   
+doitgen         | OK         | YES        | MATCH      | 6.239504   | 1.02x   
+syr2k           | OK         | YES        | MATCH      | 25.067175  | 1.11x   
+symm            | OK         | YES        | MATCH      | 190.608301 | 1.02x   
+atax            | OK         | NO         | MATCH      | 0.157640   | 0.94x   
+2mm             | OK         | YES        | MATCH      | 183.380679 | 1.08x   
+bicg            | OK         | NO         | MATCH      | 0.115631   | 0.78x   
+trmm            | OK         | YES        | MATCH      | 9.147042   | 0.58x   
+gesummv         | OK         | NO         | MATCH      | 0.153686   | 1.08x   
+mvt             | OK         | YES        | MATCH      | 2.089316   | 6.68x   
+3mm             | OK         | YES        | MATCH      | 262.647359 | 1.05x   
+syrk            | OK         | YES        | MATCH      | 14.736477  | 1.34x   
+dynprog         | OK         | YES        | MATCH      | 37.852969  | 1.02x   
+lu              | OK         | YES        | MATCH      | 3.635722   | 0.40x   
+durbin          | OK         | NO         | MATCH      | 2.663800   | 0.98x   
+gramschmidt     | OK         | NO         | MATCH      | 212.698320 | 1.08x   
+ludcmp          | OK         | NO         | MATCH      | 17.891252  | 0.92x   
+seidel-2d       | OK         | YES        | MATCH      | 0.992008   | 1.00x   
+adi             | OK         | YES        | MATCH      | 3.461457   | 0.63x   
+jacobi-1d-imper | OK         | NO         | MATCH      | 0.134815   | 1.15x   
+jacobi-2d-imper | OK         | YES        | MATCH      | 0.366371   | 0.49x   
+fdtd-2d         | OK         | YES        | MATCH      | 1.428481   | 0.53x   
+fdtd-apml       | SKIPPED    | YES        | N/A        | -          | -       
+correlation     | OK         | YES        | MATCH      | 87.103238  | 1.01x   
+covariance      | OK         | YES        | MATCH      | 86.919926  | 0.96x   
 --------------------------------------------------------------------------------------------
-Final Results: 27 Matches (ignoring timer), 0 Mismatches, 1 Missing.
-Total Parallelized: 0
+Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+Total Transformed: 21
