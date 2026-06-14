@@ -44,4 +44,17 @@
 # endif
 
 
+/* Lowercase loop-bound alias */
+# define _pb_ni _PB_NI
+
+# undef polybench_declare_prevent_dce_vars
+# ifndef POLYBENCH_DUMP_ARRAYS
+#  define polybench_declare_prevent_dce_vars \
+      integer :: ni = NI, i; \
+      character(LEN = 30) :: arg
+# else
+#  define polybench_declare_prevent_dce_vars \
+      integer :: ni = NI, i
+# endif
+
 #endif /* !TRMM */

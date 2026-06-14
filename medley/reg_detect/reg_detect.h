@@ -56,4 +56,19 @@
 # endif
 
 
+/* Lowercase loop-bound aliases */
+# define _pb_niter _PB_NITER
+# define _pb_length _PB_LENGTH
+# define _pb_maxgrid _PB_MAXGRID
+
+# undef polybench_declare_prevent_dce_vars
+# ifndef POLYBENCH_DUMP_ARRAYS
+#  define polybench_declare_prevent_dce_vars \
+      integer :: niter = NITER, length = LENGTH, maxgrid = MAXGRID, i; \
+      character(LEN = 30) :: arg
+# else
+#  define polybench_declare_prevent_dce_vars \
+      integer :: niter = NITER, length = LENGTH, maxgrid = MAXGRID, i
+# endif
+
 #endif /* !REG_DETECT */

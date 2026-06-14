@@ -56,4 +56,19 @@
 # endif
 
 
+/* Lowercase loop-bound aliases */
+# define _pb_nq _PB_NQ
+# define _pb_nr _PB_NR
+# define _pb_np _PB_NP
+
+# undef polybench_declare_prevent_dce_vars
+# ifndef POLYBENCH_DUMP_ARRAYS
+#  define polybench_declare_prevent_dce_vars \
+      integer :: nr = NR, nq = NQ, np = NP, i; \
+      character(LEN = 30) :: arg
+# else
+#  define polybench_declare_prevent_dce_vars \
+      integer :: nr = NR, nq = NQ, np = NP, i
+# endif
+
 #endif /* !DOITGEN */

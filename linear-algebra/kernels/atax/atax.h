@@ -50,4 +50,21 @@
 # endif
 
 
+/* Lowercase loop-bound aliases for benchmarks that use _pb_* naming */
+# define _pb_nx _PB_NX
+# define _pb_ny _PB_NY
+
+/* Initialize runtime size variables in the main program declaration section.
+ * Overrides fpolybench.h's version to also declare nx/ny with compile-time values
+ * so that polybench_alloc_*d_array calls receive correct sizes. */
+# undef polybench_declare_prevent_dce_vars
+# ifndef POLYBENCH_DUMP_ARRAYS
+#  define polybench_declare_prevent_dce_vars \
+      integer :: nx = NX, ny = NY, i; \
+      character(LEN = 30) :: arg
+# else
+#  define polybench_declare_prevent_dce_vars \
+      integer :: nx = NX, ny = NY, i
+# endif
+
 #endif /* !ATAX */

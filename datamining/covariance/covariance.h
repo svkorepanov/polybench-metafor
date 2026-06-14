@@ -50,4 +50,18 @@
 # endif
 
 
+/* Lowercase loop-bound aliases */
+# define _pb_n _PB_N
+# define _pb_m _PB_M
+
+# undef polybench_declare_prevent_dce_vars
+# ifndef POLYBENCH_DUMP_ARRAYS
+#  define polybench_declare_prevent_dce_vars \
+      integer :: n = N, m = M, i; \
+      character(LEN = 30) :: arg
+# else
+#  define polybench_declare_prevent_dce_vars \
+      integer :: n = N, m = M, i
+# endif
+
 #endif /* !COVARIANCE_H */

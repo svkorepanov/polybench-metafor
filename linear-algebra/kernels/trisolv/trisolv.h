@@ -44,4 +44,17 @@
 # endif
 
 
+/* Lowercase loop-bound alias */
+# define _pb_n _PB_N
+
+# undef polybench_declare_prevent_dce_vars
+# ifndef POLYBENCH_DUMP_ARRAYS
+#  define polybench_declare_prevent_dce_vars \
+      integer :: n = N, i; \
+      character(LEN = 30) :: arg
+# else
+#  define polybench_declare_prevent_dce_vars \
+      integer :: n = N, i
+# endif
+
 #endif /* !TRISOLV */

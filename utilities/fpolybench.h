@@ -151,4 +151,21 @@
 #define POLYBENCH_FREE_ARRAY(NAME)
 #endif
 
+/* Lowercase aliases for benchmarks that use lowercase macro names.
+ * These map to the uppercase variants defined above so both styles compile. */
+#define data_type DATA_TYPE
+#define data_printf_modifier DATA_PRINTF_MODIFIER
+#define polybench_1d_array_decl POLYBENCH_1D_ARRAY_DECL
+#define polybench_2d_array_decl POLYBENCH_2D_ARRAY_DECL
+#define polybench_3d_array_decl POLYBENCH_3D_ARRAY_DECL
+#define polybench_4d_array_decl POLYBENCH_4D_ARRAY_DECL
+#define polybench_5d_array_decl POLYBENCH_5D_ARRAY_DECL
+#define polybench_alloc_1d_array POLYBENCH_ALLOC_1D_ARRAY
+#define polybench_alloc_2d_array POLYBENCH_ALLOC_2D_ARRAY
+#define polybench_alloc_3d_array POLYBENCH_ALLOC_3D_ARRAY
+#define polybench_alloc_4d_array POLYBENCH_ALLOC_4D_ARRAY
+#define polybench_alloc_5d_array POLYBENCH_ALLOC_5D_ARRAY
+#define polybench_dealloc_array POLYBENCH_DEALLOC_ARRAY
+#define polybench_free_array POLYBENCH_FREE_ARRAY
+
 #endif
