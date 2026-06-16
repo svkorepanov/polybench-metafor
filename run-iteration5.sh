@@ -8,6 +8,8 @@
 # Results go to: experiments/issues/iteration-5/
 
 POLYBENCH_ROOT="$(cd "$(dirname "$0")" && pwd)"
+cd "$POLYBENCH_ROOT"
+
 ITER_DIR="$POLYBENCH_ROOT/experiments/issues/iteration-5"
 SUMMARY="$ITER_DIR/results-summary.txt"
 LOG="$ITER_DIR/run.log"
