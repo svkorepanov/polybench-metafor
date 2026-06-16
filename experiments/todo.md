@@ -71,30 +71,79 @@ The expected directory layout:
 parent/
   polybench-metafor/    ← this repo
   fortran-transpiler/   ← transpiler (sibling)
+    FortranAst/         ← Java module
+    FortranParser/      ← Java module
+    FortranWeaver/      ← Java module (produces java-binaries)
     Fortran-JS/
       src-api/
       src-code/
-      java-binaries/    ← JVM bridge (NOT in git — see §2.3)
+      java-binaries/    ← JVM bridge (NOT in git — build from FortranWeaver)
+  specs-java-libs/      ← required by FortranWeaver build
+  lara-framework/       ← required by FortranWeaver build
 ```
 
-### 2.3 Obtain java-binaries (JVM bridge)
+`FortranWeaver/settings.gradle` resolves `specs-java-libs` and `lara-framework`
+at `../../specs-java-libs` and `../../lara-framework` by default (overridable via
+`SPECS_JAVA_LIBS_HOME` and `LARA_FRAMEWORK_HOME` environment variables).
 
-`java-binaries/` is excluded from git. Obtain it from CI artifacts or a Gradle build
-of `FortranWeaver/`:
+### 2.3 Clone Java dependency repos
 
 ```bash
-# Option A — copy from CI artifact
-cp -r /path/to/artifact/java-binaries fortran-transpiler/Fortran-JS/
-
-# Option B — build from source (requires Gradle)
-cd fortran-transpiler/FortranWeaver
-./gradlew jar
-# then copy the produced jar into Fortran-JS/java-binaries/
+# From the parent/ directory (same level as fortran-transpiler/)
+git clone <specs-java-libs-url> specs-java-libs
+git clone <lara-framework-url>  lara-framework
 ```
 
-Without `java-binaries/`, every `npx metafor` call fails with a JVM/classpath error.
+These are compile-time dependencies for the Gradle build; they are not needed at runtime.
 
-### 2.4 Build fortran-transpiler
+### 2.4 Build java-binaries from source
+
+`java-binaries/` contains the output of `gradle installDist` run inside `FortranWeaver/`.
+It provides the JVM bridge that `npx metafor` calls at runtime. Without it every
+`npx metafor` invocation fails with a JVM/classpath error.
+
+**Prerequisites**: Java 17+ (`java -version`) and Gradle 8+ (`gradle --version`).
+
+```bash
+# Install Gradle if not present (Ubuntu/Debian)
+apt-get install -y gradle
+# or via sdkman: sdk install gradle 8.13
+
+cd fortran-transpiler/FortranWeaver
+gradle installDist
+```
+
+`installDist` produces a self-contained distribution at `build/install/FortranWeaver/`
+with two subdirectories:
+
+```
+build/install/FortranWeaver/
+  bin/
+    FortranWeaver        ← launch script (Linux)
+    FortranWeaver.bat    ← launch script (Windows)
+  lib/
+    FortranWeaver.jar
+    FortranAst.jar
+    FortranParser.jar
+    LARAI.jar
+    ... (all runtime jars)
+```
+
+Copy this into `Fortran-JS/java-binaries/`:
+
+```bash
+# From fortran-transpiler/FortranWeaver/
+cp -r build/install/FortranWeaver/* ../Fortran-JS/java-binaries/
+
+# Verify
+ls ../Fortran-JS/java-binaries/bin/FortranWeaver   # must exist
+ls ../Fortran-JS/java-binaries/lib/FortranWeaver.jar
+```
+
+Rebuild `java-binaries` only when Java source under `FortranAst/`, `FortranParser/`,
+or `FortranWeaver/src/` changes. The TypeScript build in §2.5 is independent.
+
+### 2.5 Build fortran-transpiler (TypeScript)
 
 ```bash
 export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" && nvm use 22
@@ -108,6 +157,7 @@ ls code/index.js     # must exist
 ```
 
 Rebuild whenever TypeScript source under `src-api/` or `src-code/` changes.
+Rebuild `java-binaries/` (§2.4) separately when Java source changes.
 
 ---
 
