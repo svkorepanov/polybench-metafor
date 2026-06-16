@@ -1,30 +1,37 @@
-------------------------------------------------------------
-Gradle 7.4.2
-------------------------------------------------------------
+# Gradle installation note
 
-Build time:   2022-03-31 15:25:29 UTC
-Revision:     540473b8118064efcc264694cbcaa4b677f61041
+## Why not apt?
 
-Kotlin:       1.5.31
-Groovy:       3.0.9
-Ant:          Apache Ant(TM) version 1.10.11 compiled on July 10 2021
-JVM:          21.0.11-ea (Ubuntu 21.0.11-ea+8-Ubuntu-1)
-OS:           Linux 7.0.0-15-generic amd64
+The apt package for Gradle on Ubuntu is out of date. Ubuntu ships Gradle 7.4.2
+(from 2022), and Gradle 7.x officially supports only up to Java 16. When run
+under Java 21, its embedded Groovy and Kotlin runtimes break with:
 
+    Could not open settings generic class cache for settings file 'settings.gradle'
+    BUG! exception in phase 'semantic analysis' Unsupported class file major version 65
 
-Starting a Gradle Daemon, 2 stopped Daemons could not be reused, use --status for details
+Gradle does not publish to the Ubuntu apt repositories itself — the package is
+maintained by Debian/Ubuntu and lags years behind upstream. Use one of the
+options below instead.
 
-FAILURE: Build failed with an exception.
+## Install Gradle 8
 
-* What went wrong:
-Could not open settings generic class cache for settings file '/home/sergeikorepanov/fortran-transpiler/FortranWeaver/settings.gradle' (/home/sergeikorepanov/.gradle/caches/7.4.2/scripts/6rkdmivm7qa2kf4s382vkkl4l).
-> BUG! exception in phase 'semantic analysis' in source unit '_BuildScript_' Unsupported class file major version 65
+### Option A — manual install
 
-* Try:
-> Run with --stacktrace option to get the stack trace.
-> Run with --info or --debug option to get more log output.
-> Run with --scan to get full insights.
+    wget https://services.gradle.org/distributions/gradle-8.13-bin.zip -P /tmp
+    unzip /tmp/gradle-8.13-bin.zip -d /opt/gradle
+    export PATH=/opt/gradle/gradle-8.13/bin:$PATH
+    echo 'export PATH=/opt/gradle/gradle-8.13/bin:$PATH' >> ~/.bashrc
 
-* Get more help at https://help.gradle.org
+### Option B — SDKMAN
 
-BUILD FAILED in 3s
+    curl -s "https://get.sdkman.io" | bash
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    sdk install gradle 8.13
+
+## After installing Gradle 8
+
+    gradle --version   # must show 8.13
+    gradle --stop      # kill any stale 7.4.2 daemons
+
+    cd fortran-transpiler/FortranWeaver
+    gradle installDist
