@@ -1,0 +1,37 @@
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+correlation     | OK         | YES        | MATCH      | 0.148889   | 1.04x   
+covariance      | OK         | YES        | MATCH      | 0.128923   | 0.98x   
+floyd-warshall  | OK         | YES        | MATCH      | 0.001769   | 0.69x   
+reg_detect      | OK         | YES        | MATCH      | 0.000094   | 0.67x   
+fdtd-2d         | OK         | YES        | MATCH      | 0.009316   | 0.82x   
+seidel-2d       | OK         | YES        | MATCH      | 0.037612   | 0.99x   
+fdtd-apml       | OK         | YES        | MATCH      | 0.011610   | 1.00x   
+adi             | OK         | YES        | MATCH      | 0.057334   | 0.79x   
+jacobi-1d-imper | OK         | YES        | MATCH      | 0.000011   | 0.65x   
+jacobi-2d-imper | OK         | YES        | MATCH      | 0.008641   | 1.18x   
+mvt             | OK         | YES        | MATCH      | 0.000791   | 1.13x   
+syr2k           | OK         | YES        | MATCH      | 0.005502   | 1.07x   
+trmm            | OK         | YES        | MATCH      | 0.001541   | 1.01x   
+gesummv         | OK         | YES        | MATCH      | 0.000483   | 1.01x   
+trisolv         | OK         | YES        | MATCH      | 0.000200   | 0.82x   
+syrk            | OK         | YES        | MATCH      | 0.002927   | 1.00x   
+cholesky        | OK         | YES        | MATCH      | 0.001214   | 1.02x   
+bicg            | OK         | YES        | MATCH      | 0.000392   | 1.02x   
+gemver          | OK         | YES        | MATCH      | 0.001148   | 0.90x   
+3mm             | OK         | YES        | MATCH      | 0.011553   | 1.34x   
+atax            | OK         | YES        | MATCH      | 0.000485   | 0.78x   
+2mm             | OK         | YES        | MATCH      | 0.007085   | 0.94x   
+symm            | OK         | YES        | MATCH      | 0.005732   | 1.12x   
+gemm            | OK         | YES        | MATCH      | 0.003321   | 1.15x   
+doitgen         | OK         | YES        | MATCH      | 0.001203   | 1.05x   
+dynprog         | OK         | YES        | MATCH      | 0.004003   | 1.10x   
+ludcmp          | OK         | YES        | MATCH      | 0.000946   | 1.02x   
+durbin          | OK         | YES        | MATCH      | 0.002970   | 1.79x   
+lu              | OK         | YES        | MATCH      | 0.000593   | 0.64x   
+gramschmidt     | OK         | YES        | MATCH      | 0.005785   | 0.64x   
+--------------------------------------------------------------------------------------------
+Final Results: 30 Matches (ignoring timer), 0 Mismatches, 0 Missing.
+Total Transformed: 30

@@ -23,7 +23,7 @@ TRANSPILER_JS="$POLYBENCH_ROOT/../fortran-transpiler/Fortran-JS"
 
 # ── Flags ─────────────────────────────────────────────────────────────────────
 if [ "$DATASET" = "SMALL_DATASET" ]; then
-    PARGS="-DSMALL_DATASET -DPOLYBENCH_DUMP_ARRAYS"
+    PARGS="-DSMALL_DATASET -DPOLYBENCH_TIME"
 else
     PARGS="-DLARGE_DATASET -DPOLYBENCH_TIME"
 fi

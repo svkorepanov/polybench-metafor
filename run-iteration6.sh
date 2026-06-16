@@ -1,16 +1,16 @@
 #!/bin/bash
-# run-iteration5.sh — Iteration-5: setup correctness check (SMALL_DATASET + DUMP_ARRAYS)
+# run-iteration6.sh — Iteration-5: setup correctness check (SMALL_DATASET + DUMP_ARRAYS)
 #
 # Purpose: verify that all 5 loop transforms produce 30/30 MATCH on a fresh
 # machine. Runs under POLYBENCH_DUMP_ARRAYS so compare.sh diffs actual array
 # values, not just empty timing output.
 #
-# Results go to: experiments/issues/iteration-5/
+# Results go to: experiments/issues/iteration-6/
 
 POLYBENCH_ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$POLYBENCH_ROOT"
 
-ITER_DIR="$POLYBENCH_ROOT/experiments/issues/iteration-5"
+ITER_DIR="$POLYBENCH_ROOT/experiments/issues/iteration-6"
 SUMMARY="$ITER_DIR/results-summary.txt"
 LOG="$ITER_DIR/run.log"
 TRANSPILER_JS="$POLYBENCH_ROOT/../fortran-transpiler/Fortran-JS"
@@ -38,7 +38,10 @@ check() {
 check "flang-22 installed"        flang-22 --version
 check "clang-22 installed"        clang-22 --version
 check "java 21+ installed"        bash -c 'java -version 2>&1 | grep -qE "version \"(2[1-9]|[3-9][0-9])\."'
-check "node 22"                   bash -c 'node --version | grep -q "^v22\."'
+# check "node 22 via NVM"           bash -c \
+#     'export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" \
+#      && nvm use 22 &>/dev/null && node --version | grep -q "^v22\."'
+check "node 22 installed"         bash -c 'node --version | grep -q "^v22\."'
 check "fortran-transpiler built"  test -f "$TRANSPILER_JS/code/index.js"
 check "java-binaries present"     test -f "$TRANSPILER_JS/java-binaries/bin/FortranWeaver"
 
@@ -48,12 +51,6 @@ if [ "$ERRORS" -gt 0 ]; then
     exit 1
 fi
 log "All setup checks passed."
-log ""
-
-# ── 2. Clean stale woven_code directories ────────────────────────────────────
-log "Removing stale woven_code/ directories..."
-find . -type d -name "woven_code" -exec rm -rf {} + 2>/dev/null || true
-log "Done."
 log ""
 
 # ── 2. Patch scripts for SMALL_DATASET + POLYBENCH_DUMP_ARRAYS ───────────────
