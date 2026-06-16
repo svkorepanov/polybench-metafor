@@ -1,0 +1,30 @@
+------------------------------------------------------------
+Gradle 7.4.2
+------------------------------------------------------------
+
+Build time:   2022-03-31 15:25:29 UTC
+Revision:     540473b8118064efcc264694cbcaa4b677f61041
+
+Kotlin:       1.5.31
+Groovy:       3.0.9
+Ant:          Apache Ant(TM) version 1.10.11 compiled on July 10 2021
+JVM:          21.0.11-ea (Ubuntu 21.0.11-ea+8-Ubuntu-1)
+OS:           Linux 7.0.0-15-generic amd64
+
+
+Starting a Gradle Daemon, 2 stopped Daemons could not be reused, use --status for details
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not open settings generic class cache for settings file '/home/sergeikorepanov/fortran-transpiler/FortranWeaver/settings.gradle' (/home/sergeikorepanov/.gradle/caches/7.4.2/scripts/6rkdmivm7qa2kf4s382vkkl4l).
+> BUG! exception in phase 'semantic analysis' in source unit '_BuildScript_' Unsupported class file major version 65
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 3s
