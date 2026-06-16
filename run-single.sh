@@ -49,7 +49,7 @@ BENCH_DIR="$(dirname "$BENCH_SRC")"
 PREPROC="$BENCH_DIR/${BENCHMARK}.preproc.f90"
 ORIG_EXE="$BENCH_DIR/${BENCHMARK}.exe"
 ORIG_OUT="$BENCH_DIR/${BENCHMARK}.output.txt"
-WOVEN_F90="$BENCH_DIR/woven_code/${BENCHMARK}.f90"
+WOVEN_F90="$BENCH_DIR/woven_code/${BENCHMARK}.preproc.f90"
 WOVEN_EXE="$BENCH_DIR/woven_code/${BENCHMARK}.exe"
 WOVEN_OUT="$BENCH_DIR/woven_code/${BENCHMARK}.output.txt"
 
@@ -92,8 +92,10 @@ echo ""
 # ── 5. Apply transformation ───────────────────────────────────────────────────
 echo "--- 5. Apply $TRANSFORM ---"
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm use 22
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    . "$NVM_DIR/nvm.sh"
+    nvm use 22
+fi
 
 cd "$TRANSPILER_JS"
 npx metafor classic "api/examples/${TRANSFORM}.js" \

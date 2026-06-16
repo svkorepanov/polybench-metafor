@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# Load NVM — node is not on PATH without it
+# Load NVM if present; fall back to system node otherwise
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm use 22 || { echo "Failed to switch to Node 22"; exit 1; }
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    . "$NVM_DIR/nvm.sh"
+    nvm use 22 || { echo "Failed to switch to Node 22"; exit 1; }
+fi
 
 # --- Configuration ---
 TRANSFORM="${1:-tilingGeneric}"
