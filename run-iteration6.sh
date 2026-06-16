@@ -1,9 +1,11 @@
 #!/bin/bash
-# run-iteration6.sh — Iteration-5: setup correctness check (SMALL_DATASET + DUMP_ARRAYS)
+# run-iteration6.sh — Iteration-6: all 5 transforms at LARGE_DATASET
 #
-# Purpose: verify that all 5 loop transforms produce 30/30 MATCH on a fresh
-# machine. Runs under POLYBENCH_DUMP_ARRAYS so compare.sh diffs actual array
-# values, not just empty timing output.
+# Purpose: measure real execution-time speedup for all 5 loop transforms.
+# Requires preproc.sh and compile.sh to already be set to LARGE_DATASET +
+# POLYBENCH_TIME (the committed defaults). Run under nohup for overnight use:
+#
+#   nohup ./run-iteration6.sh > experiments/issues/iteration-6/nohup.log 2>&1 &
 #
 # Results go to: experiments/issues/iteration-6/
 
@@ -53,29 +55,30 @@ fi
 log "All setup checks passed."
 log ""
 
-# ── 2. Patch scripts for SMALL_DATASET + POLYBENCH_DUMP_ARRAYS ───────────────
-log "Patching preproc.sh + compile.sh for SMALL_DATASET / POLYBENCH_DUMP_ARRAYS..."
-
-cp "$POLYBENCH_ROOT/preproc.sh" "$POLYBENCH_ROOT/preproc.sh.bak"
-cp "$POLYBENCH_ROOT/compile.sh" "$POLYBENCH_ROOT/compile.sh.bak"
-
-# Restore on exit regardless of success or failure
-trap 'mv "$POLYBENCH_ROOT/preproc.sh.bak" "$POLYBENCH_ROOT/preproc.sh"
-      mv "$POLYBENCH_ROOT/compile.sh.bak"  "$POLYBENCH_ROOT/compile.sh"
-      log "Restored preproc.sh and compile.sh."' EXIT
-
-sed -i \
-    -e 's/-DLARGE_DATASET/-DSMALL_DATASET/g' \
-    -e 's/-DPOLYBENCH_TIME/-DPOLYBENCH_TIME/g' \
-    "$POLYBENCH_ROOT/preproc.sh" "$POLYBENCH_ROOT/compile.sh"
-
-log "Done. Current PARGS:"
+# ── 2. Verify dataset flags ───────────────────────────────────────────────────
+log "Verifying LARGE_DATASET + POLYBENCH_TIME flags..."
 grep 'PARGS=' "$POLYBENCH_ROOT/preproc.sh" | head -1 | tee -a "$LOG"
 grep 'PARGS=' "$POLYBENCH_ROOT/compile.sh" | head -1 | tee -a "$LOG"
+
+if ! grep -q 'LARGE_DATASET' "$POLYBENCH_ROOT/preproc.sh"; then
+    log "ERROR: preproc.sh does not contain LARGE_DATASET. Check PARGS."
+    exit 1
+fi
+if ! grep -q 'POLYBENCH_TIME' "$POLYBENCH_ROOT/compile.sh"; then
+    log "ERROR: compile.sh does not contain POLYBENCH_TIME. Check PARGS."
+    exit 1
+fi
+log "Flags OK."
 log ""
 
-# ── 3. Preprocess and baseline ────────────────────────────────────────────────
-log "=== Preprocessing (SMALL_DATASET) ==="
+# ── 3. Clean stale woven_code directories ────────────────────────────────────
+log "Removing stale woven_code/ directories..."
+find . -type d -name "woven_code" -exec rm -rf {} + 2>/dev/null || true
+log "Done."
+log ""
+
+# ── 4. Preprocess and baseline ────────────────────────────────────────────────
+log "=== Preprocessing (LARGE_DATASET) ==="
 "$POLYBENCH_ROOT/preproc.sh" 2>&1 | tee -a "$LOG"
 
 log ""
@@ -86,7 +89,7 @@ log ""
 log "=== Executing originals ==="
 "$POLYBENCH_ROOT/execute.sh" 2>&1 | tee -a "$LOG"
 
-# ── 4. Run all 5 transforms ───────────────────────────────────────────────────
+# ── 5. Run all 5 transforms ───────────────────────────────────────────────────
 TRANSFORMS="tilingGeneric unrollGeneric fusionGeneric fissionGeneric interchangeGeneric"
 
 for TRANSFORM in $TRANSFORMS; do
@@ -114,7 +117,7 @@ for TRANSFORM in $TRANSFORMS; do
     log "Finished $TRANSFORM: $(date)"
 done
 
-# ── 5. Final summary ──────────────────────────────────────────────────────────
+# ── 6. Final summary ──────────────────────────────────────────────────────────
 log ""
 log "=== Summary ==="
 for TRANSFORM in $TRANSFORMS; do
