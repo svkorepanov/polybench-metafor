@@ -97,6 +97,7 @@
           end do
           y(k, k) = alpha(k)
         end do
+        !$omp tile sizes(32,32)
         do i = 1, n
           outArray(i) = y(n, i)
         end do

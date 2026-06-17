@@ -83,6 +83,7 @@
             c(j, i) = c(j, i) * beta
           end do
         end do
+        !$omp tile sizes(32,32)
         do i = 1, ni
           do j = 1, ni
             do k = 1, ni

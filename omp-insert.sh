@@ -2,9 +2,10 @@
 # omp-insert.sh — Insert OpenMP loop-transformation pragmas into all benchmarks
 #
 # Produces two output files alongside each .preproc.f90:
-#   ${name}.omp-tile.preproc.f90   — !$omp tile sizes(32,32) before first do in scop
-#   ${name}.omp-unroll.preproc.f90 — !$omp unroll factor(4)  before first do in scop
+#   ${name}.omp-tile.preproc.f90   — !$omp tile sizes(32,32) before every outermost do in scop
+#   ${name}.omp-unroll.preproc.f90 — !$omp unroll factor(4)  before every outermost do in scop
 #
+# "Outermost" means depth=0 relative to the !DIR$ scop / !DIR$ end scop region.
 # No legality check is performed — pragmas are inserted unconditionally.
 # Compile tile variant with:  flang-22 -fopenmp -fopenmp-version=51
 #
@@ -12,11 +13,43 @@
 
 ok_tile=0; ok_unroll=0; total=0
 
-echo "OMP pragma insertion"
+echo "OMP pragma insertion (all outermost do-loops in scop)"
 echo "Pragma (tile)  : !$omp tile sizes(32,32)"
 echo "Pragma (unroll): !$omp unroll factor(4)"
 echo "Output         : alongside each .preproc.f90 (not in woven_code/)"
 echo "------------------------------------------------"
+
+# Perl script: insert $pragma before every outermost do in the scop region.
+# Usage: perl insert_omp.pl <pragma> < input > output
+PERL_SCRIPT='
+use strict;
+my $pragma = shift @ARGV;
+local $/;
+my $text = <>;
+my @lines = split /\n/, $text, -1;
+my @out;
+my $in_scop = 0;
+my $depth   = 0;
+for my $line (@lines) {
+    my $s = lc($line); $s =~ s/^\s+|\s+$//g;
+    # Enter scop
+    if ($s =~ /^!dir\$\s*scop\b/ && $s !~ /end/) { $in_scop = 1; $depth = 0; }
+    # Insert pragma before every outermost do in scop
+    if ($in_scop && $depth == 0 && $s =~ /^do\s/) {
+        (my $indent = $line) =~ s/^(\s*).*/$1/;
+        push @out, $indent . $pragma;
+    }
+    push @out, $line;
+    # Track depth
+    if ($in_scop) {
+        $depth++ if $s =~ /^do\s/;
+        $depth-- if $s =~ /^end\s*do\b/ || $s =~ /^enddo\b/;
+    }
+    # Exit scop
+    if ($s =~ /^!dir\$\s*(end\s*scop|endscop)/) { $in_scop = 0; }
+}
+print join("\n", @out);
+'
 
 while IFS= read -r bench_file; do
     abs_bench="$(realpath "$bench_file")"
@@ -26,29 +59,16 @@ while IFS= read -r bench_file; do
     tile_file="$bench_dir/${name}.omp-tile.preproc.f90"
     unroll_file="$bench_dir/${name}.omp-unroll.preproc.f90"
 
-    # Insert pragma before the FIRST `do` after !DIR$ scop, skipping any
-    # intervening lines (blank, comment, or executable).
-    # Group 1: scop line + newline
-    # Group 2: zero or more lines that do NOT start the next `do` (negative lookahead)
-    # Group 3: indentation of the `do` line
-    # Group 4: `do` keyword + following char
-    # \$ in replacement = literal $ (not a Perl variable sigil).
-    perl -0777 -pe \
-        's/(!DIR\$\s*scop[^\n]*\n)((?:(?![ \t]*do[ \t]).*\n)*)([ \t]*)(do[ \t])/\1\2\3!\$omp tile sizes(32,32)\n\3\4/i' \
-        "$abs_bench" > "$tile_file"
+    perl -e "$PERL_SCRIPT" -- '!$omp tile sizes(32,32)'   < "$abs_bench" > "$tile_file"
+    perl -e "$PERL_SCRIPT" -- '!$omp unroll factor(4)'    < "$abs_bench" > "$unroll_file"
 
-    perl -0777 -pe \
-        's/(!DIR\$\s*scop[^\n]*\n)((?:(?![ \t]*do[ \t]).*\n)*)([ \t]*)(do[ \t])/\1\2\3!\$omp unroll factor(4)\n\3\4/i' \
-        "$abs_bench" > "$unroll_file"
+    tile_count=$(grep -c '!\$omp tile'   "$tile_file"   2>/dev/null || echo 0)
+    unroll_count=$(grep -c '!\$omp unroll' "$unroll_file" 2>/dev/null || echo 0)
 
-    tile_ok=false; unroll_ok=false
-    grep -q '!\$omp tile'   "$tile_file"   && tile_ok=true   && ((ok_tile++))
-    grep -q '!\$omp unroll' "$unroll_file" && unroll_ok=true && ((ok_unroll++))
+    [ "$tile_count"   -gt 0 ] && ((ok_tile++))
+    [ "$unroll_count" -gt 0 ] && ((ok_unroll++))
 
-    tile_tag="$( $tile_ok   && echo "TILE" || echo "SKIP")"
-    unroll_tag="$($unroll_ok && echo "UNROLL" || echo "SKIP")"
-    printf "  [%-6s / %-6s]  %s\n" "$tile_tag" "$unroll_tag" "$name"
-
+    printf "  [tile:%-2s / unroll:%-2s]  %s\n" "$tile_count" "$unroll_count" "$name"
     ((total++))
 
 done < <(find . -path "*/woven_code" -prune \

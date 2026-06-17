@@ -71,6 +71,7 @@ program atax
       do i = 1, ny
          y(i) = 0.0d0
       end do
+      !$omp unroll factor(4)
       do i = 1, nx
          tmp(i) = 0.0d0
          do j = 1, ny

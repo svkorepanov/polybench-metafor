@@ -106,6 +106,7 @@
             end do
           end do
         end do
+        !$omp unroll factor(4)
         do i = 1, ni
           do j = 1, nl
             d(j,i) = d(j,i) * beta

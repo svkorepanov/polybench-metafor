@@ -88,6 +88,7 @@
         do i = 1, ny
           s(i) = 0.0D0
         end do
+        !$omp tile sizes(32,32)
         do i = 1, nx
           q(i) = 0.0D0
           do j = 1, ny

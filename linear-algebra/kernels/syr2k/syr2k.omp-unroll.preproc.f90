@@ -83,6 +83,7 @@
             c(j, i) = c(j, i) * beta
           end do
         end do
+        !$omp unroll factor(4)
         do i = 1, ni
           do j = 1, ni
             do k = 1, ni

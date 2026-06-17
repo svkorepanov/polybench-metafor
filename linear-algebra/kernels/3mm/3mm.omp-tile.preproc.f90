@@ -109,6 +109,7 @@
           end do
         end do
         ! F := C*D
+        !$omp tile sizes(32,32)
         do i = 1, nj
           do j = 1, nl
             f(j,i) = 0.0
@@ -118,6 +119,7 @@
           end do
         end do
         ! G := E*F
+        !$omp tile sizes(32,32)
         do i = 1, ni
           do j = 1, nl
             g(j,i) = 0.0

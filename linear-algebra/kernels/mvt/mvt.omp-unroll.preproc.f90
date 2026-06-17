@@ -85,6 +85,7 @@
             x1(i) = x1(i) + (a(j, i) * y1(j))
           end do
         end do
+        !$omp unroll factor(4)
         do i = 1, n
           do j = 1, n 
             x2(i) = x2(i) + (a(i, j) * y2(j))

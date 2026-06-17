@@ -118,14 +118,17 @@ program gemver
             a(j, i) = a(j, i) + (u1(i) * v1(j)) + (u2(i) * v2(j))
          end do
       end do
+      !$omp unroll factor(4)
       do i = 1, n
          do j = 1, n
             x(i) = x(i) + (beta * a(i, j) * y(j))
          end do
       end do
+      !$omp unroll factor(4)
       do i = 1, n
          x(i) = x(i) + z(i)
       end do
+      !$omp unroll factor(4)
       do i = 1, n
          do j = 1, n
             w(i) = w(i) + (alpha * a(j, i) * x(j))

@@ -76,12 +76,14 @@ program covariance
          mean(j) = mean(j) / float_n
       end do
       !       Center the column vectors.
+      !$omp unroll factor(4)
       do i = 1, n
          do j = 1, m
             dat(j, i) = dat(j, i) - mean(j)
          end do
       end do
       !       Calculate the m * m covariance matrix.
+      !$omp unroll factor(4)
       do j1 = 1, m
          do j2 = j1, m
             symmat(j2, j1) = 0.0d0
