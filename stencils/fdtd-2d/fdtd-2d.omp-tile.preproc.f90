@@ -78,7 +78,7 @@
         integer :: i, j, t
       CONTINUE
       !DIR$ scop
-        !$omp tile sizes(32,32)
+        !$omp tile sizes(32)
         do t = 1, tmax
           do j = 1, ny
             ey(j, 1) = fict(t)

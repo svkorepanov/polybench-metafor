@@ -74,7 +74,7 @@
       CONTINUE
       !DIR$ scop
 !       Determine mean of column vectors of input data matrix
-        !$omp tile sizes(32,32)
+        !$omp tile sizes(32)
         do j = 1, m
           mean(j) = 0.0D0
           do i = 1, n
@@ -83,7 +83,7 @@
           mean(j) = mean(j) / float_n
         end do
 !       Determine standard deviations of column vectors of data matrix.
-        !$omp tile sizes(32,32)
+        !$omp tile sizes(32)
         do j = 1, m
           stddev(j) = 0.0D0
           do i = 1, n
@@ -105,7 +105,7 @@
           end do
         end do
 !       Calculate the m * m correlation matrix.
-        !$omp tile sizes(32,32)
+        !$omp tile sizes(32)
         do j1 = 1, m - 1 
           symmat(j1, j1) = 1.0D0
           do j2 = j1 + 1, m 

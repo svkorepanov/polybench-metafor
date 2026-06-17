@@ -177,33 +177,96 @@ this limitation affects only the "unconditional OMP" path, and the point of the 
 is to show what happens when the pragma IS inserted, the limitation doesn't weaken the
 conclusion; it means 4 benchmarks were simply not tested in Phase 2.
 
+## Phase 2b — Per-File Legitimacy Analysis (corrected OMP)
+
+After Phase 2, each of the 30 benchmark scop regions was read individually and the correct
+pragma was determined for every outermost DO loop, checking three conditions:
+
+1. **Imperfect outer body** → at most `sizes(32)` (1D strip-mine); `sizes(32,32)` requires
+   outer body = ONLY the inner DO, no scalar statements before or after.
+2. **Triangular immediate inner bound** → at most `sizes(32)` (inner DO bounds must not
+   reference outer loop variable).
+3. **Depth-2+ outer-variable reference** → **no pragma** (if any DO loop anywhere in the
+   body has bounds referencing the outermost loop variable, tiling that outermost loop puts
+   the tiled variable into an inner trip count, which flang-22 miscompiles → runtime crash).
+
+Rule 3 is what the script-based approach in Phase 2 missed. It caught two benchmarks:
+
+| Benchmark | Issue | Pragma removed |
+|---|---|---|
+| `trmm` | `do i = 2,ni` body → `do j` body → `do k = 1, i-1` (references outer `i` at depth 2) | `sizes(32,32)` removed |
+| `durbin` | `do k = 2,n` body → `do i = 1, k-1` (references outer `k` at depth 1) | `sizes(32)` removed; second loop `do i = 1,n` keeps `sizes(32)` |
+
+Result of Phase 2b: **30/30 MATCH, 0 MISMATCH, 0 crashes.**
+
+### Per-benchmark pragma assignments (tile)
+
+| Benchmark | Outermost loop(s) | Pragma |
+|---|---|---|
+| correlation | `do j` (mean), `do j` (stddev) | `sizes(32)` — imperfect body |
+| correlation | `do i` (center/normalize) | `sizes(32,32)` — perfect, non-triangular |
+| correlation | `do j1` (sym matrix) | `sizes(32)` — scalar before inner DO |
+| covariance | `do j` (mean) | `sizes(32)` — imperfect |
+| covariance | `do i` (center) | `sizes(32,32)` — perfect, non-triangular |
+| covariance | `do j1` (sym matrix) | `sizes(32)` — triangular `j2=j1,m` |
+| 2mm | both `do i` | `sizes(32,32)` — perfect, non-triangular |
+| 3mm | all three `do i` | `sizes(32,32)` — perfect, non-triangular |
+| atax | `do i` (init), `do i` (matvec) | `sizes(32)` — 1D / imperfect |
+| bicg | `do i` (init), `do i` (bicg) | `sizes(32)` — 1D / imperfect |
+| cholesky | `do i` | `sizes(32)` — imperfect, triangular inner |
+| doitgen | `do r` | `sizes(32,32)` — perfect (r,q), non-triangular |
+| gemm | `do i` | `sizes(32,32)` — perfect, non-triangular |
+| gemver | loops 1,2,4: `do i` | `sizes(32,32)` — perfect, non-triangular |
+| gemver | loop 3: `do i` (scalar) | `sizes(32)` — 1D |
+| gesummv | `do i` | `sizes(32)` — imperfect (scalars around inner) |
+| mvt | both `do i` | `sizes(32,32)` — perfect, non-triangular |
+| symm | `do i` | `sizes(32,32)` — outer body = only `do j` |
+| syr2k | both `do i` | `sizes(32,32)` — perfect, non-triangular |
+| syrk | both `do i` | `sizes(32,32)` — perfect, non-triangular |
+| trisolv | `do i` | `sizes(32)` — imperfect + triangular `j=1,i-1` |
+| **trmm** | `do i = 2,ni` | **no pragma** — `do k=1,i-1` at depth 2 references `i` |
+| **durbin** | `do k = 2,n` | **no pragma** — `do i=1,k-1` at depth 1 references `k` |
+| durbin | `do i = 1,n` | `sizes(32)` — 1D, body has no inner loops |
+| dynprog | `do iter` | `sizes(32)` — imperfect |
+| gramschmidt | `do k` | `sizes(32)` — imperfect |
+| lu | `do k` | `sizes(32)` — two triangular inner DOs |
+| ludcmp | all three `do i` | `sizes(32)` — imperfect / triangular |
+| floyd-warshall | `do k` | `sizes(32,32)` — perfect (k,i), non-triangular |
+| reg_detect | `do t` | `sizes(32)` — imperfect |
+| adi | `do t` | `sizes(32)` — imperfect |
+| fdtd-2d | `do t` | `sizes(32)` — imperfect |
+| fdtd-apml | `do iz` | `sizes(32,32)` — perfect (iz,iy), non-triangular |
+| jacobi-1d-imper | `do t` | `sizes(32)` — imperfect |
+| jacobi-2d-imper | `do t` | `sizes(32)` — imperfect |
+| seidel-2d | `do t` | `sizes(32,32)` — perfect (t,i), non-triangular |
+
 ## Summary Table
 
-| | Phase 1 (transpiler + legality) | Phase 2 (OMP pragma, no legality) |
-|---|---|---|
-| MATCH | **30** | 17 |
-| MISMATCH | 0 | **1** (`trmm`) |
-| MISSING (compile error) | 0 | **12** |
-| Not transformed (correct skip) | 9 | 4 (regex miss) |
-| Not transformed (wrong result) | 0 | 0 |
+| | Phase 1 (transpiler + legality) | Phase 2 (OMP script, no legality) | Phase 2b (OMP per-file legality) |
+|---|---|---|---|
+| MATCH | **30** | 17 | **30** |
+| MISMATCH | 0 | **1** (`trmm`) | 0 |
+| MISSING (compile error) | 0 | **12** | 0 |
+| Runtime crash | 0 | 2 (`trmm`, `durbin`) | 0 |
+| Not transformed (correct skip) | 9 | 4 (regex miss) | 2 (`trmm`, `durbin` outer loop) |
 
 ## Conclusion
 
 The hypothesis is confirmed and extended:
 
-1. **OMP pragma causes compile errors** for benchmarks with triangular bounds (6 of the 9
-   the transpiler correctly skips). The transpiler prevents this by detecting the same
-   invariant at analysis time.
+1. **OMP pragma causes compile errors** for benchmarks with triangular bounds (Phase 2
+   script approach). The transpiler prevents this by detecting the same invariant at
+   analysis time via `canTile()`.
 
-2. **OMP pragma causes MISMATCH** for `trmm` — a benchmark the transpiler handles
-   correctly by choosing a different (legal) loop pair. OMP always targets the first
-   outermost loop, missing deeper-but-legal opportunities, and applies a semantically
-   incorrect transformation that flang-22 does not catch.
+2. **OMP pragma causes MISMATCH/crash** for `trmm` — a benchmark the transpiler handles
+   correctly by choosing a different (legal) loop pair. OMP always targets the outermost
+   loop, missing deeper-but-legal opportunities.
 
-3. **OMP pragma causes 5 additional compile errors** for benchmarks the transpiler
-   successfully handled by descending past non-perfect outer loops. The pragma insertion
-   at the outermost level fails the "perfectly nested" requirement.
+3. **Per-file legitimacy analysis (Phase 2b)** achieves 30/30 MATCH by applying three
+   legality rules: imperfect-body detection, immediate triangular bound check, and
+   depth-2+ outer-variable reference check. The third rule catches `trmm` and `durbin`
+   that the script-based approach missed.
 
-In total, the unchecked OMP approach degrades 13/26 attempted benchmarks (50%) versus
-0 failures from the transpiler across all 30. The legality checks are not just a
-conservative filter — they actively enable correct transformations that OMP rejects.
+4. The transpiler's `canTile()` checks correspond directly to the rules in Phase 2b:
+   the transpiler does the same geometric analysis at the IR level, while Phase 2b
+   does it by hand-reading the source. Both prevent the same set of unsafe transformations.

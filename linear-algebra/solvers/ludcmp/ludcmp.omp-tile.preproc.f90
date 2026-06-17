@@ -71,7 +71,7 @@
       CONTINUE
       !DIR$ scop
         b(1) = 1.0D0
-        !$omp tile sizes(32,32)
+        !$omp tile sizes(32)
         do i = 1, n 
           do j = i + 1, n + 1
             w = a(i, j)
@@ -89,7 +89,7 @@
           end do
         end do
         y(1) = b(1)
-        !$omp tile sizes(32,32)
+        !$omp tile sizes(32)
         do i = 2, n + 1
           w = b(i)
           do j = 1, i - 1
@@ -98,7 +98,7 @@
           y(i) = w
         end do
         x(n + 1) = y(n + 1) / a(n + 1, n + 1)
-        !$omp tile sizes(32,32)
+        !$omp tile sizes(32)
         do i = 1, n 
           w = y(n + 1 - i)
           do j = n + 2 - i, n + 1

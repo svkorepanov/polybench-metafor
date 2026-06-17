@@ -56,7 +56,7 @@
       CONTINUE
       !DIR$ scop
         output = 0
-        !$omp tile sizes(32,32)
+        !$omp tile sizes(32)
         do iter = 1, tsteps
           do i = 1, length
             do j = 1, length
