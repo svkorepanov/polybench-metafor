@@ -1,73 +1,60 @@
 #!/bin/bash
 # omp-insert.sh — Insert OpenMP loop-transformation pragmas into all benchmarks
 #
-# Usage: ./omp-insert.sh [tile|unroll]
+# Produces two output files alongside each .preproc.f90:
+#   ${name}.omp-tile.preproc.f90   — !$omp tile sizes(32,32) before first do in scop
+#   ${name}.omp-unroll.preproc.f90 — !$omp unroll factor(4)  before first do in scop
 #
-# For each .preproc.f90 found in the benchmark tree (excluding existing woven_code/
-# directories), copies it to woven_code/${name}.preproc.f90 and inserts:
-#   tile mode:   !$omp tile sizes(32,32)  before the first `do` in each !DIR$ scop region
-#   unroll mode: !$omp unroll factor(4)   before the first innermost `do` in each scop
+# No legality check is performed — pragmas are inserted unconditionally.
+# Compile tile variant with:  flang-22 -fopenmp -fopenmp-version=51
 #
-# No legality check is performed — the pragma is inserted unconditionally.
-# Compile with:  flang-22 -fopenmp -fopenmp-version=51
-#
-# WARNING: flang-22 requires -fopenmp-version=51 for !$omp tile.
-#          !$omp unroll is not supported in flang-22 as of 2026-06.
+# WARNING: flang-22 does not support !$omp unroll as of 2026-06.
 
-MODE="${1:-tile}"
-if [[ "$MODE" != "tile" && "$MODE" != "unroll" ]]; then
-    echo "Usage: $0 [tile|unroll]"
-    exit 1
-fi
+ok_tile=0; ok_unroll=0; total=0
 
-if [[ "$MODE" == "tile" ]]; then
-    PRAGMA="!\\$omp tile sizes(32,32)"
-else
-    PRAGMA="!\\$omp unroll factor(4)"
-fi
-
-echo "OMP pragma mode: $MODE"
-echo "Pragma: $PRAGMA"
+echo "OMP pragma insertion"
+echo "Pragma (tile)  : !$omp tile sizes(32,32)"
+echo "Pragma (unroll): !$omp unroll factor(4)"
+echo "Output         : alongside each .preproc.f90 (not in woven_code/)"
 echo "------------------------------------------------"
-
-ok=0; total=0
 
 while IFS= read -r bench_file; do
     abs_bench="$(realpath "$bench_file")"
     bench_dir="$(dirname "$abs_bench")"
     name="$(basename "$abs_bench" .preproc.f90)"
-    woven_dir="$bench_dir/woven_code"
-    woven_file="$woven_dir/${name}.preproc.f90"
 
-    mkdir -p "$woven_dir"
+    tile_file="$bench_dir/${name}.omp-tile.preproc.f90"
+    unroll_file="$bench_dir/${name}.omp-unroll.preproc.f90"
 
-    if [[ "$MODE" == "tile" ]]; then
-        # Insert !$omp tile sizes(32,32) immediately before the first `do` line
-        # that follows a !DIR$ scop marker.
-        # Capture the indentation of the `do` line and reuse it for the pragma.
-        # Note: \$ in the Perl replacement is a literal $, not a variable sigil.
-        perl -0777 -pe \
-            's/(!DIR\$\s*scop[^\n]*\n)([ \t]*)(do[ \t])/\1\2!\$omp tile sizes(32,32)\n\2\3/i' \
-            "$abs_bench" > "$woven_file"
-    else
-        # Insert !$omp unroll factor(4) before the first `do` in each scop.
-        perl -0777 -pe \
-            's/(!DIR\$\s*scop[^\n]*\n)([ \t]*)(do[ \t])/\1\2!\$omp unroll factor(4)\n\2\3/i' \
-            "$abs_bench" > "$woven_file"
-    fi
+    # Insert pragma before the FIRST `do` after !DIR$ scop, skipping any
+    # intervening lines (blank, comment, or executable).
+    # Group 1: scop line + newline
+    # Group 2: zero or more lines that do NOT start the next `do` (negative lookahead)
+    # Group 3: indentation of the `do` line
+    # Group 4: `do` keyword + following char
+    # \$ in replacement = literal $ (not a Perl variable sigil).
+    perl -0777 -pe \
+        's/(!DIR\$\s*scop[^\n]*\n)((?:(?![ \t]*do[ \t]).*\n)*)([ \t]*)(do[ \t])/\1\2\3!\$omp tile sizes(32,32)\n\3\4/i' \
+        "$abs_bench" > "$tile_file"
 
-    # Check the pragma was actually inserted
-    if grep -q '!\$omp' "$woven_file"; then
-        echo "YES" > "$woven_dir/.transform-status"
-        echo "  [INSERTED] $name"
-        ((ok++))
-    else
-        echo "NO" > "$woven_dir/.transform-status"
-        echo "  [SKIP]     $name — scop+do pattern not found"
-    fi
+    perl -0777 -pe \
+        's/(!DIR\$\s*scop[^\n]*\n)((?:(?![ \t]*do[ \t]).*\n)*)([ \t]*)(do[ \t])/\1\2\3!\$omp unroll factor(4)\n\3\4/i' \
+        "$abs_bench" > "$unroll_file"
+
+    tile_ok=false; unroll_ok=false
+    grep -q '!\$omp tile'   "$tile_file"   && tile_ok=true   && ((ok_tile++))
+    grep -q '!\$omp unroll' "$unroll_file" && unroll_ok=true && ((ok_unroll++))
+
+    tile_tag="$( $tile_ok   && echo "TILE" || echo "SKIP")"
+    unroll_tag="$($unroll_ok && echo "UNROLL" || echo "SKIP")"
+    printf "  [%-6s / %-6s]  %s\n" "$tile_tag" "$unroll_tag" "$name"
+
     ((total++))
 
-done < <(find . -path "*/woven_code" -prune -o -type f -name "*.preproc.f90" -print)
+done < <(find . -path "*/woven_code" -prune \
+              -o -name "*.omp-tile.preproc.f90"   -prune \
+              -o -name "*.omp-unroll.preproc.f90" -prune \
+              -o -type f -name "*.preproc.f90" -print)
 
 echo "------------------------------------------------"
-echo "Done. OMP pragma inserted in $ok/$total benchmarks."
+echo "Done. tile: $ok_tile/$total inserted | unroll: $ok_unroll/$total inserted."
