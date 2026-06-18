@@ -70,7 +70,7 @@ program regdetect
       integer :: i, j, t, cnt
             CONTINUE
       !DIR$ scop
-      !$omp tile sizes(32)
+      !$omp tile sizes(32,32)
       do t = 1, niter
          do j = 1, maxgrid
             do i = j, maxgrid

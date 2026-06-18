@@ -82,6 +82,7 @@
         y(1, 1) = r(1)
         beta(1) = 1
         alpha(1) = r(1)
+        !$omp tile sizes(32,32)
         do k = 2, n
           beta(k) = beta(k - 1) - (alpha(k - 1) * alpha(k - 1) * &
                                    beta(k -1))
@@ -96,7 +97,7 @@
           end do
           y(k, k) = alpha(k)
         end do
-        !$omp tile sizes(32)
+        !$omp tile sizes(32,32)
         do i = 1, n
           outArray(i) = y(n, i)
         end do

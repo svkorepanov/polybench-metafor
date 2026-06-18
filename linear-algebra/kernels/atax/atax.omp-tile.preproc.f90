@@ -67,11 +67,11 @@ program atax
       integer nx, ny, i, j
             CONTINUE
       !DIR$ scop
-      !$omp tile sizes(32)
+      !$omp tile sizes(32,32)
       do i = 1, ny
          y(i) = 0.0d0
       end do
-      !$omp tile sizes(32)
+      !$omp tile sizes(32,32)
       do i = 1, nx
          tmp(i) = 0.0d0
          do j = 1, ny

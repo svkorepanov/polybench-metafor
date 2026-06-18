@@ -124,7 +124,7 @@ program gemver
             x(i) = x(i) + (beta * a(i, j) * y(j))
          end do
       end do
-      !$omp tile sizes(32)
+      !$omp tile sizes(32,32)
       do i = 1, n
          x(i) = x(i) + z(i)
       end do

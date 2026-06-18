@@ -64,6 +64,7 @@ program trmm
       integer :: i, j, k
             CONTINUE
       !DIR$ scop
+      !$omp tile sizes(32,32)
       do i = 2, ni
          do j = 1, ni
             do k = 1, i - 1

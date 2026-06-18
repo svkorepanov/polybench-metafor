@@ -61,7 +61,7 @@
         integer :: i, j, k
       CONTINUE
       !DIR$ scop
-        !$omp tile sizes(32)
+        !$omp tile sizes(32,32)
         do i = 1, n
           x = a(i, i)
           do j = 1, i - 1
