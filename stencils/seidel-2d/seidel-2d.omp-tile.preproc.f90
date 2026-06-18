@@ -1,70 +1,72 @@
-!******************************************************************************
-!
-!  seidel-2d.F90: This file is part of the PolyBench/Fortran 1.0 test suite.
-! 
-!  Contact: Louis-Noel Pouchet <pouchet@cse.ohio-state.edu>
-!  Web address: http://polybench.sourceforge.net
-!
-!******************************************************************************
-! Include polybench common header. 
-! Include benchmark-specific header. 
-! Default data type is double, default size is 20x1000. 
-      program seidel
-      double precision, dimension(:,:), allocatable :: a
-      integer :: i
-!     Allocation of Arrays
-      allocate(a( 500+0, 500+0), STAT=I); call check_err(I)
-!     Initialization
-      call init_array(500, a)
-!     Kernel Execution
-      call kernel_seidel(10, 500, a)
-!     Prevent dead-code elimination. All live-out data must be printed
-!     by the function call in argument. 
-            call print_array(500, a);  ;
-!     Deallocation of Arrays 
-      deallocate(a)
-      contains
-        subroutine init_array(n, a)
-        double precision, dimension(n, n) :: a
-        integer :: n
-        integer :: i,j
-        do i = 1, n
-          do j = 1, n
-            a(j, i) = ((DBLE(i - 1) * DBLE(j + 1)) + 2.0D0) / n
-          end do
-        end do
-        end subroutine
-        subroutine print_array(n, a)
-        double precision, dimension(n, n) :: a
-        integer :: n
-        integer :: i,j
-        do i = 1, n
-          do j = 1, n
-            write(0, "(f0.2,1x)", advance='no') a(j, i)
-            if (mod((i - 1) * n + j - 1, 20) == 0) then
-              write(0, *)
-            end if
-          end do
-        end do
-        write(0, *)
-        end subroutine
-        subroutine kernel_seidel(tsteps, n, a)
-        double precision, dimension(n, n) :: a
-        integer :: n, tsteps
-        integer :: i, t, j
-      CONTINUE
+PROGRAM SEIDEL
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: a
+   INTEGER :: i
+   CHARACTER(LEN = 30) :: arg
+   allocate(a(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   call init_array(2000, a)
+   call polybench_timer_start()
+   call kernel_seidel(20, 2000, a)
+   call polybench_timer_stop()
+   call polybench_timer_print()
+   call get_command_argument(1, arg)
+   IF (command_argument_count() > 42 .and. arg == "") THEN
+      call print_array(2000, a)
+   END IF
+   deallocate(a)
+   contains
+   SUBROUTINE init_array(n, a)
+      DOUBLE PRECISION, DIMENSION(n, n) :: a
+      INTEGER :: n
+      INTEGER :: i, j
+      DO i = 1, n
+      DO j = 1, n
+      a(j, i) = ((dble(i - 1) * dble(j + 1)) + 2.0d0) / n
+      
+      END DO
+      
+      END DO
+   END SUBROUTINE init_array
+   
+   SUBROUTINE print_array(n, a)
+      DOUBLE PRECISION, DIMENSION(n, n) :: a
+      INTEGER :: n
+      INTEGER :: i, j
+      DO i = 1, n
+      DO j = 1, n
+      WRITE(0, "(f0.2,1x)", advance="no") a(j, i)
+      IF (mod((i - 1) * n + j - 1, 20) == 0) THEN
+         WRITE(0, *) 
+      END IF
+      
+      END DO
+      
+      END DO
+      WRITE(0, *) 
+   END SUBROUTINE print_array
+   
+   SUBROUTINE kernel_seidel(tsteps, n, a)
+      DOUBLE PRECISION, DIMENSION(n, n) :: a
+      INTEGER :: n, tsteps
+      INTEGER :: i, t, j
+      continue
       !DIR$ scop
-        !$omp tile sizes(32,32)
-        do t = 1, tsteps
-          do i = 2, n - 1
-            do j = 2, n - 1
-            a(j, i) = (a(j - 1, i - 1) + a(j, i - 1) + a(j + 1, i - 1) + &
-                       a(j - 1, i) + a(j, i) + a(j + 1, i) + &
-                       a(j - 1, i + 1) + a(j, i + 1) + &
-                       a(j + 1, i + 1))/9.0D0
-            end do
-          end do
-        end do
-!DIR$ end scop
-        end subroutine
-      end program
+      DO tt = 1, tsteps, 32
+      DO ii = 2, n - 1, 32
+      DO t = tt, MIN(tt + 32 - 1, tsteps)
+      DO i = ii, MIN(ii + 32 - 1, n - 1)
+      DO j = 2, n - 1
+      a(j, i) = (a(j - 1, i - 1) + a(j, i - 1) + a(j + 1, i - 1) + a(j - 1, i) + a(j, i) + a(j + 1, i) + a(j - 1, i + 1) + a(j, i + 1) + a(j + 1, i + 1)) / 9.0d0
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      !DIR$ end scop
+   END SUBROUTINE kernel_seidel
+END PROGRAM SEIDEL

@@ -1,77 +1,75 @@
-!******************************************************************************
-!
-!  trisolv.F90: This file is part of the PolyBench/Fortran 1.0 test suite.
-!
-!  Contact: Louis-Noel Pouchet <pouchet@cse.ohio-state.edu>
-!  Web address: http://polybench.sourceforge.net
-!
-!******************************************************************************
-! Include polybench common header.
-! Include benchmark-specific header.
-! Default data type is double, default size is 4000.
-program trisolv
-    double precision, dimension(:,:), allocatable :: a
-    double precision, dimension(:), allocatable :: x
-    double precision, dimension(:), allocatable :: c
-   integer :: n = 500, i
-   !     Allocation of Arrays
-   allocate(a( n+0, n+0), STAT=I); call check_err(I)
-   allocate(x( n+0), STAT=I); call check_err(I)
-   allocate(c( n+0), STAT=I); call check_err(I)
-   !     Initialization
+PROGRAM TRISOLV
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: a
+   DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: x
+   DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: c
+   INTEGER :: n = 8000, i
+   CHARACTER(LEN = 30) :: arg
+   allocate(a(n + 0, n + 0), STAT=i)
+   call check_err(i)
+   allocate(x(n + 0), STAT=i)
+   call check_err(i)
+   allocate(c(n + 0), STAT=i)
+   call check_err(i)
    call init_array(n, a, x, c)
-   !     Kernel Execution
-   call kernel_trisolv(n, &
-   a, x, c)
-   !     Prevent dead-code elimination. All live-out data must be printed
-   !     by the function call in argument.
-         call print_array(n, x);   ;
-   !     Deallocation of Arrays
+   call polybench_timer_start()
+   call kernel_trisolv(n, a, x, c)
+   call polybench_timer_stop()
+   call polybench_timer_print()
+   call get_command_argument(1, arg)
+   IF (command_argument_count() > 42 .and. arg == "") THEN
+      call print_array(n, x)
+   END IF
    deallocate(a)
    deallocate(x)
    deallocate(c)
    contains
-   subroutine init_array(n, a, x, c)
-      double precision, dimension(n, n) :: a
-      double precision, dimension(n) :: c
-      double precision, dimension(n) :: x
-      integer :: n
-      integer :: i, j
-      do i = 1, n
-         c(i) = dble(i - 1) / dble(n)
-         x(i) = dble(i - 1) / dble(n)
-         do j = 1, n
-            a(j, i) = (dble(i - 1) * dble(j - 1)) / dble(n)
-         end do
-      end do
-   end subroutine
-   subroutine print_array(n, x)
-      double precision, dimension(n) :: x
-      integer :: n
-      integer :: i
-      do i = 1, n
-         write(0, "(f0.2,1x)", advance='no') x(i)
-         if (mod((i - 1), 20) == 0) then
-            write(0, *)
-         end if
-      end do
-   end subroutine
-   subroutine kernel_trisolv(n, a, x, c)
-      double precision, dimension(n, n) :: a
-      double precision, dimension(n) :: c
-      double precision, dimension(n) :: x
-      integer :: n
-      integer :: i, j
-            CONTINUE
+   SUBROUTINE init_array(n, a, x, c)
+      DOUBLE PRECISION, DIMENSION(n, n) :: a
+      DOUBLE PRECISION, DIMENSION(n) :: c
+      DOUBLE PRECISION, DIMENSION(n) :: x
+      INTEGER :: n
+      INTEGER :: i, j
+      DO i = 1, n
+      c(i) = dble(i - 1) / dble(n)
+      x(i) = dble(i - 1) / dble(n)
+      DO j = 1, n
+      a(j, i) = (dble(i - 1) * dble(j - 1)) / dble(n)
+      
+      END DO
+      
+      END DO
+   END SUBROUTINE init_array
+   
+   SUBROUTINE print_array(n, x)
+      DOUBLE PRECISION, DIMENSION(n) :: x
+      INTEGER :: n
+      INTEGER :: i
+      DO i = 1, n
+      WRITE(0, "(f0.2,1x)", advance="no") x(i)
+      IF (mod((i - 1), 20) == 0) THEN
+         WRITE(0, *) 
+      END IF
+      
+      END DO
+   END SUBROUTINE print_array
+   
+   SUBROUTINE kernel_trisolv(n, a, x, c)
+      DOUBLE PRECISION, DIMENSION(n, n) :: a
+      DOUBLE PRECISION, DIMENSION(n) :: c
+      DOUBLE PRECISION, DIMENSION(n) :: x
+      INTEGER :: n
+      INTEGER :: i, j
+      continue
       !DIR$ scop
-      !$omp tile sizes(32)
-      do i = 1, n
-         x(i) = c(i)
-         do j = 1, i - 1
-            x(i) = x(i) - (a(j, i) * x(j))
-         end do
-         x(i) = x(i) / a(i, i)
-      end do
+      DO i = 1, n
+      x(i) = c(i)
+      DO j = 1, i - 1
+      x(i) = x(i) - (a(j, i) * x(j))
+      
+      END DO
+      x(i) = x(i) / a(i, i)
+      
+      END DO
       !DIR$ end scop
-   end subroutine
-end program
+   END SUBROUTINE kernel_trisolv
+END PROGRAM TRISOLV

@@ -4,5 +4,6 @@
 !*.omp-tile.preproc.f90
 !*.omp-unroll.preproc.f90
 *.output.txt
-woven_code/
+!woven_code/
+!woven_code/**
 all_transformed_code/

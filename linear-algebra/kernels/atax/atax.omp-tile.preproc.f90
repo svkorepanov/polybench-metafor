@@ -1,86 +1,87 @@
-!******************************************************************************
-!
-!  atax.F90: This file is part of the PolyBench/Fortran 1.0 test suite.
-!
-!  Contact: Louis-Noel Pouchet <pouchet@cse.ohio-state.edu>
-!  Web address: http://polybench.sourceforge.net
-!
-!******************************************************************************
-! Include polybench common header.
-! Include benchmark-specific header.
-! Default data type is double, default size is 4000.
-program atax
-    double precision, dimension(:,:), allocatable :: a
-    double precision, dimension(:), allocatable :: x
-    double precision, dimension(:), allocatable :: y
-    double precision, dimension(:), allocatable :: tmp
-   integer :: nx = 500, ny = 500, i
-   !     Allocation of Arrays
-   allocate(a( ny+0, nx+0), STAT=I); call check_err(I)
-   allocate(x( ny+0), STAT=I); call check_err(I)
-   allocate(y( nx+0), STAT=I); call check_err(I)
-   allocate(tmp( ny+0), STAT=I); call check_err(I)
-   !     Initialization
+PROGRAM ATAX
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: a
+   DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: x
+   DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: y
+   DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: tmp
+   INTEGER :: nx = 8000, ny = 8000, i
+   CHARACTER(LEN = 30) :: arg
+   allocate(a(ny + 0, nx + 0), STAT=i)
+   call check_err(i)
+   allocate(x(ny + 0), STAT=i)
+   call check_err(i)
+   allocate(y(nx + 0), STAT=i)
+   call check_err(i)
+   allocate(tmp(ny + 0), STAT=i)
+   call check_err(i)
    call init_array(a, x, nx, ny)
-   !     Kernel Execution
+   call polybench_timer_start()
    call kernel_atax(nx, ny, a, x, y, tmp)
-   !     Prevent dead-code elimination. All live-out data must be printed
-   !     by the function call in argument.
-         call print_array(y, ny);   ;
-   !     Deallocation of Arrays
+   call polybench_timer_stop()
+   call polybench_timer_print()
+   call get_command_argument(1, arg)
+   IF (command_argument_count() > 42 .and. arg == "") THEN
+      call print_array(y, ny)
+   END IF
    deallocate(a)
    deallocate(x)
    deallocate(y)
    deallocate(tmp)
    contains
-   subroutine init_array(a, x, nx, ny)
-      double precision :: m_pi
-      parameter(m_pi = 3.14159265358979323846d0)
-      double precision, dimension(ny, nx) :: a
-      double precision, dimension(ny) :: x
-      integer :: nx, ny
-      integer :: i, j
-      do i = 1, ny
-         x(i) = dble(i - 1) * m_pi
-         do j = 1, ny
-            a(j, i) = (dble((i - 1) * (j))) / nx
-         end do
-      end do
-   end subroutine
-   subroutine print_array(y, ny)
-      double precision, dimension(ny) :: y
-      integer :: ny
-      integer :: i
-      do i = 1, ny
-         write(0, "(f0.2,1x)", advance='no') y(i)
-         if (mod(i - 1, 20) == 0) then
-            write(0, *)
-         end if
-      end do
-      write(0, *)
-   end subroutine
-   subroutine kernel_atax(nx, ny, a, x, y, tmp)
-      double precision, dimension(ny, nx) :: a
-      double precision, dimension(ny) :: x
-      double precision, dimension(ny) :: y
-      double precision, dimension(nx) :: tmp
-      integer nx, ny, i, j
-            CONTINUE
+   SUBROUTINE init_array(a, x, nx, ny)
+      DOUBLE PRECISION :: m_pi
+      PARAMETER (m_pi = 3.14159265358979323846d0)
+      DOUBLE PRECISION, DIMENSION(ny, nx) :: a
+      DOUBLE PRECISION, DIMENSION(ny) :: x
+      INTEGER :: nx, ny
+      INTEGER :: i, j
+      DO i = 1, ny
+      x(i) = dble(i - 1) * m_pi
+      DO j = 1, ny
+      a(j, i) = (dble((i - 1) * (j))) / nx
+      
+      END DO
+      
+      END DO
+   END SUBROUTINE init_array
+   
+   SUBROUTINE print_array(y, ny)
+      DOUBLE PRECISION, DIMENSION(ny) :: y
+      INTEGER :: ny
+      INTEGER :: i
+      DO i = 1, ny
+      WRITE(0, "(f0.2,1x)", advance="no") y(i)
+      IF (mod(i - 1, 20) == 0) THEN
+         WRITE(0, *) 
+      END IF
+      
+      END DO
+      WRITE(0, *) 
+   END SUBROUTINE print_array
+   
+   SUBROUTINE kernel_atax(nx, ny, a, x, y, tmp)
+      DOUBLE PRECISION, DIMENSION(ny, nx) :: a
+      DOUBLE PRECISION, DIMENSION(ny) :: x
+      DOUBLE PRECISION, DIMENSION(ny) :: y
+      DOUBLE PRECISION, DIMENSION(nx) :: tmp
+      INTEGER :: nx, ny, i, j
+      continue
       !DIR$ scop
-      !$omp tile sizes(32)
-      do i = 1, ny
-         y(i) = 0.0d0
-      end do
-      !$omp tile sizes(32)
-      do i = 1, nx
-         tmp(i) = 0.0d0
-         do j = 1, ny
-            tmp(i) = tmp(i) + (a(j, i) * x(j))
-         end do
-         do j = 1, ny
-            y(j) = y(j) + a(j, i) * tmp(i)
-         end do
-      end do
+      DO i = 1, ny
+      y(i) = 0.0d0
+      
+      END DO
+      DO i = 1, nx
+      tmp(i) = 0.0d0
+      DO j = 1, ny
+      tmp(i) = tmp(i) + (a(j, i) * x(j))
+      
+      END DO
+      DO j = 1, ny
+      y(j) = y(j) + a(j, i) * tmp(i)
+      
+      END DO
+      
+      END DO
       !DIR$ end scop
-   end subroutine
-end program
+   END SUBROUTINE kernel_atax
+END PROGRAM ATAX

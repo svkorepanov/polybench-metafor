@@ -1,105 +1,130 @@
-!******************************************************************************
-!
-!  fdtd-2d.F90: This file is part of the PolyBench/Fortran 1.0 test suite.
-! 
-!  Contact: Louis-Noel Pouchet <pouchet@cse.ohio-state.edu>
-!  Web address: http://polybench.sourceforge.net
-!
-!******************************************************************************
-! Include polybench common header. 
-! Include benchmark-specific header. 
-! Default data type is double, default size is 50x1000x1000. 
-      program fdtd2d
-      double precision, dimension(:), allocatable :: fict
-      double precision, dimension(:,:), allocatable :: ex
-      double precision, dimension(:,:), allocatable :: ey
-      double precision, dimension(:,:), allocatable :: hz
-      integer :: i
-!     Allocation of Arrays
-      allocate(fict( 10+0), STAT=I); call check_err(I)
-      allocate(ex( 500+0, 500+0), STAT=I); call check_err(I)
-      allocate(ey( 500+0, 500+0), STAT=I); call check_err(I)
-      allocate(hz( 500+0, 500+0), STAT=I); call check_err(I)
-!     Initialization
-      call init_array(10, 500, 500, ex, ey, hz, fict)
-!     Kernel Execution
-      call kernel_fdtd_2d(10, 500, 500, ex, ey, hz, fict)
-!     Prevent dead-code elimination. All live-out data must be printed
-!     by the function call in argument. 
-            call print_array(500, 500, ex, ey, hz);  ;
-!     Deallocation of Arrays 
-      deallocate(fict)
-      deallocate(ex)
-      deallocate(ey)
-      deallocate(hz)
-      contains
-        subroutine init_array(tmax, nx, ny, ex, ey, hz, fict)
-        integer :: nx, ny, tmax
-        double precision, dimension(tmax) :: fict
-        double precision, dimension(ny, nx) :: ex
-        double precision, dimension(ny, nx) :: ey
-        double precision, dimension(ny, nx) :: hz
-        integer :: i, j
-        do i = 1, tmax
-          fict(i) = DBLE(i - 1)
-        end do
-        do i = 1, nx
-          do j = 1, ny
-            ex(j, i) = (DBLE((i - 1) * (j))) / DBLE(nx)
-            ey(j, i) = (DBLE((i - 1) * (j + 1))) / DBLE(ny)
-            hz(j, i) = (DBLE((i - 1) * (j + 2))) / DBLE(nx)
-          end do
-        end do
-        end subroutine
-        subroutine print_array(nx, ny, ex, ey, hz)
-        double precision, dimension(ny, nx) :: ex
-        double precision, dimension(ny, nx) :: ey
-        double precision, dimension(ny, nx) :: hz
-        integer :: nx, ny
-        integer :: i, j
-        do i = 1, nx
-          do j = 1, ny
-            write(0, "(f0.2,1x)", advance='no') ex(j, i)
-            write(0, "(f0.2,1x)", advance='no') ey(j, i)
-            write(0, "(f0.2,1x)", advance='no') hz(j, i)
-            if (mod(((i - 1) * nx) + j - 1, 20) == 0) then
-              write(0, *)
-            end if
-          end do
-        end do
-        write(0, *)
-        end subroutine
-        subroutine kernel_fdtd_2d(tmax, nx, ny, ex, ey, hz, fict)
-        integer :: tmax, nx, ny
-        double precision, dimension(tmax) :: fict
-        double precision, dimension(ny, nx) :: ex
-        double precision, dimension(ny, nx) :: ey
-        double precision, dimension(ny, nx) :: hz
-        integer :: i, j, t
-      CONTINUE
+PROGRAM FDTD2D
+   DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: fict
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: ex
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: ey
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: hz
+   INTEGER :: i
+   CHARACTER(LEN = 30) :: arg
+   allocate(fict(50 + 0), STAT=i)
+   call check_err(i)
+   allocate(ex(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   allocate(ey(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   allocate(hz(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   call init_array(50, 2000, 2000, ex, ey, hz, fict)
+   call polybench_timer_start()
+   call kernel_fdtd_2d(50, 2000, 2000, ex, ey, hz, fict)
+   call polybench_timer_stop()
+   call polybench_timer_print()
+   call get_command_argument(1, arg)
+   IF (command_argument_count() > 42 .and. arg == "") THEN
+      call print_array(2000, 2000, ex, ey, hz)
+   END IF
+   deallocate(fict)
+   deallocate(ex)
+   deallocate(ey)
+   deallocate(hz)
+   contains
+   SUBROUTINE init_array(tmax, nx, ny, ex, ey, hz, fict)
+      INTEGER :: nx, ny, tmax
+      DOUBLE PRECISION, DIMENSION(tmax) :: fict
+      DOUBLE PRECISION, DIMENSION(ny, nx) :: ex
+      DOUBLE PRECISION, DIMENSION(ny, nx) :: ey
+      DOUBLE PRECISION, DIMENSION(ny, nx) :: hz
+      INTEGER :: i, j
+      DO i = 1, tmax
+      fict(i) = dble(i - 1)
+      
+      END DO
+      DO i = 1, nx
+      DO j = 1, ny
+      ex(j, i) = (dble((i - 1) * (j))) / dble(nx)
+      ey(j, i) = (dble((i - 1) * (j + 1))) / dble(ny)
+      hz(j, i) = (dble((i - 1) * (j + 2))) / dble(nx)
+      
+      END DO
+      
+      END DO
+   END SUBROUTINE init_array
+   
+   SUBROUTINE print_array(nx, ny, ex, ey, hz)
+      DOUBLE PRECISION, DIMENSION(ny, nx) :: ex
+      DOUBLE PRECISION, DIMENSION(ny, nx) :: ey
+      DOUBLE PRECISION, DIMENSION(ny, nx) :: hz
+      INTEGER :: nx, ny
+      INTEGER :: i, j
+      DO i = 1, nx
+      DO j = 1, ny
+      WRITE(0, "(f0.2,1x)", advance="no") ex(j, i)
+      WRITE(0, "(f0.2,1x)", advance="no") ey(j, i)
+      WRITE(0, "(f0.2,1x)", advance="no") hz(j, i)
+      IF (mod(((i - 1) * nx) + j - 1, 20) == 0) THEN
+         WRITE(0, *) 
+      END IF
+      
+      END DO
+      
+      END DO
+      WRITE(0, *) 
+   END SUBROUTINE print_array
+   
+   SUBROUTINE kernel_fdtd_2d(tmax, nx, ny, ex, ey, hz, fict)
+      INTEGER :: tmax, nx, ny
+      DOUBLE PRECISION, DIMENSION(tmax) :: fict
+      DOUBLE PRECISION, DIMENSION(ny, nx) :: ex
+      DOUBLE PRECISION, DIMENSION(ny, nx) :: ey
+      DOUBLE PRECISION, DIMENSION(ny, nx) :: hz
+      INTEGER :: i, j, t
+      continue
       !DIR$ scop
-        !$omp tile sizes(32)
-        do t = 1, tmax
-          do j = 1, ny
-            ey(j, 1) = fict(t)
-          end do
-          do i = 2, nx
-            do j = 1, ny
-              ey(j, i) = ey(j, i) - (0.5D0 * (hz(j, i) - hz(j, i - 1)))
-            end do
-          end do
-          do i = 1, nx
-            do j = 2, ny
-              ex(j, i) = ex(j, i) - (0.5D0 * (hz(j, i) - hz(j - 1, i)))
-            end do
-          end do
-          do i = 1, nx - 1
-            do j = 1, ny - 1
-              hz(j, i) = hz(j, i) - (0.7D0 * (ex(j + 1, i) - ex(j, i)  &
-                                           + ey(j, i + 1) - ey(j, i)))
-            end do
-          end do
-        end do
-!DIR$ end scop
-        end subroutine
-      end program
+      DO t = 1, tmax
+      DO j = 1, ny
+      ey(j, 1) = fict(t)
+      
+      END DO
+      DO ii = 2, nx, 32
+      DO jj = 1, ny, 32
+      DO i = ii, MIN(ii + 32 - 1, nx)
+      DO j = jj, MIN(jj + 32 - 1, ny)
+      ey(j, i) = ey(j, i) - (0.5d0 * (hz(j, i) - hz(j, i - 1)))
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO ii = 1, nx, 32
+      DO jj = 2, ny, 32
+      DO i = ii, MIN(ii + 32 - 1, nx)
+      DO j = jj, MIN(jj + 32 - 1, ny)
+      ex(j, i) = ex(j, i) - (0.5d0 * (hz(j, i) - hz(j - 1, i)))
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO ii = 1, nx - 1, 32
+      DO jj = 1, ny - 1, 32
+      DO i = ii, MIN(ii + 32 - 1, nx - 1)
+      DO j = jj, MIN(jj + 32 - 1, ny - 1)
+      hz(j, i) = hz(j, i) - (0.7d0 * (ex(j + 1, i) - ex(j, i) + ey(j, i + 1) - ey(j, i)))
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      !DIR$ end scop
+   END SUBROUTINE kernel_fdtd_2d
+END PROGRAM FDTD2D

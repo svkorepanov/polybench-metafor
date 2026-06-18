@@ -1,97 +1,112 @@
-!******************************************************************************
-!
-!  syr2k.F90: This file is part of the PolyBench/Fortran 1.0 test suite.
-! 
-!  Contact: Louis-Noel Pouchet <pouchet@cse.ohio-state.edu>
-!  Web address: http://polybench.sourceforge.net
-!
-!******************************************************************************
-! Include polybench common header. 
-! Include benchmark-specific header. 
-! Default data type is double, default size is 4000. 
-      program syr2k
-      double precision :: alpha
-      double precision :: beta
-      double precision, dimension(:,:), allocatable :: a
-      double precision, dimension(:,:), allocatable :: b
-      double precision, dimension(:,:), allocatable :: c
-      integer :: i
-!     Allocation of Arrays
-      allocate(a( 128+0, 128+0), STAT=I); call check_err(I)
-      allocate(b( 128+0, 128+0), STAT=I); call check_err(I)
-      allocate(c( 128+0, 128+0), STAT=I); call check_err(I)
-!     Initialization
-      call init_array(128, 128, alpha, beta, c, a, b)
-!     Kernel Execution
-      call kernel_syr2k(128, 128, alpha, beta,  &
-                              c, a, b)
-!     Prevent dead-code elimination. All live-out data must be printed
-!     by the function call in argument. 
-            call print_array(128, c);  ;
-!     Deallocation of Arrays 
-      deallocate(a)
-      deallocate(b)
-      deallocate(c)
-      contains
-        subroutine init_array(ni, nj, alpha, beta, c, a, b)
-        double precision, dimension(nj, ni) :: a
-        double precision, dimension(nj, ni) :: b
-        double precision, dimension(ni, ni) :: c
-        double precision :: alpha, beta
-        integer :: ni, nj
-        integer :: i, j
-        alpha = 32412.0D0
-        beta = 2123.0D0
-        do i = 1, ni
-          do j = 1, nj
-            a(j, i) = (DBLE(i - 1) * DBLE(j - 1)) / DBLE(ni)
-            b(j, i) = ((DBLE(i - 1) * DBLE(j - 1))) / DBLE(ni)
-          end do
-        end do
-        do i = 1, ni
-          do j = 1, ni
-            c(j, i) = ((DBLE(i - 1) * DBLE(j - 1))) / DBLE(ni)
-          end do
-        end do
-        end subroutine
-        subroutine print_array(ni, c)
-        double precision, dimension(ni, ni) :: c
-        integer :: ni
-        integer :: i, j
-        do i = 1, ni
-          do j = 1, ni
-            write(0, "(f0.2,1x)", advance='no') c(j, i)
-            if (mod(((i - 1) * ni) + j - 1, 20) == 0) then
-              write(0, *)
-            end if
-          end do
-        end do
-        write(0, *)
-        end subroutine
-        subroutine kernel_syr2k(ni, nj, alpha, beta, c, a, b)
-        double precision, dimension(nj, ni) :: a
-        double precision, dimension(nj, ni) :: b
-        double precision, dimension(ni, ni) :: c
-        double precision :: alpha, beta
-        integer :: ni, nj
-        integer :: i, j, k
-      CONTINUE
+PROGRAM SYR2K
+   DOUBLE PRECISION :: alpha
+   DOUBLE PRECISION :: beta
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: a
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: b
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: c
+   INTEGER :: i
+   CHARACTER(LEN = 30) :: arg
+   allocate(a(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   allocate(b(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   allocate(c(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   call init_array(2000, 2000, alpha, beta, c, a, b)
+   call polybench_timer_start()
+   call kernel_syr2k(2000, 2000, alpha, beta, c, a, b)
+   call polybench_timer_stop()
+   call polybench_timer_print()
+   call get_command_argument(1, arg)
+   IF (command_argument_count() > 42 .and. arg == "") THEN
+      call print_array(2000, c)
+   END IF
+   deallocate(a)
+   deallocate(b)
+   deallocate(c)
+   contains
+   SUBROUTINE init_array(ni, nj, alpha, beta, c, a, b)
+      DOUBLE PRECISION, DIMENSION(nj, ni) :: a
+      DOUBLE PRECISION, DIMENSION(nj, ni) :: b
+      DOUBLE PRECISION, DIMENSION(ni, ni) :: c
+      DOUBLE PRECISION :: alpha, beta
+      INTEGER :: ni, nj
+      INTEGER :: i, j
+      alpha = 32412.0d0
+      beta = 2123.0d0
+      DO i = 1, ni
+      DO j = 1, nj
+      a(j, i) = (dble(i - 1) * dble(j - 1)) / dble(ni)
+      b(j, i) = ((dble(i - 1) * dble(j - 1))) / dble(ni)
+      
+      END DO
+      
+      END DO
+      DO i = 1, ni
+      DO j = 1, ni
+      c(j, i) = ((dble(i - 1) * dble(j - 1))) / dble(ni)
+      
+      END DO
+      
+      END DO
+   END SUBROUTINE init_array
+   
+   SUBROUTINE print_array(ni, c)
+      DOUBLE PRECISION, DIMENSION(ni, ni) :: c
+      INTEGER :: ni
+      INTEGER :: i, j
+      DO i = 1, ni
+      DO j = 1, ni
+      WRITE(0, "(f0.2,1x)", advance="no") c(j, i)
+      IF (mod(((i - 1) * ni) + j - 1, 20) == 0) THEN
+         WRITE(0, *) 
+      END IF
+      
+      END DO
+      
+      END DO
+      WRITE(0, *) 
+   END SUBROUTINE print_array
+   
+   SUBROUTINE kernel_syr2k(ni, nj, alpha, beta, c, a, b)
+      DOUBLE PRECISION, DIMENSION(nj, ni) :: a
+      DOUBLE PRECISION, DIMENSION(nj, ni) :: b
+      DOUBLE PRECISION, DIMENSION(ni, ni) :: c
+      DOUBLE PRECISION :: alpha, beta
+      INTEGER :: ni, nj
+      INTEGER :: i, j, k
+      continue
       !DIR$ scop
-        !$omp tile sizes(32,32)
-        do i = 1, ni
-          do j = 1, ni
-            c(j, i) = c(j, i) * beta
-          end do
-        end do
-        !$omp tile sizes(32,32)
-        do i = 1, ni
-          do j = 1, ni
-            do k = 1, ni
-              c(j, i) = c(j, i) + (alpha * a(k, i) * b(k, j))
-              c(j, i) = c(j, i) + (alpha * b(k, i) * a(k, j))
-            end do
-          end do
-        end do
-!DIR$ end scop
-        end subroutine
-      end program
+      DO ii = 1, ni, 32
+      DO jj = 1, ni, 32
+      DO i = ii, MIN(ii + 32 - 1, ni)
+      DO j = jj, MIN(jj + 32 - 1, ni)
+      c(j, i) = c(j, i) * beta
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO ii = 1, ni, 32
+      DO jj = 1, ni, 32
+      DO i = ii, MIN(ii + 32 - 1, ni)
+      DO j = jj, MIN(jj + 32 - 1, ni)
+      DO k = 1, ni
+      c(j, i) = c(j, i) + (alpha * a(k, i) * b(k, j))
+      c(j, i) = c(j, i) + (alpha * b(k, i) * a(k, j))
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      !DIR$ end scop
+   END SUBROUTINE kernel_syr2k
+END PROGRAM SYR2K

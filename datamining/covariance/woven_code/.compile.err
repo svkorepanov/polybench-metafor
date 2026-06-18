@@ -1,0 +1,8 @@
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in /root/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90
+/root/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90:70:18: error: The SIZES clause has more entries than there are nested canonical loops.
+        !$omp tile sizes(32,32)
+                   ^^^^^^^^^^^^
+/root/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90:86:13: error: Trip count must be computable and invariant
+        !$omp tile sizes(32,32)
+              ^^^^

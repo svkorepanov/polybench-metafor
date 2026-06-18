@@ -1,98 +1,110 @@
-!******************************************************************************
-!
-!  covariance.F90: This file is part of the PolyBench/Fortran 1.0 test suite.
-!
-!  Contact: Louis-Noel Pouchet <pouchet@cse.ohio-state.edu>
-!  Web address: http://polybench.sourceforge.net
-!
-!******************************************************************************
-! Include polybench common header.
-! Include benchmark-specific header.
-! Default data type is double, default size is 4000.
-program covariance
-   double precision :: float_n
-    double precision, dimension(:,:), allocatable :: dat
-    double precision, dimension(:,:), allocatable :: symmat
-    double precision, dimension(:), allocatable :: mean
-   integer :: n = 500, m = 500, i
-   !     Allocation of Arrays
-   allocate(dat( n+0, m+0), STAT=I); call check_err(I)
-   allocate(symmat( m+0, m+0), STAT=I); call check_err(I)
-   allocate(mean( m+0), STAT=I); call check_err(I)
-   !     Initialization
+PROGRAM COVARIANCE
+   DOUBLE PRECISION :: float_n
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: dat
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: symmat
+   DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: mean
+   INTEGER :: n = 2000, m = 2000, i
+   CHARACTER(LEN = 30) :: arg
+   allocate(dat(n + 0, m + 0), STAT=i)
+   call check_err(i)
+   allocate(symmat(m + 0, m + 0), STAT=i)
+   call check_err(i)
+   allocate(mean(m + 0), STAT=i)
+   call check_err(i)
    call init_array(m, n, float_n, dat)
-   !     Kernel Execution
+   call polybench_timer_start()
    call kernel_covariance(m, n, float_n, dat, symmat, mean)
-   !     Prevent dead-code elimination. All live-out data must be printed
-   !     by the function call in argument.
-         call print_array(m, symmat);   ;
-   !     Deallocation of Arrays
+   call polybench_timer_stop()
+   call polybench_timer_print()
+   call get_command_argument(1, arg)
+   IF (command_argument_count() > 42 .and. arg == "") THEN
+      call print_array(m, symmat)
+   END IF
    deallocate(dat)
    deallocate(symmat)
    deallocate(mean)
    contains
-   subroutine init_array(m, n, float_n, dat)
-      double precision, dimension(n, m) :: dat
-      double precision :: float_n
-      integer :: m, n
-      integer :: i, j
+   SUBROUTINE init_array(m, n, float_n, dat)
+      DOUBLE PRECISION, DIMENSION(n, m) :: dat
+      DOUBLE PRECISION :: float_n
+      INTEGER :: m, n
+      INTEGER :: i, j
       float_n = 1.2d0
-      do i = 1, m
-         do j = 1, n
-            dat(j, i) = (dble((i - 1) * (j - 1))) / dble(m)
-         end do
-      end do
-   end subroutine
-   subroutine print_array(m, symmat)
-      double precision, dimension(m, m) :: symmat
-      integer :: m
-      integer :: i, j
-      do i = 1, m
-         do j = 1, m
-            write(0, "(f0.2,1x)", advance='no') symmat(j, i)
-            if (mod(((i - 1) * m) + j - 1, 20) == 0) then
-               write(0, *)
-            end if
-         end do
-      end do
-      write(0, *)
-   end subroutine
-   subroutine kernel_covariance(m, n, float_n, dat, symmat, mean)
-      double precision, dimension(m, m) :: symmat
-      double precision, dimension(n, m) :: dat
-      double precision, dimension(m) :: mean
-      double precision :: float_n
-      integer :: m, n
-      integer :: i, j, j1, j2
-            CONTINUE
+      DO i = 1, m
+      DO j = 1, n
+      dat(j, i) = (dble((i - 1) * (j - 1))) / dble(m)
+      
+      END DO
+      
+      END DO
+   END SUBROUTINE init_array
+   
+   SUBROUTINE print_array(m, symmat)
+      DOUBLE PRECISION, DIMENSION(m, m) :: symmat
+      INTEGER :: m
+      INTEGER :: i, j
+      DO i = 1, m
+      DO j = 1, m
+      WRITE(0, "(f0.2,1x)", advance="no") symmat(j, i)
+      IF (mod(((i - 1) * m) + j - 1, 20) == 0) THEN
+         WRITE(0, *) 
+      END IF
+      
+      END DO
+      
+      END DO
+      WRITE(0, *) 
+   END SUBROUTINE print_array
+   
+   SUBROUTINE kernel_covariance(m, n, float_n, dat, symmat, mean)
+      DOUBLE PRECISION, DIMENSION(m, m) :: symmat
+      DOUBLE PRECISION, DIMENSION(n, m) :: dat
+      DOUBLE PRECISION, DIMENSION(m) :: mean
+      DOUBLE PRECISION :: float_n
+      INTEGER :: m, n
+      INTEGER :: i, j, j1, j2
+      continue
       !DIR$ scop
-      !       Determine mean of column vectors of input data matrix
-      !$omp tile sizes(32)
-      do j = 1, m
-         mean(j) = 0.0d0
-         do i = 1, n
-            mean(j) = mean(j) + dat(j, i)
-         end do
-         mean(j) = mean(j) / float_n
-      end do
-      !       Center the column vectors.
-      !$omp tile sizes(32,32)
-      do i = 1, n
-         do j = 1, m
-            dat(j, i) = dat(j, i) - mean(j)
-         end do
-      end do
-      !       Calculate the m * m covariance matrix.
-      !$omp tile sizes(32)
-      do j1 = 1, m
-         do j2 = j1, m
-            symmat(j2, j1) = 0.0d0
-            do i = 1, n
-               symmat(j2, j1) = symmat(j2, j1) + (dat(j1, i) * dat(j2, i))
-            end do
-            symmat(j1, j2) = symmat(j2, j1)
-         end do
-      end do
+      DO j = 1, m
+      mean(j) = 0.0d0
+      DO i = 1, n
+      mean(j) = mean(j) + dat(j, i)
+      
+      END DO
+      mean(j) = mean(j) / float_n
+      
+      END DO
+      DO ii = 1, n, 32
+      DO jj = 1, m, 32
+      DO i = ii, MIN(ii + 32 - 1, n)
+      DO j = jj, MIN(jj + 32 - 1, m)
+      dat(j, i) = dat(j, i) - mean(j)
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO j1j1 = 1, m, 32
+      DO j2j2 = j1, m, 32
+      DO j1 = j1j1, MIN(j1j1 + 32 - 1, m)
+      DO j2 = j2j2, MIN(j2j2 + 32 - 1, m)
+      symmat(j2, j1) = 0.0d0
+      DO i = 1, n
+      symmat(j2, j1) = symmat(j2, j1) + (dat(j1, i) * dat(j2, i))
+      
+      END DO
+      symmat(j1, j2) = symmat(j2, j1)
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
       !DIR$ end scop
-   end subroutine
-end program
+   END SUBROUTINE kernel_covariance
+END PROGRAM COVARIANCE

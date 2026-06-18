@@ -1,70 +1,68 @@
-!******************************************************************************
-!
-!  jacobi-1d-imper.F90: This file is part of the PolyBench/Fortran 1.0 test suite.
-! 
-!  Contact: Louis-Noel Pouchet <pouchet@cse.ohio-state.edu>
-!  Web address: http://polybench.sourceforge.net
-!
-!******************************************************************************
-! Include polybench common header. 
-! Include benchmark-specific header. 
-! Default data type is double, default size is 100x10000. 
-      program jacobi1d
-      double precision, dimension(:), allocatable :: a
-      double precision, dimension(:), allocatable :: b
-      integer :: i
-!     Allocation of Arrays
-      allocate(a( 1000+0), STAT=I); call check_err(I)
-      allocate(b( 1000+0), STAT=I); call check_err(I)
-!     Initialization
-      call init_array(1000, a, b)
-!     Kernel Execution
-      call kernel_jacobi1d(10, 1000, a, b)
-!     Prevent dead-code elimination. All live-out data must be printed
-!     by the function call in argument. 
-            call print_array(1000, a);  ;
-!     Deallocation of Arrays 
-      deallocate(a)
-      deallocate(b)
-      contains
-        subroutine init_array(n, a, b)
-        double precision, dimension(n) :: a
-        double precision, dimension(n) :: b
-        integer :: n
-        integer :: i
-        do i = 1, n
-          a(i) = (DBLE(i-1) + 2.0D0) / n
-          b(i) = (DBLE(i-1) + 3.0D0) / n
-        end do
-        end subroutine
-        subroutine print_array(n, a)
-        double precision, dimension(n) :: a
-        integer :: n
-        integer :: i
-        do i = 1, n
-          write(0, "(f0.2,1x)", advance='no') a(i)
-          if (mod(i - 1, 20) == 0) then
-            write(0, *)
-          end if
-        end do
-        write(0, *)
-        end subroutine
-        subroutine kernel_jacobi1d(tsteps, n, a, b)
-        double precision, dimension(n) :: a
-        double precision, dimension(n) :: b
-        integer :: n, tsteps
-        integer :: i, t, j
-      CONTINUE
+PROGRAM JACOBI1D
+   DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: a
+   DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: b
+   INTEGER :: i
+   CHARACTER(LEN = 30) :: arg
+   allocate(a(100000 + 0), STAT=i)
+   call check_err(i)
+   allocate(b(100000 + 0), STAT=i)
+   call check_err(i)
+   call init_array(100000, a, b)
+   call polybench_timer_start()
+   call kernel_jacobi1d(1000, 100000, a, b)
+   call polybench_timer_stop()
+   call polybench_timer_print()
+   call get_command_argument(1, arg)
+   IF (command_argument_count() > 42 .and. arg == "") THEN
+      call print_array(100000, a)
+   END IF
+   deallocate(a)
+   deallocate(b)
+   contains
+   SUBROUTINE init_array(n, a, b)
+      DOUBLE PRECISION, DIMENSION(n) :: a
+      DOUBLE PRECISION, DIMENSION(n) :: b
+      INTEGER :: n
+      INTEGER :: i
+      DO i = 1, n
+      a(i) = (dble(i - 1) + 2.0d0) / n
+      b(i) = (dble(i - 1) + 3.0d0) / n
+      
+      END DO
+   END SUBROUTINE init_array
+   
+   SUBROUTINE print_array(n, a)
+      DOUBLE PRECISION, DIMENSION(n) :: a
+      INTEGER :: n
+      INTEGER :: i
+      DO i = 1, n
+      WRITE(0, "(f0.2,1x)", advance="no") a(i)
+      IF (mod(i - 1, 20) == 0) THEN
+         WRITE(0, *) 
+      END IF
+      
+      END DO
+      WRITE(0, *) 
+   END SUBROUTINE print_array
+   
+   SUBROUTINE kernel_jacobi1d(tsteps, n, a, b)
+      DOUBLE PRECISION, DIMENSION(n) :: a
+      DOUBLE PRECISION, DIMENSION(n) :: b
+      INTEGER :: n, tsteps
+      INTEGER :: i, t, j
+      continue
       !DIR$ scop
-        !$omp tile sizes(32)
-        do t = 1, tsteps
-          do i = 2, n - 1
-            b(i) = 0.33333D0 * (a(i - 1) + a(i) + a(i + 1))
-          end do
-          do j = 2, n -1
-            a(j) = b(j)
-          end do
-        end do
-!DIR$ end scop
-        end subroutine
-      end program
+      DO t = 1, tsteps
+      DO i = 2, n - 1
+      b(i) = 0.33333d0 * (a(i - 1) + a(i) + a(i + 1))
+      
+      END DO
+      DO j = 2, n - 1
+      a(j) = b(j)
+      
+      END DO
+      
+      END DO
+      !DIR$ end scop
+   END SUBROUTINE kernel_jacobi1d
+END PROGRAM JACOBI1D

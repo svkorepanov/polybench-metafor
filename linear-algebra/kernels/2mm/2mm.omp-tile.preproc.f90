@@ -1,120 +1,139 @@
-!******************************************************************************
-!
-!  2mm.F90: This file is part of the PolyBench/Fortran 1.0 test suite.
-! 
-!  Contact: Louis-Noel Pouchet <pouchet@cse.ohio-state.edu>
-!  Web address: http://polybench.sourceforge.net
-!
-!******************************************************************************
-! Include polybench common header. 
-! Include benchmark-specific header. 
-! Default data type is double, default size is 4000. 
-      program two_mm
-      double precision, dimension(:,:), allocatable :: tmp 
-      double precision, dimension(:,:), allocatable :: a  
-      double precision, dimension(:,:), allocatable :: b  
-      double precision, dimension(:,:), allocatable :: c  
-      double precision, dimension(:,:), allocatable :: d  
-      double precision :: alpha, beta
-      integer :: i
-!     Allocation of Arrays
-      allocate(tmp( 128+0, 128+0), STAT=I); call check_err(I)
-      allocate(a( 128+0, 128+0), STAT=I); call check_err(I)
-      allocate(b( 128+0, 128+0), STAT=I); call check_err(I)
-      allocate(c( 128+0, 128+0), STAT=I); call check_err(I)
-      allocate(d( 128+0, 128+0), STAT=I); call check_err(I)
-!     Initialization
-      call init_array(alpha, beta, a, b, c, d, 128, 128,  &
-                                             128, 128)
-!     Kernel Execution
-      call kernel_2mm(alpha, beta, tmp, a, b, c, d,  &
-                                  128, 128, 128, 128)
-!     Prevent dead-code elimination. All live-out data must be printed
-!     by the function call in argument. 
-            call print_array(d, 128, 128);  ;
-!     Deallocation of Arrays 
-      deallocate(tmp)
-      deallocate(a)
-      deallocate(b)
-      deallocate(c)
-      deallocate(d)
-      contains
-        subroutine init_array(alpha, beta, a, b, c ,d, ni, nj,  &
-             nk, nl)
-        double precision, dimension(nk, ni) :: a
-        double precision, dimension(nj, nk) :: b
-        double precision, dimension(nl, nj) :: c
-        double precision, dimension(nl, ni) :: d
-        double precision :: alpha, beta
-        integer :: ni, nj, nk, nl
-        integer :: i, j
-        alpha = 32412;
-        beta = 2123; 
-        do i = 1, ni
-          do j = 1, nk
-            a(j,i) = DBLE((i-1) * (j-1)) / ni
-          end do
-        end do
-        do i = 1, nk
-          do j = 1, nj
-            b(j,i) = (DBLE((i-1) * (j)))/ nj
-          end do
-        end do
-        do i = 1, nl
-          do j = 1, nj
-            c(j,i) = (DBLE(i-1) * (j+2))/ nl
-          end do
-        end do
-        do i = 1, ni
-          do j = 1, nl
-            d(j,i) = (DBLE(i-1) * (j+1))/ nk
-          end do
-        end do
-        end subroutine
-        subroutine print_array(d, ni, nl)
-        double precision, dimension(nl, ni) :: d
-        integer :: nl, ni
-        integer :: i, j
-        do i = 1, ni
-          do j = 1, nl
-            write(0, "(f0.2,1x)", advance='no') d(j,i) 
-            if (mod(((i - 1) * ni) + j - 1, 20) == 0) then
-              write(0, *)
-            end if
-          end do
-        end do
-        write(0, *)
-        end subroutine
-        subroutine kernel_2mm(alpha, beta, tmp, a, b, c, d,  &
-                                              ni, nj, nk, nl)
-        double precision, dimension(nj, ni) :: tmp
-        double precision, dimension(nk, ni) :: a
-        double precision, dimension(nj, nk) :: b
-        double precision, dimension(nl, nj) :: c
-        double precision, dimension(nl, ni) :: d
-        double precision :: alpha, beta
-        integer :: ni, nj, nk, nl
-        integer :: i, j, k
-      CONTINUE
+PROGRAM TWO_MM
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: tmp
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: a
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: b
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: c
+   DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: d
+   DOUBLE PRECISION :: alpha, beta
+   INTEGER :: i
+   CHARACTER(LEN = 30) :: arg
+   allocate(tmp(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   allocate(a(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   allocate(b(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   allocate(c(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   allocate(d(2000 + 0, 2000 + 0), STAT=i)
+   call check_err(i)
+   call init_array(alpha, beta, a, b, c, d, 2000, 2000, 2000, 2000)
+   call polybench_timer_start()
+   call kernel_2mm(alpha, beta, tmp, a, b, c, d, 2000, 2000, 2000, 2000)
+   call polybench_timer_stop()
+   call polybench_timer_print()
+   call get_command_argument(1, arg)
+   IF (command_argument_count() > 42 .and. arg == "") THEN
+      call print_array(d, 2000, 2000)
+   END IF
+   deallocate(tmp)
+   deallocate(a)
+   deallocate(b)
+   deallocate(c)
+   deallocate(d)
+   contains
+   SUBROUTINE init_array(alpha, beta, a, b, c, d, ni, nj, nk, nl)
+      DOUBLE PRECISION, DIMENSION(nk, ni) :: a
+      DOUBLE PRECISION, DIMENSION(nj, nk) :: b
+      DOUBLE PRECISION, DIMENSION(nl, nj) :: c
+      DOUBLE PRECISION, DIMENSION(nl, ni) :: d
+      DOUBLE PRECISION :: alpha, beta
+      INTEGER :: ni, nj, nk, nl
+      INTEGER :: i, j
+      alpha = 32412
+      beta = 2123
+      DO i = 1, ni
+      DO j = 1, nk
+      a(j, i) = dble((i - 1) * (j - 1)) / ni
+      
+      END DO
+      
+      END DO
+      DO i = 1, nk
+      DO j = 1, nj
+      b(j, i) = (dble((i - 1) * (j))) / nj
+      
+      END DO
+      
+      END DO
+      DO i = 1, nl
+      DO j = 1, nj
+      c(j, i) = (dble(i - 1) * (j + 2)) / nl
+      
+      END DO
+      
+      END DO
+      DO i = 1, ni
+      DO j = 1, nl
+      d(j, i) = (dble(i - 1) * (j + 1)) / nk
+      
+      END DO
+      
+      END DO
+   END SUBROUTINE init_array
+   
+   SUBROUTINE print_array(d, ni, nl)
+      DOUBLE PRECISION, DIMENSION(nl, ni) :: d
+      INTEGER :: nl, ni
+      INTEGER :: i, j
+      DO i = 1, ni
+      DO j = 1, nl
+      WRITE(0, "(f0.2,1x)", advance="no") d(j, i)
+      IF (mod(((i - 1) * ni) + j - 1, 20) == 0) THEN
+         WRITE(0, *) 
+      END IF
+      
+      END DO
+      
+      END DO
+      WRITE(0, *) 
+   END SUBROUTINE print_array
+   
+   SUBROUTINE kernel_2mm(alpha, beta, tmp, a, b, c, d, ni, nj, nk, nl)
+      DOUBLE PRECISION, DIMENSION(nj, ni) :: tmp
+      DOUBLE PRECISION, DIMENSION(nk, ni) :: a
+      DOUBLE PRECISION, DIMENSION(nj, nk) :: b
+      DOUBLE PRECISION, DIMENSION(nl, nj) :: c
+      DOUBLE PRECISION, DIMENSION(nl, ni) :: d
+      DOUBLE PRECISION :: alpha, beta
+      INTEGER :: ni, nj, nk, nl
+      INTEGER :: i, j, k
+      continue
       !DIR$ scop
-        !$omp tile sizes(32,32)
-        do i = 1, ni
-          do j = 1, nj
-            tmp(j,i) = 0.0
-            do k = 1, nk
-              tmp(j,i) = tmp(j,i) + alpha * a(k,i) * b(j,k)
-            end do
-          end do
-        end do
-        !$omp tile sizes(32,32)
-        do i = 1, ni
-          do j = 1, nl
-            d(j,i) = d(j,i) * beta
-            do k = 1, nj
-              d(j,i) = d(j,i) + tmp(k,i) * c(j,k)
-            end do
-          end do
-        end do
-!DIR$ end scop
-        end subroutine 
-      end program
+      DO ii = 1, ni, 32
+      DO jj = 1, nj, 32
+      DO i = ii, MIN(ii + 32 - 1, ni)
+      DO j = jj, MIN(jj + 32 - 1, nj)
+      tmp(j, i) = 0.0
+      DO k = 1, nk
+      tmp(j, i) = tmp(j, i) + alpha * a(k, i) * b(j, k)
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO ii = 1, ni, 32
+      DO jj = 1, nl, 32
+      DO i = ii, MIN(ii + 32 - 1, ni)
+      DO j = jj, MIN(jj + 32 - 1, nl)
+      d(j, i) = d(j, i) * beta
+      DO k = 1, nj
+      d(j, i) = d(j, i) + tmp(k, i) * c(j, k)
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      !DIR$ end scop
+   END SUBROUTINE kernel_2mm
+END PROGRAM TWO_MM

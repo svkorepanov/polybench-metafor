@@ -1,0 +1,5 @@
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in /root/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90
+/root/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90:73:13: error: Canonical loop nest must be perfectly nested.
+        !$omp tile sizes(32,32)
+              ^^^^
