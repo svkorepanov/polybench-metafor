@@ -1,0 +1,2643 @@
+=== Setup check: terça 16 jun 2026 19:20:38 WEST ===
+  [OK]   flang-22 installed
+  [OK]   clang-22 installed
+  [OK]   java 21+ installed
+  [OK]   node 22 installed
+  [OK]   fortran-transpiler built
+  [OK]   java-binaries present
+All setup checks passed.
+
+Verifying LARGE_DATASET + POLYBENCH_TIME flags...
+PARGS="-I $UTILITIES_DIR -DLARGE_DATASET -DPOLYBENCH_TIME"
+PARGS="-DLARGE_DATASET -DPOLYBENCH_TIME"
+Flags OK.
+
+Removing stale woven_code/ directories...
+Done.
+
+=== Preprocessing (LARGE_DATASET) ===
+Processing ./datamining/correlation/correlation.F90...
+Processing ./datamining/covariance/covariance.F90...
+Processing ./linear-algebra/kernels/2mm/2mm.F90...
+Processing ./linear-algebra/kernels/3mm/3mm.F90...
+Processing ./linear-algebra/kernels/atax/atax.F90...
+Processing ./linear-algebra/kernels/bicg/bicg.F90...
+Processing ./linear-algebra/kernels/cholesky/cholesky.F90...
+Processing ./linear-algebra/kernels/doitgen/doitgen.F90...
+Processing ./linear-algebra/kernels/gemm/gemm.F90...
+Processing ./linear-algebra/kernels/gemver/gemver.F90...
+Processing ./linear-algebra/kernels/gesummv/gesummv.F90...
+Processing ./linear-algebra/kernels/mvt/mvt.F90...
+Processing ./linear-algebra/kernels/symm/symm.F90...
+Processing ./linear-algebra/kernels/syr2k/syr2k.F90...
+Processing ./linear-algebra/kernels/syrk/syrk.F90...
+Processing ./linear-algebra/kernels/trisolv/trisolv.F90...
+Processing ./linear-algebra/kernels/trmm/trmm.F90...
+Processing ./linear-algebra/solvers/durbin/durbin.F90...
+Processing ./linear-algebra/solvers/dynprog/dynprog.F90...
+Processing ./linear-algebra/solvers/gramschmidt/gramschmidt.F90...
+Processing ./linear-algebra/solvers/lu/lu.F90...
+Processing ./linear-algebra/solvers/ludcmp/ludcmp.F90...
+Processing ./medley/floyd-warshall/floyd-warshall.F90...
+Processing ./medley/reg_detect/reg_detect.F90...
+Processing ./stencils/adi/adi.F90...
+Processing ./stencils/fdtd-2d/fdtd-2d.F90...
+Processing ./stencils/fdtd-apml/fdtd-apml.F90...
+Processing ./stencils/jacobi-1d-imper/jacobi-1d-imper.F90...
+Processing ./stencils/jacobi-2d-imper/jacobi-2d-imper.F90...
+Processing ./stencils/seidel-2d/seidel-2d.F90...
+
+=== Compiling originals ===
+Step 1: Compiling C utilities...
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:21:
+/home/sergeikorepanov/polybench-metafor/utilities/fpolybench.h:100:40: warning: empty character constant [-Winvalid-pp-token]
+  100 |       if( IARGC() > 42 .AND.  arg .EQ. '' ) then;  
+      |                                        ^
+6 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./datamining/correlation/correlation.exe
+Building: ./datamining/covariance/covariance.exe
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+Building: ./medley/reg_detect/reg_detect.exe
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+Building: ./stencils/seidel-2d/seidel-2d.exe
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+Building: ./stencils/adi/adi.exe
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+Building: ./linear-algebra/kernels/atax/atax.exe
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+Building: ./linear-algebra/kernels/symm/symm.exe
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+Building: ./linear-algebra/solvers/lu/lu.exe
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+------------------------------------------------
+Done! Compiled 30 benchmarks.
+
+=== Executing originals ===
+Running Suite...
+------------------------------------------------
+Processing: correlation
+Processing: covariance
+Processing: floyd-warshall
+Processing: reg_detect
+Processing: fdtd-2d
+Processing: seidel-2d
+Skipping (blacklisted): fdtd-apml
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: mvt
+Processing: syr2k
+Processing: trmm
+Processing: gesummv
+Processing: trisolv
+Processing: syrk
+Processing: cholesky
+Processing: bicg
+Processing: gemver
+Processing: 3mm
+Processing: atax
+Processing: 2mm
+Processing: symm
+Processing: gemm
+Processing: doitgen
+Processing: dynprog
+Processing: ludcmp
+Processing: durbin
+Processing: lu
+Processing: gramschmidt
+------------------------------------------------
+Done. Captured 29 benchmark results. Skipped (blacklisted): 1.
+
+============================================================
+Transform: tilingGeneric  |  started: terça 16 jun 2026 19:38:18 WEST
+============================================================
+Starting fortran-transpiler (transform: tilingGeneric)
+Transpiler root: /home/sergeikorepanov/fortran-transpiler/Fortran-JS
+------------------------------------------------
+Processing: ./datamining/correlation/correlation.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:38:21.066: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_correlation
+Writing file '/home/sergeikorepanov/polybench-metafor/datamining/correlation/woven_code/correlation.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/datamining/correlation/woven_code
+  [OK] correlation.preproc.f90
+------------------------------------------------
+Processing: ./datamining/covariance/covariance.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:38:25.095: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_covariance
+Writing file '/home/sergeikorepanov/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/datamining/covariance/woven_code
+  [OK] covariance.preproc.f90
+------------------------------------------------
+Processing: ./medley/floyd-warshall/floyd-warshall.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:38:29.132: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_floyd_warshall
+Writing file '/home/sergeikorepanov/polybench-metafor/medley/floyd-warshall/woven_code/floyd-warshall.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/medley/floyd-warshall/woven_code
+  [OK] floyd-warshall.preproc.f90
+------------------------------------------------
+Processing: ./medley/reg_detect/reg_detect.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:38:33.041: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_reg_detect
+Writing file '/home/sergeikorepanov/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/medley/reg_detect/woven_code
+  [OK] reg_detect.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-2d/fdtd-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:38:37.145: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_fdtd_2d
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/fdtd-2d/woven_code
+  [OK] fdtd-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/seidel-2d/seidel-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:38:41.280: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_seidel
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/seidel-2d/woven_code/seidel-2d.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/seidel-2d/woven_code
+  [OK] seidel-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-apml/fdtd-apml.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:38:45.555: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_fdtd_apml
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/fdtd-apml/woven_code/fdtd-apml.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/fdtd-apml/woven_code
+  [OK] fdtd-apml.preproc.f90
+------------------------------------------------
+Processing: ./stencils/adi/adi.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:38:50.181: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_adi
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/adi/woven_code/adi.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/adi/woven_code
+  [OK] adi.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-1d-imper/jacobi-1d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:38:54.413: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_jacobi1d
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/jacobi-1d-imper/woven_code
+  [OK] jacobi-1d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-2d-imper/jacobi-2d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:38:58.282: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_jacobi_2d_imper
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/jacobi-2d-imper/woven_code
+  [OK] jacobi-2d-imper.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/mvt/mvt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:02.588: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_mvt
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/mvt/woven_code/mvt.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/mvt/woven_code
+  [OK] mvt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syr2k/syr2k.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:06.589: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_syr2k
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syr2k/woven_code/syr2k.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syr2k/woven_code
+  [OK] syr2k.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trmm/trmm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:10.588: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_trmm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trmm/woven_code/trmm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trmm/woven_code
+  [OK] trmm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gesummv/gesummv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:14.672: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_gesummv
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gesummv/woven_code
+  [OK] gesummv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trisolv/trisolv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:18.615: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_trisolv
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trisolv/woven_code
+  [OK] trisolv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syrk/syrk.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:22.639: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_syrk
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syrk/woven_code/syrk.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syrk/woven_code
+  [OK] syrk.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/cholesky/cholesky.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:26.603: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_cholesky
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/cholesky/woven_code
+  [OK] cholesky.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/bicg/bicg.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:30.537: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_bicg
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/bicg/woven_code
+  [OK] bicg.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemver/gemver.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:34.460: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_gemver
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemver/woven_code/gemver.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemver/woven_code
+  [OK] gemver.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/3mm/3mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:38.714: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_3mm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/3mm/woven_code/3mm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/3mm/woven_code
+  [OK] 3mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/atax/atax.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:42.930: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_atax
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/atax/woven_code/atax.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/atax/woven_code
+  [OK] atax.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/2mm/2mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:46.782: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_2mm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/2mm/woven_code/2mm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/2mm/woven_code
+  [OK] 2mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/symm/symm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:50.973: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_symm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/symm/woven_code/symm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/symm/woven_code
+  [OK] symm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemm/gemm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:54.967: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_gemm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemm/woven_code/gemm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemm/woven_code
+  [OK] gemm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/doitgen/doitgen.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:39:59.076: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[tilingGeneric] TILED (tile=32): kernel_doitgen
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/doitgen/woven_code/doitgen.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/doitgen/woven_code
+  [OK] doitgen.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/dynprog/dynprog.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:40:03.148: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_dynprog
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/dynprog/woven_code/dynprog.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/dynprog/woven_code
+  [OK] dynprog.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/ludcmp/ludcmp.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:40:07.069: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_ludcmp
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code/ludcmp.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code
+  [OK] ludcmp.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/durbin/durbin.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:40:11.191: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_durbin
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/durbin/woven_code/durbin.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/durbin/woven_code
+  [OK] durbin.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/lu/lu.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:40:15.123: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_lu
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/lu/woven_code
+  [OK] lu.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/gramschmidt/gramschmidt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 19:40:19.101: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_gramschmidt
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code
+  [OK] gramschmidt.preproc.f90
+------------------------------------------------
+Done. 30/30 succeeded.
+--- compile ---
+Step 1: Compiling C utilities...
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:21:
+/home/sergeikorepanov/polybench-metafor/utilities/fpolybench.h:100:40: warning: empty character constant [-Winvalid-pp-token]
+  100 |       if( IARGC() > 42 .AND.  arg .EQ. '' ) then;  
+      |                                        ^
+6 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./datamining/correlation/woven_code/correlation.exe
+Building: ./datamining/correlation/correlation.exe
+Building: ./datamining/covariance/woven_code/covariance.exe
+Building: ./datamining/covariance/covariance.exe
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+Building: ./medley/reg_detect/reg_detect.exe
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+Building: ./stencils/seidel-2d/seidel-2d.exe
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+Building: ./stencils/adi/woven_code/adi.exe
+Building: ./stencils/adi/adi.exe
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+Building: ./linear-algebra/kernels/atax/atax.exe
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+Building: ./linear-algebra/kernels/symm/symm.exe
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+Building: ./linear-algebra/solvers/lu/lu.exe
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+------------------------------------------------
+Done! Compiled 60 benchmarks.
+--- execute ---
+Running Suite...
+------------------------------------------------
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: reg_detect
+Processing: reg_detect
+Processing: fdtd-2d
+Processing: fdtd-2d
+Processing: seidel-2d
+Processing: seidel-2d
+Skipping (blacklisted): fdtd-apml
+Skipping (blacklisted): fdtd-apml
+Processing: adi
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: jacobi-2d-imper
+Processing: mvt
+Processing: mvt
+Processing: syr2k
+Processing: syr2k
+Processing: trmm
+Processing: trmm
+Processing: gesummv
+Processing: gesummv
+Processing: trisolv
+Processing: trisolv
+Processing: syrk
+Processing: syrk
+Processing: cholesky
+Processing: cholesky
+Processing: bicg
+Processing: bicg
+Processing: gemver
+Processing: gemver
+Processing: 3mm
+Processing: 3mm
+Processing: atax
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: symm
+Processing: symm
+Processing: gemm
+Processing: gemm
+Processing: doitgen
+Processing: doitgen
+Processing: dynprog
+Processing: dynprog
+Processing: ludcmp
+Processing: ludcmp
+Processing: durbin
+Processing: durbin
+Processing: lu
+Processing: lu
+Processing: gramschmidt
+Processing: gramschmidt
+------------------------------------------------
+Done. Captured 58 benchmark results. Skipped (blacklisted): 2.
+--- compare ---
+Finished tilingGeneric: terça 16 jun 2026 20:14:54 WEST
+
+============================================================
+Transform: unrollGeneric  |  started: terça 16 jun 2026 20:14:54 WEST
+============================================================
+Starting fortran-transpiler (transform: unrollGeneric)
+Transpiler root: /home/sergeikorepanov/fortran-transpiler/Fortran-JS
+------------------------------------------------
+Processing: ./datamining/correlation/correlation.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:14:56.863: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_correlation
+Writing file '/home/sergeikorepanov/polybench-metafor/datamining/correlation/woven_code/correlation.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/datamining/correlation/woven_code
+  [OK] correlation.preproc.f90
+------------------------------------------------
+Processing: ./datamining/covariance/covariance.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:01.163: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_covariance
+Writing file '/home/sergeikorepanov/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/datamining/covariance/woven_code
+  [OK] covariance.preproc.f90
+------------------------------------------------
+Processing: ./medley/floyd-warshall/floyd-warshall.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:05.475: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_floyd_warshall
+Writing file '/home/sergeikorepanov/polybench-metafor/medley/floyd-warshall/woven_code/floyd-warshall.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/medley/floyd-warshall/woven_code
+  [OK] floyd-warshall.preproc.f90
+------------------------------------------------
+Processing: ./medley/reg_detect/reg_detect.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:09.509: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_reg_detect
+Writing file '/home/sergeikorepanov/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/medley/reg_detect/woven_code
+  [OK] reg_detect.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-2d/fdtd-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:13.593: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_fdtd_2d
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/fdtd-2d/woven_code
+  [OK] fdtd-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/seidel-2d/seidel-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:18.080: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_seidel
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/seidel-2d/woven_code/seidel-2d.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/seidel-2d/woven_code
+  [OK] seidel-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-apml/fdtd-apml.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:21.884: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_fdtd_apml
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/fdtd-apml/woven_code/fdtd-apml.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/fdtd-apml/woven_code
+  [OK] fdtd-apml.preproc.f90
+------------------------------------------------
+Processing: ./stencils/adi/adi.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:26.582: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_adi
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/adi/woven_code/adi.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/adi/woven_code
+  [OK] adi.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-1d-imper/jacobi-1d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:30.942: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_jacobi1d
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/jacobi-1d-imper/woven_code
+  [OK] jacobi-1d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-2d-imper/jacobi-2d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:34.988: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_jacobi_2d_imper
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/jacobi-2d-imper/woven_code
+  [OK] jacobi-2d-imper.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/mvt/mvt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:39.036: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[unrollGeneric] UNROLLED (factor=4): kernel_mvt
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/mvt/woven_code/mvt.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/mvt/woven_code
+  [OK] mvt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syr2k/syr2k.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:43.259: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_syr2k
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syr2k/woven_code/syr2k.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syr2k/woven_code
+  [OK] syr2k.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trmm/trmm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:47.649: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_trmm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trmm/woven_code/trmm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trmm/woven_code
+  [OK] trmm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gesummv/gesummv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:51.806: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_gesummv
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gesummv/woven_code
+  [OK] gesummv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trisolv/trisolv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:15:56.123: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[unrollGeneric] UNROLLED (factor=4): kernel_trisolv
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trisolv/woven_code
+  [OK] trisolv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syrk/syrk.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:00.258: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_syrk
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syrk/woven_code/syrk.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syrk/woven_code
+  [OK] syrk.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/cholesky/cholesky.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:04.306: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_cholesky
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/cholesky/woven_code
+  [OK] cholesky.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/bicg/bicg.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:08.664: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_bicg
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/bicg/woven_code
+  [OK] bicg.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemver/gemver.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:12.935: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_gemver
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemver/woven_code/gemver.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemver/woven_code
+  [OK] gemver.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/3mm/3mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:17.595: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_3mm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/3mm/woven_code/3mm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/3mm/woven_code
+  [OK] 3mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/atax/atax.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:21.816: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_atax
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/atax/woven_code/atax.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/atax/woven_code
+  [OK] atax.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/2mm/2mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:25.895: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_2mm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/2mm/woven_code/2mm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/2mm/woven_code
+  [OK] 2mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/symm/symm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:29.996: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_symm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/symm/woven_code/symm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/symm/woven_code
+  [OK] symm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemm/gemm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:34.214: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_gemm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemm/woven_code/gemm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemm/woven_code
+  [OK] gemm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/doitgen/doitgen.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:38.243: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[unrollGeneric] UNROLLED (factor=4): kernel_doitgen
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/doitgen/woven_code/doitgen.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/doitgen/woven_code
+  [OK] doitgen.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/dynprog/dynprog.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:42.338: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_dynprog
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/dynprog/woven_code/dynprog.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/dynprog/woven_code
+  [OK] dynprog.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/ludcmp/ludcmp.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:46.370: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_ludcmp
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code/ludcmp.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code
+  [OK] ludcmp.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/durbin/durbin.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:50.890: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_durbin
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/durbin/woven_code/durbin.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/durbin/woven_code
+  [OK] durbin.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/lu/lu.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:55.066: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[unrollGeneric] UNROLLED (factor=4): kernel_lu
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/lu/woven_code
+  [OK] lu.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/gramschmidt/gramschmidt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:16:59.151: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[unrollGeneric] UNROLLED (factor=4): kernel_gramschmidt
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code
+  [OK] gramschmidt.preproc.f90
+------------------------------------------------
+Done. 30/30 succeeded.
+--- compile ---
+Step 1: Compiling C utilities...
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:21:
+/home/sergeikorepanov/polybench-metafor/utilities/fpolybench.h:100:40: warning: empty character constant [-Winvalid-pp-token]
+  100 |       if( IARGC() > 42 .AND.  arg .EQ. '' ) then;  
+      |                                        ^
+6 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./datamining/correlation/woven_code/correlation.exe
+Building: ./datamining/correlation/correlation.exe
+Building: ./datamining/covariance/woven_code/covariance.exe
+Building: ./datamining/covariance/covariance.exe
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+Building: ./medley/reg_detect/reg_detect.exe
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+Building: ./stencils/seidel-2d/seidel-2d.exe
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+Building: ./stencils/adi/woven_code/adi.exe
+Building: ./stencils/adi/adi.exe
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+Building: ./linear-algebra/kernels/atax/atax.exe
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+Building: ./linear-algebra/kernels/symm/symm.exe
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+Building: ./linear-algebra/solvers/lu/lu.exe
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+------------------------------------------------
+Done! Compiled 60 benchmarks.
+--- execute ---
+Running Suite...
+------------------------------------------------
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: reg_detect
+Processing: reg_detect
+Processing: fdtd-2d
+Processing: fdtd-2d
+Processing: seidel-2d
+Processing: seidel-2d
+Skipping (blacklisted): fdtd-apml
+Skipping (blacklisted): fdtd-apml
+Processing: adi
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: jacobi-2d-imper
+Processing: mvt
+Processing: mvt
+Processing: syr2k
+Processing: syr2k
+Processing: trmm
+Processing: trmm
+Processing: gesummv
+Processing: gesummv
+Processing: trisolv
+Processing: trisolv
+Processing: syrk
+Processing: syrk
+Processing: cholesky
+Processing: cholesky
+Processing: bicg
+Processing: bicg
+Processing: gemver
+Processing: gemver
+Processing: 3mm
+Processing: 3mm
+Processing: atax
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: symm
+Processing: symm
+Processing: gemm
+Processing: gemm
+Processing: doitgen
+Processing: doitgen
+Processing: dynprog
+Processing: dynprog
+Processing: ludcmp
+Processing: ludcmp
+Processing: durbin
+Processing: durbin
+Processing: lu
+Processing: lu
+Processing: gramschmidt
+Processing: gramschmidt
+------------------------------------------------
+Done. Captured 58 benchmark results. Skipped (blacklisted): 2.
+--- compare ---
+Finished unrollGeneric: terça 16 jun 2026 20:52:34 WEST
+
+============================================================
+Transform: fusionGeneric  |  started: terça 16 jun 2026 20:52:34 WEST
+============================================================
+Starting fortran-transpiler (transform: fusionGeneric)
+Transpiler root: /home/sergeikorepanov/fortran-transpiler/Fortran-JS
+------------------------------------------------
+Processing: ./datamining/correlation/correlation.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:52:37.355: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_correlation
+Writing file '/home/sergeikorepanov/polybench-metafor/datamining/correlation/woven_code/correlation.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/datamining/correlation/woven_code
+  [OK] correlation.preproc.f90
+------------------------------------------------
+Processing: ./datamining/covariance/covariance.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:52:41.761: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_covariance
+Writing file '/home/sergeikorepanov/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/datamining/covariance/woven_code
+  [OK] covariance.preproc.f90
+------------------------------------------------
+Processing: ./medley/floyd-warshall/floyd-warshall.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:52:45.684: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_floyd_warshall
+Writing file '/home/sergeikorepanov/polybench-metafor/medley/floyd-warshall/woven_code/floyd-warshall.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/medley/floyd-warshall/woven_code
+  [OK] floyd-warshall.preproc.f90
+------------------------------------------------
+Processing: ./medley/reg_detect/reg_detect.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:52:49.658: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_reg_detect
+Writing file '/home/sergeikorepanov/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/medley/reg_detect/woven_code
+  [OK] reg_detect.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-2d/fdtd-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:52:53.837: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_fdtd_2d
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/fdtd-2d/woven_code
+  [OK] fdtd-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/seidel-2d/seidel-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:52:57.919: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_seidel
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/seidel-2d/woven_code/seidel-2d.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/seidel-2d/woven_code
+  [OK] seidel-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-apml/fdtd-apml.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:01.962: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_fdtd_apml
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/fdtd-apml/woven_code/fdtd-apml.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/fdtd-apml/woven_code
+  [OK] fdtd-apml.preproc.f90
+------------------------------------------------
+Processing: ./stencils/adi/adi.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:06.686: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_adi
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/adi/woven_code/adi.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/adi/woven_code
+  [OK] adi.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-1d-imper/jacobi-1d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:11.032: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_jacobi1d
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/jacobi-1d-imper/woven_code
+  [OK] jacobi-1d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-2d-imper/jacobi-2d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:15.181: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_jacobi_2d_imper
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/jacobi-2d-imper/woven_code
+  [OK] jacobi-2d-imper.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/mvt/mvt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:19.143: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[fusionGeneric] FUSED: kernel_mvt
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/mvt/woven_code/mvt.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/mvt/woven_code
+  [OK] mvt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syr2k/syr2k.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:23.600: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_syr2k
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syr2k/woven_code/syr2k.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syr2k/woven_code
+  [OK] syr2k.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trmm/trmm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:27.809: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_trmm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trmm/woven_code/trmm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trmm/woven_code
+  [OK] trmm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gesummv/gesummv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:31.676: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_gesummv
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gesummv/woven_code
+  [OK] gesummv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trisolv/trisolv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:35.667: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_trisolv
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trisolv/woven_code
+  [OK] trisolv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syrk/syrk.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:39.534: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_syrk
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syrk/woven_code/syrk.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syrk/woven_code
+  [OK] syrk.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/cholesky/cholesky.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:43.475: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_cholesky
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/cholesky/woven_code
+  [OK] cholesky.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/bicg/bicg.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:47.695: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_bicg
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/bicg/woven_code
+  [OK] bicg.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemver/gemver.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:51.626: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_gemver
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemver/woven_code/gemver.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemver/woven_code
+  [OK] gemver.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/3mm/3mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:55.868: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_3mm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/3mm/woven_code/3mm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/3mm/woven_code
+  [OK] 3mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/atax/atax.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:53:59.895: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_atax
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/atax/woven_code/atax.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/atax/woven_code
+  [OK] atax.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/2mm/2mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:54:03.985: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] FUSED: kernel_2mm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/2mm/woven_code/2mm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/2mm/woven_code
+  [OK] 2mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/symm/symm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:54:08.341: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_symm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/symm/woven_code/symm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/symm/woven_code
+  [OK] symm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemm/gemm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:54:12.650: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_gemm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemm/woven_code/gemm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemm/woven_code
+  [OK] gemm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/doitgen/doitgen.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:54:16.740: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_doitgen
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/doitgen/woven_code/doitgen.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/doitgen/woven_code
+  [OK] doitgen.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/dynprog/dynprog.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:54:20.698: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_dynprog
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/dynprog/woven_code/dynprog.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/dynprog/woven_code
+  [OK] dynprog.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/ludcmp/ludcmp.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:54:24.728: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_ludcmp
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code/ludcmp.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code
+  [OK] ludcmp.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/durbin/durbin.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:54:29.135: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_durbin
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/durbin/woven_code/durbin.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/durbin/woven_code
+  [OK] durbin.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/lu/lu.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:54:33.333: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_lu
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/lu/woven_code
+  [OK] lu.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/gramschmidt/gramschmidt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 20:54:37.248: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[fusionGeneric] SKIPPED (no fusable consecutive loops): kernel_gramschmidt
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code
+  [OK] gramschmidt.preproc.f90
+------------------------------------------------
+Done. 30/30 succeeded.
+--- compile ---
+Step 1: Compiling C utilities...
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:21:
+/home/sergeikorepanov/polybench-metafor/utilities/fpolybench.h:100:40: warning: empty character constant [-Winvalid-pp-token]
+  100 |       if( IARGC() > 42 .AND.  arg .EQ. '' ) then;  
+      |                                        ^
+6 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./datamining/correlation/woven_code/correlation.exe
+Building: ./datamining/correlation/correlation.exe
+Building: ./datamining/covariance/woven_code/covariance.exe
+Building: ./datamining/covariance/covariance.exe
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+Building: ./medley/reg_detect/reg_detect.exe
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+Building: ./stencils/seidel-2d/seidel-2d.exe
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+Building: ./stencils/adi/woven_code/adi.exe
+Building: ./stencils/adi/adi.exe
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+Building: ./linear-algebra/kernels/atax/atax.exe
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+Building: ./linear-algebra/kernels/symm/symm.exe
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+Building: ./linear-algebra/solvers/lu/lu.exe
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+------------------------------------------------
+Done! Compiled 60 benchmarks.
+--- execute ---
+Running Suite...
+------------------------------------------------
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: reg_detect
+Processing: reg_detect
+Processing: fdtd-2d
+Processing: fdtd-2d
+Processing: seidel-2d
+Processing: seidel-2d
+Skipping (blacklisted): fdtd-apml
+Skipping (blacklisted): fdtd-apml
+Processing: adi
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: jacobi-2d-imper
+Processing: mvt
+Processing: mvt
+Processing: syr2k
+Processing: syr2k
+Processing: trmm
+Processing: trmm
+Processing: gesummv
+Processing: gesummv
+Processing: trisolv
+Processing: trisolv
+Processing: syrk
+Processing: syrk
+Processing: cholesky
+Processing: cholesky
+Processing: bicg
+Processing: bicg
+Processing: gemver
+Processing: gemver
+Processing: 3mm
+Processing: 3mm
+Processing: atax
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: symm
+Processing: symm
+Processing: gemm
+Processing: gemm
+Processing: doitgen
+Processing: doitgen
+Processing: dynprog
+Processing: dynprog
+Processing: ludcmp
+Processing: ludcmp
+Processing: durbin
+Processing: durbin
+Processing: lu
+Processing: lu
+Processing: gramschmidt
+Processing: gramschmidt
+------------------------------------------------
+Done. Captured 58 benchmark results. Skipped (blacklisted): 2.
+--- compare ---
+Finished fusionGeneric: terça 16 jun 2026 21:29:43 WEST
+
+============================================================
+Transform: fissionGeneric  |  started: terça 16 jun 2026 21:29:43 WEST
+============================================================
+Starting fortran-transpiler (transform: fissionGeneric)
+Transpiler root: /home/sergeikorepanov/fortran-transpiler/Fortran-JS
+------------------------------------------------
+Processing: ./datamining/correlation/correlation.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:29:45.593: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_correlation
+Writing file '/home/sergeikorepanov/polybench-metafor/datamining/correlation/woven_code/correlation.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/datamining/correlation/woven_code
+  [OK] correlation.preproc.f90
+------------------------------------------------
+Processing: ./datamining/covariance/covariance.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:29:49.866: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_covariance
+Writing file '/home/sergeikorepanov/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/datamining/covariance/woven_code
+  [OK] covariance.preproc.f90
+------------------------------------------------
+Processing: ./medley/floyd-warshall/floyd-warshall.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:29:53.850: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_floyd_warshall
+Writing file '/home/sergeikorepanov/polybench-metafor/medley/floyd-warshall/woven_code/floyd-warshall.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/medley/floyd-warshall/woven_code
+  [OK] floyd-warshall.preproc.f90
+------------------------------------------------
+Processing: ./medley/reg_detect/reg_detect.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:29:57.759: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_reg_detect
+Writing file '/home/sergeikorepanov/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/medley/reg_detect/woven_code
+  [OK] reg_detect.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-2d/fdtd-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:02.188: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_fdtd_2d
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/fdtd-2d/woven_code
+  [OK] fdtd-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/seidel-2d/seidel-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:06.429: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_seidel
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/seidel-2d/woven_code/seidel-2d.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/seidel-2d/woven_code
+  [OK] seidel-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-apml/fdtd-apml.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:10.352: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_fdtd_apml
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/fdtd-apml/woven_code/fdtd-apml.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/fdtd-apml/woven_code
+  [OK] fdtd-apml.preproc.f90
+------------------------------------------------
+Processing: ./stencils/adi/adi.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:15.225: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_adi
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/adi/woven_code/adi.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/adi/woven_code
+  [OK] adi.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-1d-imper/jacobi-1d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:19.433: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_jacobi1d
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/jacobi-1d-imper/woven_code
+  [OK] jacobi-1d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-2d-imper/jacobi-2d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:23.448: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_jacobi_2d_imper
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/jacobi-2d-imper/woven_code
+  [OK] jacobi-2d-imper.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/mvt/mvt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:27.518: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_mvt
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/mvt/woven_code/mvt.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/mvt/woven_code
+  [OK] mvt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syr2k/syr2k.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:31.661: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_syr2k
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syr2k/woven_code/syr2k.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syr2k/woven_code
+  [OK] syr2k.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trmm/trmm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:35.831: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_trmm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trmm/woven_code/trmm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trmm/woven_code
+  [OK] trmm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gesummv/gesummv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:39.887: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_gesummv
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gesummv/woven_code
+  [OK] gesummv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trisolv/trisolv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:44.064: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_trisolv
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trisolv/woven_code
+  [OK] trisolv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syrk/syrk.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:48.210: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_syrk
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syrk/woven_code/syrk.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syrk/woven_code
+  [OK] syrk.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/cholesky/cholesky.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:52.091: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_cholesky
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/cholesky/woven_code
+  [OK] cholesky.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/bicg/bicg.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:30:56.076: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_bicg
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/bicg/woven_code
+  [OK] bicg.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemver/gemver.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:00.360: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_gemver
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemver/woven_code/gemver.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemver/woven_code
+  [OK] gemver.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/3mm/3mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:04.524: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_3mm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/3mm/woven_code/3mm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/3mm/woven_code
+  [OK] 3mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/atax/atax.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:08.760: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_atax
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/atax/woven_code/atax.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/atax/woven_code
+  [OK] atax.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/2mm/2mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:12.828: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_2mm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/2mm/woven_code/2mm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/2mm/woven_code
+  [OK] 2mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/symm/symm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:17.148: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_symm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/symm/woven_code/symm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/symm/woven_code
+  [OK] symm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemm/gemm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:21.362: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_gemm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemm/woven_code/gemm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemm/woven_code
+  [OK] gemm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/doitgen/doitgen.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:25.363: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[fissionGeneric] FISSIONED: kernel_doitgen
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/doitgen/woven_code/doitgen.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/doitgen/woven_code
+  [OK] doitgen.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/dynprog/dynprog.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:29.559: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] FISSIONED: kernel_dynprog
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/dynprog/woven_code/dynprog.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/dynprog/woven_code
+  [OK] dynprog.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/ludcmp/ludcmp.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:33.616: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_ludcmp
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code/ludcmp.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code
+  [OK] ludcmp.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/durbin/durbin.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:37.798: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_durbin
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/durbin/woven_code/durbin.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/durbin/woven_code
+  [OK] durbin.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/lu/lu.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:42.129: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_lu
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/lu/woven_code
+  [OK] lu.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/gramschmidt/gramschmidt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 21:31:46.016: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[fissionGeneric] SKIPPED (no eligible multi-statement loops): kernel_gramschmidt
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code
+  [OK] gramschmidt.preproc.f90
+------------------------------------------------
+Done. 30/30 succeeded.
+--- compile ---
+Step 1: Compiling C utilities...
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:21:
+/home/sergeikorepanov/polybench-metafor/utilities/fpolybench.h:100:40: warning: empty character constant [-Winvalid-pp-token]
+  100 |       if( IARGC() > 42 .AND.  arg .EQ. '' ) then;  
+      |                                        ^
+6 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./datamining/correlation/woven_code/correlation.exe
+Building: ./datamining/correlation/correlation.exe
+Building: ./datamining/covariance/woven_code/covariance.exe
+Building: ./datamining/covariance/covariance.exe
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+Building: ./medley/reg_detect/reg_detect.exe
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+Building: ./stencils/seidel-2d/seidel-2d.exe
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+Building: ./stencils/adi/woven_code/adi.exe
+Building: ./stencils/adi/adi.exe
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+Building: ./linear-algebra/kernels/atax/atax.exe
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+Building: ./linear-algebra/kernels/symm/symm.exe
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+Building: ./linear-algebra/solvers/lu/lu.exe
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+------------------------------------------------
+Done! Compiled 60 benchmarks.
+--- execute ---
+Running Suite...
+------------------------------------------------
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: reg_detect
+Processing: reg_detect
+Processing: fdtd-2d
+Processing: fdtd-2d
+Processing: seidel-2d
+Processing: seidel-2d
+Skipping (blacklisted): fdtd-apml
+Skipping (blacklisted): fdtd-apml
+Processing: adi
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: jacobi-2d-imper
+Processing: mvt
+Processing: mvt
+Processing: syr2k
+Processing: syr2k
+Processing: trmm
+Processing: trmm
+Processing: gesummv
+Processing: gesummv
+Processing: trisolv
+Processing: trisolv
+Processing: syrk
+Processing: syrk
+Processing: cholesky
+Processing: cholesky
+Processing: bicg
+Processing: bicg
+Processing: gemver
+Processing: gemver
+Processing: 3mm
+Processing: 3mm
+Processing: atax
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: symm
+Processing: symm
+Processing: gemm
+Processing: gemm
+Processing: doitgen
+Processing: doitgen
+Processing: dynprog
+Processing: dynprog
+Processing: ludcmp
+Processing: ludcmp
+Processing: durbin
+Processing: durbin
+Processing: lu
+Processing: lu
+Processing: gramschmidt
+Processing: gramschmidt
+------------------------------------------------
+Done. Captured 58 benchmark results. Skipped (blacklisted): 2.
+--- compare ---
+Finished fissionGeneric: terça 16 jun 2026 22:07:22 WEST
+
+============================================================
+Transform: interchangeGeneric  |  started: terça 16 jun 2026 22:07:22 WEST
+============================================================
+Starting fortran-transpiler (transform: interchangeGeneric)
+Transpiler root: /home/sergeikorepanov/fortran-transpiler/Fortran-JS
+------------------------------------------------
+Processing: ./datamining/correlation/correlation.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:07:24.777: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_correlation
+Writing file '/home/sergeikorepanov/polybench-metafor/datamining/correlation/woven_code/correlation.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/datamining/correlation/woven_code
+  [OK] correlation.preproc.f90
+------------------------------------------------
+Processing: ./datamining/covariance/covariance.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:07:29.069: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_covariance
+Writing file '/home/sergeikorepanov/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/datamining/covariance/woven_code
+  [OK] covariance.preproc.f90
+------------------------------------------------
+Processing: ./medley/floyd-warshall/floyd-warshall.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:07:33.214: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_floyd_warshall
+Writing file '/home/sergeikorepanov/polybench-metafor/medley/floyd-warshall/woven_code/floyd-warshall.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/medley/floyd-warshall/woven_code
+  [OK] floyd-warshall.preproc.f90
+------------------------------------------------
+Processing: ./medley/reg_detect/reg_detect.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:07:37.137: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_reg_detect
+Writing file '/home/sergeikorepanov/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/medley/reg_detect/woven_code
+  [OK] reg_detect.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-2d/fdtd-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:07:41.111: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_fdtd_2d
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/fdtd-2d/woven_code
+  [OK] fdtd-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/seidel-2d/seidel-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:07:45.100: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_seidel
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/seidel-2d/woven_code/seidel-2d.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/seidel-2d/woven_code
+  [OK] seidel-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-apml/fdtd-apml.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:07:49.017: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_fdtd_apml
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/fdtd-apml/woven_code/fdtd-apml.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/fdtd-apml/woven_code
+  [OK] fdtd-apml.preproc.f90
+------------------------------------------------
+Processing: ./stencils/adi/adi.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:07:53.867: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_adi
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/adi/woven_code/adi.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/adi/woven_code
+  [OK] adi.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-1d-imper/jacobi-1d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:07:57.994: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_jacobi1d
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/jacobi-1d-imper/woven_code
+  [OK] jacobi-1d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-2d-imper/jacobi-2d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:01.915: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_jacobi_2d_imper
+Writing file '/home/sergeikorepanov/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/stencils/jacobi-2d-imper/woven_code
+  [OK] jacobi-2d-imper.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/mvt/mvt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:06.107: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[interchangeGeneric] INTERCHANGED: kernel_mvt
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/mvt/woven_code/mvt.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/mvt/woven_code
+  [OK] mvt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syr2k/syr2k.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:10.083: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_syr2k
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syr2k/woven_code/syr2k.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syr2k/woven_code
+  [OK] syr2k.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trmm/trmm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:14.145: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_trmm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trmm/woven_code/trmm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trmm/woven_code
+  [OK] trmm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gesummv/gesummv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:18.047: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_gesummv
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gesummv/woven_code
+  [OK] gesummv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trisolv/trisolv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:22.096: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_trisolv
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/trisolv/woven_code
+  [OK] trisolv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syrk/syrk.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:25.917: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_syrk
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syrk/woven_code/syrk.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/syrk/woven_code
+  [OK] syrk.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/cholesky/cholesky.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:29.938: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_cholesky
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/cholesky/woven_code
+  [OK] cholesky.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/bicg/bicg.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:33.824: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_bicg
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/bicg/woven_code
+  [OK] bicg.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemver/gemver.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:37.766: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_gemver
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemver/woven_code/gemver.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemver/woven_code
+  [OK] gemver.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/3mm/3mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:41.867: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_3mm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/3mm/woven_code/3mm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/3mm/woven_code
+  [OK] 3mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/atax/atax.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:46.040: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_atax
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/atax/woven_code/atax.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/atax/woven_code
+  [OK] atax.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/2mm/2mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:49.867: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_2mm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/2mm/woven_code/2mm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/2mm/woven_code
+  [OK] 2mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/symm/symm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:53.898: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_symm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/symm/woven_code/symm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/symm/woven_code
+  [OK] symm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemm/gemm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:08:57.880: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_gemm
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemm/woven_code/gemm.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/gemm/woven_code
+  [OK] gemm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/doitgen/doitgen.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:09:01.916: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_doitgen
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/doitgen/woven_code/doitgen.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/kernels/doitgen/woven_code
+  [OK] doitgen.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/dynprog/dynprog.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:09:06.037: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_dynprog
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/dynprog/woven_code/dynprog.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/dynprog/woven_code
+  [OK] dynprog.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/ludcmp/ludcmp.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:09:10.079: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_ludcmp
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code/ludcmp.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code
+  [OK] ludcmp.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/durbin/durbin.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:09:14.049: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_durbin
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/durbin/woven_code/durbin.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/durbin/woven_code
+  [OK] durbin.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/lu/lu.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:09:18.076: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[interchangeGeneric] INTERCHANGED: kernel_lu
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/lu/woven_code
+  [OK] lu.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/gramschmidt/gramschmidt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+Gtk-Message: 22:09:22.025: Failed to load module "canberra-gtk-module"
+Could not load native libraries for ScreencastHelper
+PLUGIN : /tmp/metafor_sergeikorepanov/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+[interchangeGeneric] SKIPPED (no eligible/legal 2-deep perfect nest): kernel_gramschmidt
+Writing file '/home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90'
+Output files written to folder /home/sergeikorepanov/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code
+  [OK] gramschmidt.preproc.f90
+------------------------------------------------
+Done. 30/30 succeeded.
+--- compile ---
+Step 1: Compiling C utilities...
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+In file included from /home/sergeikorepanov/polybench-metafor/utilities/fpolybench.c:21:
+/home/sergeikorepanov/polybench-metafor/utilities/fpolybench.h:100:40: warning: empty character constant [-Winvalid-pp-token]
+  100 |       if( IARGC() > 42 .AND.  arg .EQ. '' ) then;  
+      |                                        ^
+6 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./datamining/correlation/woven_code/correlation.exe
+Building: ./datamining/correlation/correlation.exe
+Building: ./datamining/covariance/woven_code/covariance.exe
+Building: ./datamining/covariance/covariance.exe
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+Building: ./medley/reg_detect/reg_detect.exe
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+Building: ./stencils/seidel-2d/seidel-2d.exe
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+Building: ./stencils/adi/woven_code/adi.exe
+Building: ./stencils/adi/adi.exe
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+Building: ./linear-algebra/kernels/atax/atax.exe
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+Building: ./linear-algebra/kernels/symm/symm.exe
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+Building: ./linear-algebra/solvers/lu/lu.exe
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+------------------------------------------------
+Done! Compiled 60 benchmarks.
+--- execute ---
+Running Suite...
+------------------------------------------------
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: reg_detect
+Processing: reg_detect
+Processing: fdtd-2d
+Processing: fdtd-2d
+Processing: seidel-2d
+Processing: seidel-2d
+Skipping (blacklisted): fdtd-apml
+Skipping (blacklisted): fdtd-apml
+Processing: adi
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: jacobi-2d-imper
+Processing: mvt
+Processing: mvt
+Processing: syr2k
+Processing: syr2k
+Processing: trmm
+Processing: trmm
+Processing: gesummv
+Processing: gesummv
+Processing: trisolv
+Processing: trisolv
+Processing: syrk
+Processing: syrk
+Processing: cholesky
+Processing: cholesky
+Processing: bicg
+Processing: bicg
+Processing: gemver
+Processing: gemver
+Processing: 3mm
+Processing: 3mm
+Processing: atax
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: symm
+Processing: symm
+Processing: gemm
+Processing: gemm
+Processing: doitgen
+Processing: doitgen
+Processing: dynprog
+Processing: dynprog
+Processing: ludcmp
+Processing: ludcmp
+Processing: durbin
+Processing: durbin
+Processing: lu
+Processing: lu
+Processing: gramschmidt
+Processing: gramschmidt
+------------------------------------------------
+Done. Captured 58 benchmark results. Skipped (blacklisted): 2.
+--- compare ---
+Finished interchangeGeneric: terça 16 jun 2026 22:45:24 WEST
+
+=== Summary ===
+  tilingGeneric: Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+  unrollGeneric: Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+  fusionGeneric: Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+  fissionGeneric: Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+  interchangeGeneric: Final Results: 29 Matches (ignoring timer), 0 Mismatches, 1 Missing.
+
+Combined results : /home/sergeikorepanov/polybench-metafor/experiments/issues/iteration-6/results-summary.txt
+Full log         : /home/sergeikorepanov/polybench-metafor/experiments/issues/iteration-6/run.log
+Done: terça 16 jun 2026 22:45:24 WEST
