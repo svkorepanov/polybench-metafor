@@ -240,33 +240,164 @@ Result of Phase 2b: **30/30 MATCH, 0 MISMATCH, 0 crashes.**
 | jacobi-2d-imper | `do t` | `sizes(32)` — imperfect |
 | seidel-2d | `do t` | `sizes(32,32)` — perfect (t,i), non-triangular |
 
+## Phase 2c — Blind Pragma via `*.omp-tile.preproc.f90` (direct compilation)
+
+Phase 2c regenerated all 30 `*.omp-tile.preproc.f90` files with `!$omp tile sizes(32,32)`
+inserted unconditionally before **every** outermost scop `do` — no legality check of any kind.
+Files were compiled directly (not routed through `woven_code/`) using:
+
+```
+flang-22 -O3 -fopenmp -fopenmp-version=51 -DSMALL_DATASET -DPOLYBENCH_DUMP_ARRAYS
+```
+
+### Results
+
+| Outcome | Count | Benchmarks |
+|---|---|---|
+| Compile OK → MATCH | 9 | 2mm, 3mm, doitgen, gemm, mvt, symm, syr2k, syrk, floyd-warshall, fdtd-apml, seidel-2d |
+| Compile OK → CRASH | 1 | trmm |
+| Compile FAIL | 20 | all others |
+
+Full table: [`blind-tile-results.txt`](blind-tile-results.txt).
+
+### Three distinct failure modes
+
+#### Category A — "The SIZES clause has more entries than there are nested canonical loops" (10 benchmarks)
+
+Benchmarks: `correlation`, `covariance`, `atax`, `bicg`, `cholesky`, `gemver`, `gesummv`,
+`gramschmidt`, `trisolv`, `durbin`.
+
+`sizes(32,32)` requires two nested canonical loops directly below the directive. These
+benchmarks all have at least one outermost scop loop that is 1-dimensional — its body
+contains scalar statements or no inner `do` at all. Example (`atax`):
+
+```fortran
+!$omp tile sizes(32,32)    ← blind insertion
+do i = 1, n                ← body = one scalar assignment, no inner do
+  y(i) = 0.0
+end do
+```
+
+flang-22 counts one canonical loop, finds two SIZES entries → semantic error at compile
+time.
+
+#### Category B — "Canonical loop nest must be perfectly nested" (8 benchmarks)
+
+Benchmarks: `dynprog`, `lu`, `ludcmp`, `reg_detect`, `adi`, `fdtd-2d`, `jacobi-1d-imper`,
+`jacobi-2d-imper`.
+
+These benchmarks have an outermost loop (`do t`, `do k`, …) whose body is imperfect: it
+contains scalar assignments, array initialisations, or multiple independent inner nests.
+The OpenMP tile construct requires the outer body to consist only of the inner canonical
+loop. Example (`adi`):
+
+```fortran
+!$omp tile sizes(32,32)
+do t = 1, tsteps           ← body has 3 separate inner nests + scalar statements
+  do i = 2, n-1
+    ...
+  end do
+  do i = 2, n-1            ← second independent nest — not perfectly nested
+    ...
+  end do
+end do
+```
+
+`lu` and `ludcmp` also trigger a secondary error "Trip count must be computable and
+invariant" because once the perfect-nest check fails the compiler also rejects the
+triangular inner bounds (`do j = 1, i-1`).
+
+**Special case — `covariance`** hits both categories in one file: a 1D loop triggers
+"SIZES clause", and the triangular nest `do j1 = 1, m; do j2 = j1, m` triggers "Trip
+count not invariant" (`j2`'s lower bound `j1` references the outer variable).
+
+#### Category C — Runtime segfault, no compile error (1 benchmark: `trmm`)
+
+This is the most dangerous category: the compiler accepts the pragma without complaint,
+but the executable crashes at runtime. The structure is:
+
+```fortran
+!$omp tile sizes(32,32)
+do i = 2, ni          ← outer tile variable
+  do j = 1, ni        ← inner tile variable
+    do k = 1, i - 1   ← k's upper bound references the outer tile variable i
+      b(j,i) = b(j,i) + alpha * a(k,i) * b(k,j)
+    end do
+  end do
+end do
+```
+
+Tiling `(i, j)` reshuffles iteration order: `i` no longer advances monotonically within
+a tile. Inside the tile, `do k = 1, i-1` is evaluated with a tile-internal value of `i`,
+producing an invalid (possibly zero or negative) trip count for some orderings →
+out-of-bounds memory access → segfault.
+
+flang-22 cannot detect this at compile time because it checks only structural nesting
+geometry, not cross-level data-dependent bounds.
+
+### Why the 10 successful benchmarks are unaffected
+
+All 10 share the same three structural properties:
+
+1. **Perfect 2-level nest** — the outermost scop loop's body is exactly one inner `do`:
+   no scalar statements between outer `do` and inner `do`, none between inner `end do`
+   and outer `end do`.
+2. **Non-triangular immediate inner bounds** — the inner loop's bounds do not reference
+   the outer loop variable.
+3. **No depth-2+ bound reference** — no loop anywhere inside the inner body has bounds
+   that reference the outermost variable.
+
+These are exactly the three conditions `canTile()` checks in
+`fortran-transpiler/Fortran-JS/src-api/code/LoopTiling.ts`. Blind pragma insertion gives
+correct results only when the structure already satisfies all three checks — i.e., when
+the legality check would have said YES anyway.
+
+### The critical asymmetry
+
+flang-22 catches Category A and B at compile time but silently accepts Category C, which
+then crashes at runtime. No MISMATCH appears in this run — because a crash terminates
+execution before producing output to compare. If `trmm` had produced wrong output instead
+of crashing, it would have been an undetected silent correctness bug.
+
 ## Summary Table
 
-| | Phase 1 (transpiler + legality) | Phase 2 (OMP script, no legality) | Phase 2b (OMP per-file legality) |
-|---|---|---|---|
-| MATCH | **30** | 17 | **30** |
-| MISMATCH | 0 | **1** (`trmm`) | 0 |
-| MISSING (compile error) | 0 | **12** | 0 |
-| Runtime crash | 0 | 2 (`trmm`, `durbin`) | 0 |
-| Not transformed (correct skip) | 9 | 4 (regex miss) | 2 (`trmm`, `durbin` outer loop) |
+| | Phase 1 (transpiler + legality) | Phase 2 (OMP script, no legality) | Phase 2b (OMP per-file legality) | Phase 2c (blind `*.omp-tile`, direct compile) |
+|---|---|---|---|---|
+| MATCH | **30** | 17 | **30** | 9 |
+| MISMATCH | 0 | **1** (`trmm`) | 0 | 0 |
+| Compile FAIL | 0 | **12** | 0 | **20** |
+| Runtime crash | 0 | 0 | 0 | **1** (`trmm`) |
+| Compile OK total | 30 | 28 | 30 | 10 |
+| Not transformed (correct skip) | 9 | 4 (regex miss) | 2 (`trmm`, `durbin` outer) | — |
 
 ## Conclusion
 
 The hypothesis is confirmed and extended:
 
-1. **OMP pragma causes compile errors** for benchmarks with triangular bounds (Phase 2
-   script approach). The transpiler prevents this by detecting the same invariant at
-   analysis time via `canTile()`.
+1. **OMP pragma causes compile errors** for benchmarks with triangular bounds or imperfect
+   outer nests (Phases 2 and 2c). The transpiler prevents this by detecting the same
+   structural invariants at analysis time via `canTile()`. In Phase 2c (direct compilation
+   of `*.omp-tile.preproc.f90`), 20/30 benchmarks fail to compile — split across two root
+   causes: Category A (1D loops given `sizes(32,32)`) and Category B (imperfect outer
+   loops failing the perfect-nest requirement).
 
-2. **OMP pragma causes MISMATCH/crash** for `trmm` — a benchmark the transpiler handles
-   correctly by choosing a different (legal) loop pair. OMP always targets the outermost
-   loop, missing deeper-but-legal opportunities.
+2. **OMP pragma causes runtime crash** for `trmm` (Phase 2c). The pragma compiles cleanly
+   because flang-22 checks only structural nesting geometry, not cross-level data-dependent
+   bounds. At runtime, tiling the `(i, j)` pair invalidates the trip count of the inner
+   `do k = 1, i-1` loop, causing a segfault. This is the most dangerous failure mode:
+   no compile-time warning, no wrong-output MISMATCH — just a crash.
 
-3. **Per-file legitimacy analysis (Phase 2b)** achieves 30/30 MATCH by applying three
+3. **OMP pragma causes MISMATCH** for `trmm` in Phase 2 (script approach) where the
+   crash didn't manifest due to a different code path. The transpiler handles `trmm`
+   correctly by descending to the `(j, k)` pair, which satisfies `canTile()`.
+
+4. **Per-file legitimacy analysis (Phase 2b)** achieves 30/30 MATCH by applying three
    legality rules: imperfect-body detection, immediate triangular bound check, and
    depth-2+ outer-variable reference check. The third rule catches `trmm` and `durbin`
-   that the script-based approach missed.
+   that any script-based approach would miss.
 
-4. The transpiler's `canTile()` checks correspond directly to the rules in Phase 2b:
-   the transpiler does the same geometric analysis at the IR level, while Phase 2b
-   does it by hand-reading the source. Both prevent the same set of unsafe transformations.
+5. The transpiler's `canTile()` checks correspond directly to the three rules in Phase 2b:
+   the transpiler performs the same geometric analysis at the IR level that Phase 2b
+   performs by reading source. Both prevent the same set of unsafe transformations.
+   Blind pragma insertion — Phase 2c — fails on exactly the benchmarks where `canTile()`
+   would say NO, confirming that the legality check is necessary and sufficient.
