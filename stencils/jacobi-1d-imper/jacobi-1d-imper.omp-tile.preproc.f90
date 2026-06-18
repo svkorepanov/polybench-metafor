@@ -56,7 +56,7 @@
         integer :: i, t, j
       CONTINUE
       !DIR$ scop
-        !$omp tile sizes(32,32)
+        !$omp tile sizes(32)
         do t = 1, tsteps
           do i = 2, n - 1
             b(i) = 0.33333D0 * (a(i - 1) + a(i) + a(i + 1))

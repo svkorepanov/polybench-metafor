@@ -67,7 +67,7 @@ program covariance
             CONTINUE
       !DIR$ scop
       !       Determine mean of column vectors of input data matrix
-      !$omp tile sizes(32,32)
+      !$omp tile sizes(32)
       do j = 1, m
          mean(j) = 0.0d0
          do i = 1, n
@@ -83,7 +83,7 @@ program covariance
          end do
       end do
       !       Calculate the m * m covariance matrix.
-      !$omp tile sizes(32,32)
+      !$omp tile sizes(32)
       do j1 = 1, m
          do j2 = j1, m
             symmat(j2, j1) = 0.0d0
