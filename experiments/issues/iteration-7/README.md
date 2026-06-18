@@ -359,16 +359,78 @@ then crashes at runtime. No MISMATCH appears in this run — because a crash ter
 execution before producing output to compare. If `trmm` had produced wrong output instead
 of crashing, it would have been an undetected silent correctness bug.
 
+## Phase 2d — Per-File Size Correction
+
+After Phase 2c established the failure taxonomy, each of the 30 `*.omp-tile.preproc.f90`
+files was read individually and the pragma size was corrected according to three rules:
+
+**Rule 1 — Imperfect outer body** → `sizes(32)` (1D strip-mine). The outer loop body
+must be exactly one inner `do` for `sizes(32,32)` to be valid. Any scalar statement
+before, after, or between inner DOs makes the body imperfect.
+
+**Rule 2 — Triangular immediate inner bound** → `sizes(32)` (1D strip-mine). If the
+inner DO's bounds reference the outer variable (e.g. `do j = i+1, n` or `do j2 = j1, m`)
+then `sizes(32,32)` triggers "Trip count must be computable and invariant". `sizes(32)`
+is safe because the outer variable still advances sequentially within each tile.
+
+**Rule 3 — Any inner DO at depth ≥ 1 references the outer variable → remove pragma
+entirely.** Even `sizes(32)` causes a flang-22 code-generation crash when the tiled
+variable appears in a trip count of any nested DO anywhere in the body. This catches
+`trmm` (`do k = 1, i-1` at depth 2 references outer `i`) and `durbin`'s outer loop
+(`do i = 1, k-1` at depth 1 references outer `k`).
+
+### Changes per benchmark
+
+| Benchmark | Loop | Before | After | Reason |
+|---|---|---|---|---|
+| `correlation` | `do j` (mean) | `sizes(32,32)` | `sizes(32)` | Rule 1: scalar before/after inner do |
+| `correlation` | `do j` (stddev) | `sizes(32,32)` | `sizes(32)` | Rule 1: scalar before/after inner do |
+| `correlation` | `do i` (center) | `sizes(32,32)` | — | kept: perfect non-triangular |
+| `correlation` | `do j1` (symmat) | `sizes(32,32)` | `sizes(32)` | Rule 1+2: scalar before inner do + triangular `j2=j1+1,m` |
+| `covariance` | `do j` (mean) | `sizes(32,32)` | `sizes(32)` | Rule 1: scalar before/after inner do |
+| `covariance` | `do i` (center) | `sizes(32,32)` | — | kept: perfect non-triangular |
+| `covariance` | `do j1` (symmat) | `sizes(32,32)` | `sizes(32)` | Rule 2: triangular `j2=j1,m` |
+| `atax` | `do i` (init) | `sizes(32,32)` | `sizes(32)` | Rule 1: pure 1D (no inner do) |
+| `atax` | `do i` (matvec) | `sizes(32,32)` | `sizes(32)` | Rule 1: scalar + two inner dos |
+| `bicg` | `do i` (init) | `sizes(32,32)` | `sizes(32)` | Rule 1: pure 1D |
+| `bicg` | `do i` (bicg) | `sizes(32,32)` | `sizes(32)` | Rule 1: scalar before inner do |
+| `cholesky` | `do i` | `sizes(32,32)` | `sizes(32)` | Rule 1: scalars + multiple inner dos |
+| `gemver` | `do i` (z) | `sizes(32,32)` | `sizes(32)` | Rule 1: pure 1D |
+| `gemver` | other 3 `do i` | `sizes(32,32)` | — | kept: perfect non-triangular |
+| `gesummv` | `do i` | `sizes(32,32)` | `sizes(32)` | Rule 1: scalar before/after inner do |
+| `trisolv` | `do i` | `sizes(32,32)` | `sizes(32)` | Rule 1+2: scalar before/after + triangular `j=1,i-1` |
+| **`trmm`** | `do i = 2, ni` | `sizes(32,32)` | **removed** | Rule 3: `do k=1,i-1` at depth 2 references `i` |
+| **`durbin`** | `do k = 2, n` | `sizes(32,32)` | **removed** | Rule 3: `do i=1,k-1` at depth 1 references `k` |
+| `durbin` | `do i = 1, n` | `sizes(32,32)` | `sizes(32)` | Rule 1: pure 1D |
+| `dynprog` | `do iter` | `sizes(32,32)` | `sizes(32)` | Rule 1: multiple inner dos |
+| `gramschmidt` | `do k` | `sizes(32,32)` | `sizes(32)` | Rule 1: scalars + multiple inner dos |
+| `lu` | `do k` | `sizes(32,32)` | `sizes(32)` | Rule 1+2: two triangular inner dos |
+| `ludcmp` | all three `do i` | `sizes(32,32)` | `sizes(32)` | Rule 1+2: imperfect + triangular bounds |
+| `reg_detect` | `do t` | `sizes(32,32)` | `sizes(32)` | Rule 1: multiple inner dos |
+| `adi` | `do t` | `sizes(32,32)` | `sizes(32)` | Rule 1: multiple inner dos |
+| `fdtd-2d` | `do t` | `sizes(32,32)` | `sizes(32)` | Rule 1: multiple inner dos |
+| `jacobi-1d-imper` | `do t` | `sizes(32,32)` | `sizes(32)` | Rule 1: two inner dos |
+| `jacobi-2d-imper` | `do t` | `sizes(32,32)` | `sizes(32)` | Rule 1: two inner dos |
+
+### Result
+
+**30/30 compile, 30/30 MATCH, 0 MISMATCH, 0 crashes.**
+
+Rule 3 is the critical addition over Phase 2c: flang-22 crashes even with `sizes(32)` when
+the tiled variable appears anywhere in a nested trip count. No compile-time diagnostic is
+issued; the executable silently produces a segfault. Detecting this requires reading the
+full loop body, not just the immediate inner `do`.
+
 ## Summary Table
 
-| | Phase 1 (transpiler + legality) | Phase 2 (OMP script, no legality) | Phase 2b (OMP per-file legality) | Phase 2c (blind `*.omp-tile`, direct compile) |
-|---|---|---|---|---|
-| MATCH | **30** | 17 | **30** | 9 |
-| MISMATCH | 0 | **1** (`trmm`) | 0 | 0 |
-| Compile FAIL | 0 | **12** | 0 | **20** |
-| Runtime crash | 0 | 0 | 0 | **1** (`trmm`) |
-| Compile OK total | 30 | 28 | 30 | 10 |
-| Not transformed (correct skip) | 9 | 4 (regex miss) | 2 (`trmm`, `durbin` outer) | — |
+| | Phase 1 (transpiler + legality) | Phase 2 (OMP script, no legality) | Phase 2b (OMP per-file legality) | Phase 2c (blind `*.omp-tile`) | Phase 2d (corrected sizes) |
+|---|---|---|---|---|---|
+| MATCH | **30** | 17 | **30** | 9 | **30** |
+| MISMATCH | 0 | **1** (`trmm`) | 0 | 0 | 0 |
+| Compile FAIL | 0 | **12** | 0 | **20** | 0 |
+| Runtime crash | 0 | 0 | 0 | **1** (`trmm`) | 0 |
+| Compile OK total | 30 | 28 | 30 | 10 | **30** |
+| Pragma removed (safe skip) | 9 | 4 (regex miss) | 2 (`trmm`, `durbin` outer) | — | 2 (`trmm`, `durbin` outer) |
 
 ## Conclusion
 
@@ -381,23 +443,22 @@ The hypothesis is confirmed and extended:
    causes: Category A (1D loops given `sizes(32,32)`) and Category B (imperfect outer
    loops failing the perfect-nest requirement).
 
-2. **OMP pragma causes runtime crash** for `trmm` (Phase 2c). The pragma compiles cleanly
-   because flang-22 checks only structural nesting geometry, not cross-level data-dependent
-   bounds. At runtime, tiling the `(i, j)` pair invalidates the trip count of the inner
-   `do k = 1, i-1` loop, causing a segfault. This is the most dangerous failure mode:
-   no compile-time warning, no wrong-output MISMATCH — just a crash.
+2. **OMP pragma causes runtime crash** for `trmm` (Phase 2c, `sizes(32,32)`) and also
+   for both `trmm` and `durbin` when `sizes(32)` is used (Phase 2d, before Rule 3 fix).
+   flang-22 crashes whenever the tiled variable appears in any nested trip count, regardless
+   of whether the tiling is 1D or 2D. No compile-time diagnostic is issued — this is the
+   most dangerous failure mode.
 
-3. **OMP pragma causes MISMATCH** for `trmm` in Phase 2 (script approach) where the
-   crash didn't manifest due to a different code path. The transpiler handles `trmm`
-   correctly by descending to the `(j, k)` pair, which satisfies `canTile()`.
+3. **OMP pragma causes MISMATCH** for `trmm` in Phase 2 (script approach). The transpiler
+   handles `trmm` correctly by descending to the `(j, k)` pair, which satisfies `canTile()`.
 
-4. **Per-file legitimacy analysis (Phase 2b)** achieves 30/30 MATCH by applying three
-   legality rules: imperfect-body detection, immediate triangular bound check, and
-   depth-2+ outer-variable reference check. The third rule catches `trmm` and `durbin`
-   that any script-based approach would miss.
+4. **Per-file size correction (Phase 2d)** achieves 30/30 MATCH by applying three rules:
+   imperfect-body detection (→ `sizes(32)`), triangular immediate inner bound (→ `sizes(32)`),
+   and any nested trip count referencing the outer variable (→ remove pragma). The third
+   rule is not detectable without reading the full body — it matches exactly what Rule 2
+   of `canTile()` checks at the IR level.
 
-5. The transpiler's `canTile()` checks correspond directly to the three rules in Phase 2b:
-   the transpiler performs the same geometric analysis at the IR level that Phase 2b
-   performs by reading source. Both prevent the same set of unsafe transformations.
-   Blind pragma insertion — Phase 2c — fails on exactly the benchmarks where `canTile()`
-   would say NO, confirming that the legality check is necessary and sufficient.
+5. The transpiler's `canTile()` checks correspond directly to the rules in Phases 2b and 2d:
+   the transpiler performs the same geometric analysis at the IR level. Blind pragma
+   insertion — Phase 2c — fails on exactly the benchmarks where `canTile()` would say NO,
+   confirming that the legality check is necessary and sufficient.
