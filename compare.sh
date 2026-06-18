@@ -7,9 +7,9 @@ missing=0
 parallel_count=0
 
 echo "Output Comparison: Original vs. Woven (Metafor)"
-echo "--------------------------------------------------------------------------------------------"
-printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "Benchmark" "Status" "Transform?" "Result" "Orig Time" "Speedup"
-echo "--------------------------------------------------------------------------------------------"
+echo "-------------------------------------------------------------------------------------------------------"
+printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "Benchmark" "Status" "Transform?" "Result" "Orig Time" "Woven Time" "Speedup"
+echo "-------------------------------------------------------------------------------------------------------"
 
 # Function to extract the last number in a file (handles scientific notation like 1.2e-05)
 get_timer() {
@@ -48,7 +48,7 @@ while read -r woven_dir; do
     fi
 
     if [[ ! -f "$orig_file" || ! -f "$woven_file" ]]; then
-        printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "$bench_name" "SKIPPED" "$transform_status" "N/A" "-" "-"
+        printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "$bench_name" "SKIPPED" "$transform_status" "N/A" "-" "-" "-"
         ((missing++))
         continue
     fi
@@ -74,10 +74,10 @@ while read -r woven_dir; do
         ((mismatches++))
     fi
 
-    printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "$bench_name" "OK" "$transform_status" "$res_msg" "$t_orig" "$speedup"
+    printf "%-15s | %-10s | %-10s | %-10s | %-10s | %-10s | %-8s\n" "$bench_name" "OK" "$transform_status" "$res_msg" "$t_orig" "$t_woven" "$speedup"
 
 done < <(find . -type d -name "woven_code")
 
-echo "--------------------------------------------------------------------------------------------"
+echo "-------------------------------------------------------------------------------------------------------"
 echo "Final Results: $matches Matches (ignoring timer), $mismatches Mismatches, $missing Missing."
 echo "Total Transformed: $parallel_count"
