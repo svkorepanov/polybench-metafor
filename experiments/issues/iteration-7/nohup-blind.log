@@ -1,0 +1,82 @@
+=== Blind ! tile sizes(32,32) experiment ===
+Rule: sizes(32,32) before EVERY outermost scop DO — no legality check
+Flags: -O3 -fopenmp -fopenmp-version=51 -Wno-ignored-directive -L/usr/lib/llvm-20/lib -DSMALL_DATASET -DPOLYBENCH_DUMP_ARRAYS
+Started: Wed Jun 17 22:50:54 UTC 2026
+
+Compiling fpolybench.c...
+Done.
+
+Benchmark          | Compile  | Execute  | Compare    | Notes
+────────────────────────────────────────────────────────────────────────────────
+correlation        | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/datamining/c
+  correlation: compile=FAIL exec=N/A compare=N/A
+covariance         | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/datamining/c
+  covariance: compile=FAIL exec=N/A compare=N/A
+2mm                | OK       | OK       | MATCH      | 
+  2mm: compile=OK exec=OK compare=MATCH
+3mm                | OK       | OK       | MATCH      | 
+  3mm: compile=OK exec=OK compare=MATCH
+atax               | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+  atax: compile=FAIL exec=N/A compare=N/A
+bicg               | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+  bicg: compile=FAIL exec=N/A compare=N/A
+cholesky           | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+  cholesky: compile=FAIL exec=N/A compare=N/A
+doitgen            | OK       | OK       | MATCH      | 
+  doitgen: compile=OK exec=OK compare=MATCH
+gemm               | OK       | OK       | MATCH      | 
+  gemm: compile=OK exec=OK compare=MATCH
+gemver             | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+  gemver: compile=FAIL exec=N/A compare=N/A
+gesummv            | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+  gesummv: compile=FAIL exec=N/A compare=N/A
+mvt                | OK       | OK       | MATCH      | 
+  mvt: compile=OK exec=OK compare=MATCH
+symm               | OK       | OK       | MATCH      | 
+  symm: compile=OK exec=OK compare=MATCH
+syr2k              | OK       | OK       | MATCH      | 
+  syr2k: compile=OK exec=OK compare=MATCH
+syrk               | OK       | OK       | MATCH      | 
+  syrk: compile=OK exec=OK compare=MATCH
+trisolv            | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+  trisolv: compile=FAIL exec=N/A compare=N/A
+./run-blind-tile.sh: line 146: 429949 Segmentation fault      timeout 30 "$woven_exe" > "$woven_out" 2>&1
+trmm               | OK       | CRASH    | N/A        | 
+  trmm: compile=OK exec=CRASH compare=N/A
+durbin             | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+  durbin: compile=FAIL exec=N/A compare=N/A
+dynprog            | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+  dynprog: compile=FAIL exec=N/A compare=N/A
+gramschmidt        | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+  gramschmidt: compile=FAIL exec=N/A compare=N/A
+lu                 | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+  lu: compile=FAIL exec=N/A compare=N/A
+ludcmp             | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+  ludcmp: compile=FAIL exec=N/A compare=N/A
+floyd-warshall     | OK       | OK       | MATCH      | 
+  floyd-warshall: compile=OK exec=OK compare=MATCH
+reg_detect         | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/medley/reg_d
+  reg_detect: compile=FAIL exec=N/A compare=N/A
+adi                | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/stencils/adi
+  adi: compile=FAIL exec=N/A compare=N/A
+fdtd-2d            | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/stencils/fdt
+  fdtd-2d: compile=FAIL exec=N/A compare=N/A
+fdtd-apml          | OK       | OK       | MATCH      | 
+  fdtd-apml: compile=OK exec=OK compare=MATCH
+jacobi-1d-imper    | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/stencils/jac
+  jacobi-1d-imper: compile=FAIL exec=N/A compare=N/A
+jacobi-2d-imper    | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/stencils/jac
+  jacobi-2d-imper: compile=FAIL exec=N/A compare=N/A
+seidel-2d          | OK       | OK       | MATCH      | 
+  seidel-2d: compile=OK exec=OK compare=MATCH
+────────────────────────────────────────────────────────────────────────────────
+
+Compile OK   : 12 / 30
+Compile FAIL : 18 / 30
+MATCH        : 11
+MISMATCH     : 0
+CRASH        : 1
+
+Results : /root/polybench-metafor/experiments/issues/iteration-7/blind-tile-results.txt
+Log     : /root/polybench-metafor/experiments/issues/iteration-7/blind-tile.log
+Done    : Wed Jun 17 22:51:36 UTC 2026

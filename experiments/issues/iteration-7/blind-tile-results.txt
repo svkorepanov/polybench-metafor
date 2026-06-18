@@ -1,0 +1,39 @@
+Benchmark          | Compile  | Execute  | Compare    | Notes
+────────────────────────────────────────────────────────────────────────────────
+correlation        | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/datamining/c
+covariance         | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/datamining/c
+2mm                | OK       | OK       | MATCH      | 
+3mm                | OK       | OK       | MATCH      | 
+atax               | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+bicg               | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+cholesky           | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+doitgen            | OK       | OK       | MATCH      | 
+gemm               | OK       | OK       | MATCH      | 
+gemver             | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+gesummv            | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+mvt                | OK       | OK       | MATCH      | 
+symm               | OK       | OK       | MATCH      | 
+syr2k              | OK       | OK       | MATCH      | 
+syrk               | OK       | OK       | MATCH      | 
+trisolv            | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+trmm               | OK       | CRASH    | N/A        | 
+durbin             | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+dynprog            | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+gramschmidt        | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+lu                 | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+ludcmp             | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/linear-algeb
+floyd-warshall     | OK       | OK       | MATCH      | 
+reg_detect         | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/medley/reg_d
+adi                | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/stencils/adi
+fdtd-2d            | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/stencils/fdt
+fdtd-apml          | OK       | OK       | MATCH      | 
+jacobi-1d-imper    | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/stencils/jac
+jacobi-2d-imper    | FAIL     | N/A      | N/A        | Semantic errors in /root/polybench-metafor/stencils/jac
+seidel-2d          | OK       | OK       | MATCH      | 
+────────────────────────────────────────────────────────────────────────────────
+
+Compile OK   : 12 / 30
+Compile FAIL : 18 / 30
+MATCH        : 11
+MISMATCH     : 0
+CRASH        : 1
