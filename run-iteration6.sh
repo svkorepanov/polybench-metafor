@@ -40,9 +40,6 @@ check() {
 check "flang-22 installed"        flang-22 --version
 check "clang-22 installed"        clang-22 --version
 check "java 21+ installed"        bash -c 'java -version 2>&1 | grep -qE "version \"(2[1-9]|[3-9][0-9])\."'
-# check "node 22 via NVM"           bash -c \
-#     'export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" \
-#      && nvm use 22 &>/dev/null && node --version | grep -q "^v22\."'
 check "node 22 installed"         bash -c 'node --version | grep -q "^v22\."'
 check "fortran-transpiler built"  test -f "$TRANSPILER_JS/code/index.js"
 check "java-binaries present"     test -f "$TRANSPILER_JS/java-binaries/bin/FortranWeaver"
