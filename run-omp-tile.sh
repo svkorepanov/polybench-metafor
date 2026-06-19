@@ -7,7 +7,7 @@ PREPROCESS_SCRIPT="$UTILITIES_DIR/create_pped_version.sh"
 FC="flang-22"
 CC="clang-22"
 PARGS="-I $UTILITIES_DIR -DLARGE_DATASET -DPOLYBENCH_TIME"
-FFLAGS="-O3 -fopenmp -Wno-ignored-directive -L/usr/lib/llvm-20/lib"
+FFLAGS="-O3 -fopenmp -fopenmp-version=51 -Wno-ignored-directive -L/usr/lib/llvm-20/lib"
 CFLAGS="-O3 -fopenmp -I/usr/lib/gcc/x86_64-linux-gnu/15/include"
 
 cd "$ROOT_DIR"
