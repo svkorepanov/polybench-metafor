@@ -56,6 +56,34 @@ while IFS= read -r f; do
     "./$exe" > "$output" 2>&1 || echo "  [!] runtime error: $bench"
 done < <(find . -name "*.omp-tile.F90" | sort)
 
+# ── ORIGINAL: preprocess ────────────────────────────────────────────────────
+echo "=== Preprocessing original .F90 (for tilingGeneric) ==="
+while IFS= read -r f; do
+    bench_dir=$(dirname "$f")
+    bench=$(basename "$bench_dir")
+    orig_f90="$bench_dir/$bench.F90"
+    echo "  $bench"
+    bash "$UTILITIES_DIR/create_pped_version.sh" "$orig_f90" "$PARGS" \
+        || echo "  [!] preprocess failed: $bench"
+done < <(find . -name "*.omp-tile.F90" | sort)
+
+# ── ORIGINAL: apply tilingGeneric ───────────────────────────────────────────
+echo "=== Applying tilingGeneric (transpiler) ==="
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && nvm use 22
+TRANSPILER_ROOT="$(cd "$ROOT_DIR/../fortran-transpiler/Fortran-JS" && pwd)"
+TRANSFORM_SCRIPT="api/examples/tilingGeneric.js"
+
+while IFS= read -r f; do
+    bench_dir=$(dirname "$f")
+    bench=$(basename "$bench_dir")
+    abs_preproc=$(realpath "$bench_dir/$bench.preproc.f90")
+    echo "  $bench"
+    (cd "$TRANSPILER_ROOT" && npx metafor classic "$TRANSFORM_SCRIPT" \
+        -p "$abs_preproc" -o "$bench_dir" 2>&1) \
+        || echo "  [!] transpiler failed: $bench"
+done < <(find . -name "*.omp-tile.F90" | sort)
+
 # ── WOVEN_CODE: compile ──────────────────────────────────────────────────────
 echo "=== Compiling woven_code (tilingGeneric) ==="
 while IFS= read -r woven_dir; do
