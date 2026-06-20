@@ -109,6 +109,9 @@ while IFS= read -r woven_dir; do
 done < <(find . -type d -name "woven_code" | sort)
 
 # ── Comparison table ─────────────────────────────────────────────────────────
+TABLE_OUT="$ROOT_DIR/results-omp-tile.txt"
+
+{
 echo ""
 echo "=== tilingGeneric (transpiler) vs omp-tile (manual) ==="
 printf "%-18s | %-12s | %-12s | %-13s | %-13s | %-14s\n" \
@@ -146,3 +149,6 @@ while IFS= read -r f; do
 done < <(find . -name "*.omp-tile.F90" | sort)
 
 echo "============================================================================================"
+} | tee "$TABLE_OUT"
+
+echo "Table saved to: $TABLE_OUT"
