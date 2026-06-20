@@ -1,0 +1,36 @@
+
+=== Array dump comparison: omp-tile (manual) vs tilingGeneric (transpiler) ===
+Benchmark          | OMP-Tile dump  | Woven dump    
+------------------------------------------------------------
+correlation        | ok             | MATCH         
+covariance         | ok             | MISMATCH      
+2mm                | ok             | MATCH         
+3mm                | ok             | MATCH         
+atax               | ok             | MATCH         
+bicg               | ok             | MATCH         
+cholesky           | ok             | MATCH         
+doitgen            | ok             | MATCH         
+gemm               | ok             | MATCH         
+gemver             | ok             | MATCH         
+gesummv            | ok             | MATCH         
+mvt                | ok             | MATCH         
+symm               | ok             | MATCH         
+syr2k              | ok             | MATCH         
+syrk               | ok             | MATCH         
+trisolv            | ok             | MATCH         
+trmm               | ok             | MISMATCH      
+durbin             | ok             | MATCH         
+dynprog            | ok             | MISMATCH      
+gramschmidt        | ok             | MATCH         
+lu                 | ok             | MATCH         
+ludcmp             | ok             | MATCH         
+floyd-warshall     | ok             | MATCH         
+reg_detect         | ok             | MISMATCH      
+adi                | ok             | MISMATCH      
+fdtd-2d            | ok             | MISMATCH      
+fdtd-apml          | skipped        | skipped       
+jacobi-1d-imper    | ok             | MATCH         
+jacobi-2d-imper    | ok             | MATCH         
+seidel-2d          | ok             | MATCH         
+============================================================
+Results: 23 MATCH, 6 MISMATCH, 0 missing
