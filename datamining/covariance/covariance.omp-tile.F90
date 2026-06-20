@@ -106,6 +106,7 @@ program covariance
       end do
 
       !       Center the column vectors.
+      !$omp tile sizes(32,32)
       do i = 1, _pb_n
          do j = 1, _pb_m
             dat(j, i) = dat(j, i) - mean(j)
@@ -113,6 +114,7 @@ program covariance
       end do
 
       !       Calculate the m * m covariance matrix.
+      !$omp tile sizes(32,32)
       do j1 = 1, _pb_m
          do j2 = j1, _pb_m
             symmat(j2, j1) = 0.0d0

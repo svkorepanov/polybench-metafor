@@ -95,6 +95,7 @@ program trmm
       integer :: i, j, k
 
       !$pragma scop
+      !$omp tile sizes(32,32)
       do i = 2, _pb_ni
          do j = 1, _pb_ni
             do k = 1, i - 1

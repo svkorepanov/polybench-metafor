@@ -107,6 +107,7 @@ program doitgen
       integer :: r, s, p, q
 
       !$pragma scop
+      !$omp tile sizes(32,32)
       do r = 1, _pb_nr
          do q = 1, _pb_nq
             do p = 1, _pb_np

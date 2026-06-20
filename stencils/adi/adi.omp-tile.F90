@@ -99,6 +99,7 @@
 
 !$pragma scop
         do t = 1, _PB_TSTEPS
+          !$omp tile sizes(32,32)
           do i1 = 1, _PB_N
             do i2 = 2, _PB_N
               x(i2, i1) = x(i2, i1) - ((x(i2 - 1, i1) * a(i2, i1)) / &
@@ -112,6 +113,7 @@
             x(_PB_N, i1) = x(_PB_N, i1) / b(_PB_N, i1)
           end do
 
+          !$omp tile sizes(32,32)
           do i1 = 1, _PB_N 
             do i2 = 1, _PB_N - 2
               x(_PB_N - i2, i1) = (x(_PB_N - i2, i1) - &
@@ -121,6 +123,7 @@
             end do
           end do
 
+          !$omp tile sizes(32,32)
           do i1 = 2, _PB_N 
             do i2 = 1, _PB_N 
               x(i2, i1) = x(i2, i1) - x(i2, i1 - 1) * a(i2, i1) / &
@@ -135,6 +138,7 @@
             x(i2, _PB_N) = x(i2, _PB_N) / b(i2, _PB_N)
           end do
 
+          !$omp tile sizes(32,32)
           do i1 = 1, _PB_N - 2
             do i2 = 1, _PB_N
               x(i2, _PB_N - i1) = (x(i2, _PB_N - i1) - &

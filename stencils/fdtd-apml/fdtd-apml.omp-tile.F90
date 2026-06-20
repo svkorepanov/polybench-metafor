@@ -192,6 +192,7 @@
         integer :: ix, iy, iz
 
 !$pragma scop
+        !$omp tile sizes(32,32)
         do iz = 1, _PB_CZ
           do iy = 1, _PB_CYM 
             do ix = 1, _PB_CXM 

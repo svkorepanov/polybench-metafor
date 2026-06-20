@@ -89,6 +89,7 @@
           do j = k + 1, _PB_N
             a(j, k) = a(j, k) / a(k, k)
           end do
+          !$omp tile sizes(32,32)
           do i = k + 1, _PB_N
             do j = k + 1, _PB_N
               a(j, i) = a(j, i) - (a(k, i) * a(j, k))

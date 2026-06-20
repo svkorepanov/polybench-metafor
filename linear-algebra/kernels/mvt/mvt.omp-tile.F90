@@ -110,11 +110,13 @@
         integer :: i, j
 
 !$pragma scop
+        !$omp tile sizes(32,32)
         do i = 1, _PB_N
           do j = 1, _PB_N
             x1(i) = x1(i) + (a(j, i) * y1(j))
           end do
         end do
+        !$omp tile sizes(32,32)
         do i = 1, _PB_N
           do j = 1, _PB_N 
             x2(i) = x2(i) + (a(i, j) * y2(j))

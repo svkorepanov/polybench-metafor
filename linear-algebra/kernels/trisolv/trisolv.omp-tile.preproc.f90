@@ -67,7 +67,6 @@ program trisolv
       integer :: i, j
             CONTINUE
       !DIR$ scop
-      !$omp tile sizes(32)
       do i = 1, n
          x(i) = c(i)
          do j = 1, i - 1

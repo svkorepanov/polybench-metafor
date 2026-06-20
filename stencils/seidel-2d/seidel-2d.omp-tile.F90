@@ -84,6 +84,7 @@
         integer :: i, t, j
 
 !$pragma scop
+        !$omp tile sizes(32,32)
         do t = 1, _PB_TSTEPS
           do i = 2, _PB_N - 1
             do j = 2, _PB_N - 1

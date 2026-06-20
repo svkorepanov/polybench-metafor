@@ -128,6 +128,7 @@
         end do
 
 !       Center and reduce the column vectors.
+        !$omp tile sizes(32,32)
         do i = 1, _PB_N
           do j = 1, _PB_M
             dat(j, i) = dat(j, i) - mean(j)

@@ -143,11 +143,13 @@ program gemver
       integer :: i, j
 
       !$pragma scop
+      !$omp tile sizes(32,32)
       do i = 1, _pb_n
          do j = 1, _pb_n
             a(j, i) = a(j, i) + (u1(i) * v1(j)) + (u2(i) * v2(j))
          end do
       end do
+      !$omp tile sizes(32,32)
       do i = 1, _pb_n
          do j = 1, _pb_n
             x(i) = x(i) + (beta * a(i, j) * y(j))
@@ -156,6 +158,7 @@ program gemver
       do i = 1, _pb_n
          x(i) = x(i) + z(i)
       end do
+      !$omp tile sizes(32,32)
       do i = 1, _pb_n
          do j = 1, _pb_n
             w(i) = w(i) + (alpha * a(j, i) * x(j))

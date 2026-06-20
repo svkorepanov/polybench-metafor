@@ -90,12 +90,14 @@
         output = 0
 
         do iter = 1, _PB_TSTEPS
+          !$omp tile sizes(32,32)
           do i = 1, _PB_LENGTH
             do j = 1, _PB_LENGTH
               c(j, i) = 0
             end do
           end do
 
+        !$omp tile sizes(32,32)
           do i = 1, _PB_LENGTH - 1
             do j = i + 1, _PB_LENGTH 
               sumC(i, j, i) = 0

@@ -133,6 +133,7 @@
 
 !$pragma scop
         ! E := A*B
+      !$omp tile sizes(32,32)
         do i = 1, _PB_NI
           do j = 1, _PB_NJ
             e(j,i) = 0.0
@@ -143,6 +144,7 @@
         end do
 
         ! F := C*D
+      !$omp tile sizes(32,32)
         do i = 1, _PB_NJ
           do j = 1, _PB_NL
             f(j,i) = 0.0
@@ -153,6 +155,7 @@
         end do
 
         ! G := E*F
+      !$omp tile sizes(32,32)
         do i = 1, _PB_NI
           do j = 1, _PB_NL
             g(j,i) = 0.0

@@ -101,11 +101,13 @@
         integer :: i, j, k
 
 !$pragma scop
+        !$omp tile sizes(32,32)
         do i = 1, _PB_NI
           do j = 1, _PB_NI
             c(j, i) = c(j, i) * beta
           end do
         end do
+        !$omp tile sizes(32,32)
         do i = 1, _PB_NI
           do j = 1, _PB_NI
             do k = 1, _PB_NJ

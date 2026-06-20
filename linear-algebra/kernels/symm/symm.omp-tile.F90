@@ -108,6 +108,7 @@
         integer :: i, j, k
 
 !$pragma scop
+      !$omp tile sizes(32,32)
         do i = 1, _PB_NI
           do j = 1, _PB_NJ
             acc = 0.0D0

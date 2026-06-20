@@ -101,6 +101,7 @@ program regdetect
 
       !$pragma scop
       do t = 1, _pb_niter
+        !$omp tile sizes(32,32)
          do j = 1, _pb_maxgrid
             do i = j, _pb_maxgrid
                do cnt = 1, _pb_length
@@ -109,6 +110,7 @@ program regdetect
             end do
          end do
 
+        !$omp tile sizes(32,32)
          do j = 1, _pb_maxgrid
             do i = j, _pb_maxgrid
                sumdiff(1, i, j) = diff(1, i, j)
@@ -124,6 +126,7 @@ program regdetect
             path(i, 1) = mean(i, 1)
          end do
 
+        !$omp tile sizes(32,32)
          do j = 2, _pb_maxgrid
             do i = j, _pb_maxgrid
                path(i, j) = path(i - 1, j - 1) + mean(i, j)
