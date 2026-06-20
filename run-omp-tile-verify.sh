@@ -73,10 +73,11 @@ TRANSFORM_SCRIPT="api/examples/tilingGeneric.js"
 while IFS= read -r f; do
     bench_dir=$(dirname "$f")
     bench=$(basename "$bench_dir")
-    abs_preproc=$(realpath "$bench_dir/$bench.preproc.f90")
+    abs_bench_dir=$(realpath "$bench_dir")
+    abs_preproc="$abs_bench_dir/$bench.preproc.f90"
     echo "  $bench"
     (cd "$TRANSPILER_ROOT" && npx metafor classic "$TRANSFORM_SCRIPT" \
-        -p "$abs_preproc" -o "$bench_dir" 2>&1) \
+        -p "$abs_preproc" -o "$abs_bench_dir" 2>&1) \
         || echo "  [!] transpiler failed: $bench"
 done < <(find . -name "*.omp-tile.F90" | sort)
 
