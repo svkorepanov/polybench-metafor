@@ -62,11 +62,11 @@ PROGRAM TRMM
       INTEGER :: i, j, k
       continue
       !DIR$ scop
-      DO ii = 2, ni, 32
+      DO i = 2, ni
       DO jj = 1, ni, 32
-      DO i = ii, MIN(ii + 32 - 1, ni)
+      DO kk = 1, i - 1, 32
       DO j = jj, MIN(jj + 32 - 1, ni)
-      DO k = 1, i - 1
+      DO k = kk, MIN(kk + 32 - 1, i - 1)
       b(j, i) = b(j, i) + (alpha * a(k, i) * b(k, j))
       
       END DO

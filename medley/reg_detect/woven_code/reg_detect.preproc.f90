@@ -70,11 +70,11 @@ PROGRAM REGDETECT
       continue
       !DIR$ scop
       DO t = 1, niter
-      DO jj = 1, maxgrid, 32
+      DO j = 1, maxgrid
       DO ii = j, maxgrid, 32
-      DO j = jj, MIN(jj + 32 - 1, maxgrid)
+      DO cntcnt = 1, length, 32
       DO i = ii, MIN(ii + 32 - 1, maxgrid)
-      DO cnt = 1, length
+      DO cnt = cntcnt, MIN(cntcnt + 32 - 1, length)
       diff(cnt, i, j) = sumtang(i, j)
       
       END DO
@@ -86,10 +86,8 @@ PROGRAM REGDETECT
       END DO
       
       END DO
-      DO jj = 1, maxgrid, 32
-      DO ii = j, maxgrid, 32
-      DO j = jj, MIN(jj + 32 - 1, maxgrid)
-      DO i = ii, MIN(ii + 32 - 1, maxgrid)
+      DO j = 1, maxgrid
+      DO i = j, maxgrid
       sumdiff(1, i, j) = diff(1, i, j)
       DO cnt = 2, length
       sumdiff(cnt, i, j) = sumdiff(cnt - 1, i, j) + diff(cnt, i, j)
@@ -100,23 +98,13 @@ PROGRAM REGDETECT
       END DO
       
       END DO
-      
-      END DO
-      
-      END DO
       DO i = 1, maxgrid
       path(i, 1) = mean(i, 1)
       
       END DO
-      DO jj = 2, maxgrid, 32
-      DO ii = j, maxgrid, 32
-      DO j = jj, MIN(jj + 32 - 1, maxgrid)
-      DO i = ii, MIN(ii + 32 - 1, maxgrid)
+      DO j = 2, maxgrid
+      DO i = j, maxgrid
       path(i, j) = path(i - 1, j - 1) + mean(i, j)
-      
-      END DO
-      
-      END DO
       
       END DO
       

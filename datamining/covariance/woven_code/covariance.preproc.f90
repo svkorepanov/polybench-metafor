@@ -87,20 +87,14 @@ PROGRAM COVARIANCE
       END DO
       
       END DO
-      DO j1j1 = 1, m, 32
-      DO j2j2 = j1, m, 32
-      DO j1 = j1j1, MIN(j1j1 + 32 - 1, m)
-      DO j2 = j2j2, MIN(j2j2 + 32 - 1, m)
+      DO j1 = 1, m
+      DO j2 = j1, m
       symmat(j2, j1) = 0.0d0
       DO i = 1, n
       symmat(j2, j1) = symmat(j2, j1) + (dat(j1, i) * dat(j2, i))
       
       END DO
       symmat(j1, j2) = symmat(j2, j1)
-      
-      END DO
-      
-      END DO
       
       END DO
       

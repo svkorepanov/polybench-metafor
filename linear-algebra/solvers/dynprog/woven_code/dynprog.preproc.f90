@@ -67,20 +67,14 @@ PROGRAM DYNPROG
       END DO
       
       END DO
-      DO ii = 1, length - 1, 32
-      DO jj = i + 1, length, 32
-      DO i = ii, MIN(ii + 32 - 1, length - 1)
-      DO j = jj, MIN(jj + 32 - 1, length)
+      DO i = 1, length - 1
+      DO j = i + 1, length
       sumc(i, j, i) = 0
       DO k = i + 1, j - 1
       sumc(k, j, i) = sumc(k - 1, j, i) + c(k, i) + c(j, k)
       
       END DO
       c(j, i) = sumc(j - 1, j, i) + w(j, i)
-      
-      END DO
-      
-      END DO
       
       END DO
       
