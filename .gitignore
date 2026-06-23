@@ -4,3 +4,4 @@
 *.output.txt
 woven_code/
 all_transformed_code/
+.DS_Store
