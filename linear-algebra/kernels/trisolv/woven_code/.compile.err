@@ -1,0 +1,5 @@
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in /root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90
+/root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90:67:18: error: The SIZES clause has more entries than there are nested canonical loops.
+        !$omp tile sizes(32,32)
+                   ^^^^^^^^^^^^

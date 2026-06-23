@@ -1,0 +1,8 @@
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in /root/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90
+/root/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90:57:15: error: Canonical loop nest must be perfectly nested.
+          !$omp tile sizes(32,32)
+                ^^^^
+/root/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90:57:15: error: Trip count must be computable and invariant
+          !$omp tile sizes(32,32)
+                ^^^^

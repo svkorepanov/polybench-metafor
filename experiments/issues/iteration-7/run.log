@@ -1,0 +1,1003 @@
+=== Setup check: Wed Jun 17 18:46:41 UTC 2026 ===
+  [OK]   flang-22 installed
+  [OK]   clang-22 installed
+  [OK]   java 21+ installed
+  [OK]   node 22 installed
+  [OK]   fortran-transpiler built
+  [OK]   java-binaries present
+All setup checks passed.
+
+=== Checking flang-22 ! tile support ===
+  ! tile: SUPPORTED (flang-22 -fopenmp-version=51)
+  ! unroll: not supported by this flang-22 version — Phase 3 skipped
+
+Patching preproc.sh + compile.sh for SMALL_DATASET + POLYBENCH_DUMP_ARRAYS...
+Done. Current PARGS:
+PARGS="-I $UTILITIES_DIR -DSMALL_DATASET -DPOLYBENCH_DUMP_ARRAYS"
+PARGS="-DSMALL_DATASET -DPOLYBENCH_DUMP_ARRAYS"
+
+Removing stale woven_code/ directories...
+Done.
+
+=== Preprocessing (SMALL_DATASET + POLYBENCH_DUMP_ARRAYS) ===
+Processing ./datamining/correlation/correlation.F90...
+Processing ./datamining/covariance/covariance.F90...
+Processing ./linear-algebra/kernels/2mm/2mm.F90...
+Processing ./linear-algebra/kernels/3mm/3mm.F90...
+Processing ./linear-algebra/kernels/atax/atax.F90...
+Processing ./linear-algebra/kernels/bicg/bicg.F90...
+Processing ./linear-algebra/kernels/cholesky/cholesky.F90...
+Processing ./linear-algebra/kernels/doitgen/doitgen.F90...
+Processing ./linear-algebra/kernels/gemm/gemm.F90...
+Processing ./linear-algebra/kernels/gemver/gemver.F90...
+Processing ./linear-algebra/kernels/gesummv/gesummv.F90...
+Processing ./linear-algebra/kernels/mvt/mvt.F90...
+Processing ./linear-algebra/kernels/symm/symm.F90...
+Processing ./linear-algebra/kernels/syr2k/syr2k.F90...
+Processing ./linear-algebra/kernels/syrk/syrk.F90...
+Processing ./linear-algebra/kernels/trisolv/trisolv.F90...
+Processing ./linear-algebra/kernels/trmm/trmm.F90...
+Processing ./linear-algebra/solvers/durbin/durbin.F90...
+Processing ./linear-algebra/solvers/dynprog/dynprog.F90...
+Processing ./linear-algebra/solvers/gramschmidt/gramschmidt.F90...
+Processing ./linear-algebra/solvers/lu/lu.F90...
+Processing ./linear-algebra/solvers/ludcmp/ludcmp.F90...
+Processing ./medley/floyd-warshall/floyd-warshall.F90...
+Processing ./medley/reg_detect/reg_detect.F90...
+Processing ./stencils/adi/adi.F90...
+Processing ./stencils/fdtd-2d/fdtd-2d.F90...
+Processing ./stencils/fdtd-apml/fdtd-apml.F90...
+Processing ./stencils/jacobi-1d-imper/jacobi-1d-imper.F90...
+Processing ./stencils/jacobi-2d-imper/jacobi-2d-imper.F90...
+Processing ./stencils/seidel-2d/seidel-2d.F90...
+
+=== Compiling originals ===
+Step 1: Compiling C utilities...
+In file included from /root/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+5 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./medley/reg_detect/reg_detect.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/symm/symm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/atax/atax.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/lu/lu.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/seidel-2d/seidel-2d.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/adi/adi.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./datamining/correlation/correlation.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./datamining/covariance/covariance.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+------------------------------------------------
+Done! Compiled 30 benchmarks.
+
+=== Executing originals ===
+Running Suite...
+------------------------------------------------
+Processing: reg_detect
+Processing: floyd-warshall
+Processing: gemm
+Processing: gemver
+Processing: trisolv
+Processing: cholesky
+Processing: doitgen
+Processing: syr2k
+Processing: symm
+Processing: atax
+Processing: 2mm
+Processing: bicg
+Processing: trmm
+Processing: gesummv
+Processing: mvt
+Processing: 3mm
+Processing: syrk
+Processing: dynprog
+Processing: lu
+Processing: durbin
+Processing: gramschmidt
+Processing: ludcmp
+Processing: seidel-2d
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: fdtd-2d
+Processing: fdtd-apml
+Processing: correlation
+Processing: covariance
+------------------------------------------------
+Done. Captured 30 benchmark results. Skipped (blacklisted): 0.
+
+============================================================
+Phase 1: tilingGeneric (control — canTile() legality check active)
+Started: Wed Jun 17 18:47:07 UTC 2026
+============================================================
+Now using node v22.22.3 (npm v10.9.8)
+Starting fortran-transpiler (transform: tilingGeneric)
+Transpiler root: /root/fortran-transpiler/Fortran-JS
+------------------------------------------------
+Processing: ./medley/reg_detect/reg_detect.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_reg_detect
+Writing file '/root/polybench-metafor/medley/reg_detect/woven_code/reg_detect.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/reg_detect/woven_code
+  [OK] reg_detect.preproc.f90
+------------------------------------------------
+Processing: ./medley/floyd-warshall/floyd-warshall.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_floyd_warshall
+Writing file '/root/polybench-metafor/medley/floyd-warshall/woven_code/floyd-warshall.preproc.f90'
+Output files written to folder /root/polybench-metafor/medley/floyd-warshall/woven_code
+  [OK] floyd-warshall.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemm/gemm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_gemm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemm/woven_code/gemm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemm/woven_code
+  [OK] gemm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gemver/gemver.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_gemver
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gemver/woven_code/gemver.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gemver/woven_code
+  [OK] gemver.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trisolv/trisolv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_trisolv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trisolv/woven_code
+  [OK] trisolv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/cholesky/cholesky.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_cholesky
+Writing file '/root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/cholesky/woven_code
+  [OK] cholesky.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/doitgen/doitgen.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[tilingGeneric] TILED (tile=32): kernel_doitgen
+Writing file '/root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code/doitgen.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/doitgen/woven_code
+  [OK] doitgen.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syr2k/syr2k.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_syr2k
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code/syr2k.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syr2k/woven_code
+  [OK] syr2k.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/symm/symm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_symm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/symm/woven_code/symm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/symm/woven_code
+  [OK] symm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/atax/atax.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_atax
+Writing file '/root/polybench-metafor/linear-algebra/kernels/atax/woven_code/atax.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/atax/woven_code
+  [OK] atax.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/2mm/2mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_2mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/2mm/woven_code/2mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/2mm/woven_code
+  [OK] 2mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/bicg/bicg.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_bicg
+Writing file '/root/polybench-metafor/linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/bicg/woven_code
+  [OK] bicg.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/trmm/trmm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_trmm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/trmm/woven_code/trmm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/trmm/woven_code
+  [OK] trmm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/gesummv/gesummv.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_gesummv
+Writing file '/root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/gesummv/woven_code
+  [OK] gesummv.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/mvt/mvt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_mvt
+Writing file '/root/polybench-metafor/linear-algebra/kernels/mvt/woven_code/mvt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/mvt/woven_code
+  [OK] mvt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/3mm/3mm.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_3mm
+Writing file '/root/polybench-metafor/linear-algebra/kernels/3mm/woven_code/3mm.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/3mm/woven_code
+  [OK] 3mm.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/kernels/syrk/syrk.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_syrk
+Writing file '/root/polybench-metafor/linear-algebra/kernels/syrk/woven_code/syrk.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/kernels/syrk/woven_code
+  [OK] syrk.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/dynprog/dynprog.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_dynprog
+Writing file '/root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code/dynprog.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/dynprog/woven_code
+  [OK] dynprog.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/lu/lu.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_lu
+Writing file '/root/polybench-metafor/linear-algebra/solvers/lu/woven_code/lu.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/lu/woven_code
+  [OK] lu.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/durbin/durbin.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_durbin
+Writing file '/root/polybench-metafor/linear-algebra/solvers/durbin/woven_code/durbin.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/durbin/woven_code
+  [OK] durbin.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/gramschmidt/gramschmidt.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [Expr]
+There are unexpected common keys while merging attributes: [source]
+There are unexpected common keys while merging attributes: [Expr]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_gramschmidt
+Writing file '/root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/gramschmidt/woven_code
+  [OK] gramschmidt.preproc.f90
+------------------------------------------------
+Processing: ./linear-algebra/solvers/ludcmp/ludcmp.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_ludcmp
+Writing file '/root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code/ludcmp.preproc.f90'
+Output files written to folder /root/polybench-metafor/linear-algebra/solvers/ludcmp/woven_code
+  [OK] ludcmp.preproc.f90
+------------------------------------------------
+Processing: ./stencils/seidel-2d/seidel-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_seidel
+Writing file '/root/polybench-metafor/stencils/seidel-2d/woven_code/seidel-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/seidel-2d/woven_code
+  [OK] seidel-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/adi/adi.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_adi
+Writing file '/root/polybench-metafor/stencils/adi/woven_code/adi.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/adi/woven_code
+  [OK] adi.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-1d-imper/jacobi-1d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] SKIPPED (no eligible 2-deep perfect nest): kernel_jacobi1d
+Writing file '/root/polybench-metafor/stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-1d-imper/woven_code
+  [OK] jacobi-1d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/jacobi-2d-imper/jacobi-2d-imper.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_jacobi_2d_imper
+Writing file '/root/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/jacobi-2d-imper/woven_code
+  [OK] jacobi-2d-imper.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-2d/fdtd-2d.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_fdtd_2d
+Writing file '/root/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-2d/woven_code
+  [OK] fdtd-2d.preproc.f90
+------------------------------------------------
+Processing: ./stencils/fdtd-apml/fdtd-apml.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_fdtd_apml
+Writing file '/root/polybench-metafor/stencils/fdtd-apml/woven_code/fdtd-apml.preproc.f90'
+Output files written to folder /root/polybench-metafor/stencils/fdtd-apml/woven_code
+  [OK] fdtd-apml.preproc.f90
+------------------------------------------------
+Processing: ./datamining/correlation/correlation.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_correlation
+Writing file '/root/polybench-metafor/datamining/correlation/woven_code/correlation.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/correlation/woven_code
+  [OK] correlation.preproc.f90
+------------------------------------------------
+Processing: ./datamining/covariance/covariance.preproc.f90
+Executing Fortran Transpiler script in classic CLI mode...
+PLUGIN : /tmp/metafor_root/DumpASTPlugin.so
+There are unexpected common keys while merging attributes: [source]
+[tilingGeneric] TILED (tile=32): kernel_covariance
+Writing file '/root/polybench-metafor/datamining/covariance/woven_code/covariance.preproc.f90'
+Output files written to folder /root/polybench-metafor/datamining/covariance/woven_code
+  [OK] covariance.preproc.f90
+------------------------------------------------
+Done. 30/30 succeeded.
+--- compile ---
+Step 1: Compiling C utilities...
+In file included from /root/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+5 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./medley/reg_detect/reg_detect.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/symm/symm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/atax/atax.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/lu/lu.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/seidel-2d/seidel-2d.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/adi/woven_code/adi.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/adi/adi.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./datamining/correlation/woven_code/correlation.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./datamining/correlation/correlation.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./datamining/covariance/woven_code/covariance.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./datamining/covariance/covariance.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+------------------------------------------------
+Done! Compiled 60 benchmarks.
+--- execute ---
+Running Suite...
+------------------------------------------------
+Processing: reg_detect
+Processing: reg_detect
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: gemm
+Processing: gemm
+Processing: gemver
+Processing: gemver
+Processing: trisolv
+Processing: trisolv
+Processing: cholesky
+Processing: cholesky
+Processing: doitgen
+Processing: doitgen
+Processing: syr2k
+Processing: syr2k
+Processing: symm
+Processing: symm
+Processing: atax
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: bicg
+Processing: bicg
+Processing: trmm
+Processing: trmm
+Processing: gesummv
+Processing: gesummv
+Processing: mvt
+Processing: mvt
+Processing: 3mm
+Processing: 3mm
+Processing: syrk
+Processing: syrk
+Processing: dynprog
+Processing: dynprog
+Processing: lu
+Processing: lu
+Processing: durbin
+Processing: durbin
+Processing: gramschmidt
+Processing: gramschmidt
+Processing: ludcmp
+Processing: ludcmp
+Processing: seidel-2d
+Processing: seidel-2d
+Processing: adi
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: jacobi-2d-imper
+Processing: fdtd-2d
+Processing: fdtd-2d
+Processing: fdtd-apml
+Processing: fdtd-apml
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+------------------------------------------------
+Done. Captured 60 benchmark results. Skipped (blacklisted): 0.
+--- compare ---
+Phase 1 finished: Wed Jun 17 18:50:18 UTC 2026
+
+============================================================
+Phase 2: ! tile sizes(32,32) — no legality check
+Started: Wed Jun 17 18:50:18 UTC 2026
+============================================================
+OMP pragma mode: tile
+Pragma: !\ tile sizes(32,32)
+------------------------------------------------
+  [INSERTED] reg_detect
+  [INSERTED] floyd-warshall
+  [INSERTED] gemm
+  [INSERTED] gemver
+  [INSERTED] trisolv
+  [INSERTED] cholesky
+  [INSERTED] doitgen
+  [INSERTED] syr2k
+  [INSERTED] symm
+  [INSERTED] atax
+  [INSERTED] 2mm
+  [INSERTED] bicg
+  [INSERTED] trmm
+  [INSERTED] gesummv
+  [INSERTED] mvt
+  [SKIP]     3mm — scop+do pattern not found
+  [INSERTED] syrk
+  [SKIP]     dynprog — scop+do pattern not found
+  [INSERTED] lu
+  [SKIP]     durbin — scop+do pattern not found
+  [INSERTED] gramschmidt
+  [SKIP]     ludcmp — scop+do pattern not found
+  [INSERTED] seidel-2d
+  [INSERTED] adi
+  [INSERTED] jacobi-1d-imper
+  [INSERTED] jacobi-2d-imper
+  [INSERTED] fdtd-2d
+  [INSERTED] fdtd-apml
+  [SKIP]     correlation — scop+do pattern not found
+  [SKIP]     covariance — scop+do pattern not found
+------------------------------------------------
+Done. OMP pragma inserted in 24/30 benchmarks.
+--- compile (with -fopenmp-version=51) ---
+Step 1: Compiling C utilities...
+In file included from /root/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+5 warnings generated.
+Step 2: Compiling benchmarks with flang-22...
+------------------------------------------------
+Building: ./medley/reg_detect/woven_code/reg_detect.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./medley/reg_detect/woven_code/reg_detect.preproc.f90
+././medley/reg_detect/woven_code/reg_detect.preproc.f90:73:13: error: Canonical loop nest must be perfectly nested.
+        !$omp tile sizes(32,32)
+              ^^^^
+   [!] Failed to compile ./medley/reg_detect/woven_code/reg_detect.preproc.f90
+Building: ./medley/reg_detect/reg_detect.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./medley/floyd-warshall/woven_code/floyd-warshall.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./medley/floyd-warshall/floyd-warshall.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gemm/woven_code/gemm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gemm/gemm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gemver/gemver.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gemver/woven_code/gemver.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/trisolv/trisolv.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/trisolv/woven_code/trisolv.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90
+././linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90:67:18: error: The SIZES clause has more entries than there are nested canonical loops.
+        !$omp tile sizes(32,32)
+                   ^^^^^^^^^^^^
+   [!] Failed to compile ./linear-algebra/kernels/trisolv/woven_code/trisolv.preproc.f90
+Building: ./linear-algebra/kernels/cholesky/cholesky.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/cholesky/woven_code/cholesky.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90
+././linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90:64:20: error: The SIZES clause has more entries than there are nested canonical loops.
+          !$omp tile sizes(32,32)
+                     ^^^^^^^^^^^^
+   [!] Failed to compile ./linear-algebra/kernels/cholesky/woven_code/cholesky.preproc.f90
+Building: ./linear-algebra/kernels/doitgen/woven_code/doitgen.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/doitgen/doitgen.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/syr2k/woven_code/syr2k.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/syr2k/syr2k.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/symm/symm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/symm/woven_code/symm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/atax/woven_code/atax.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./linear-algebra/kernels/atax/woven_code/atax.preproc.f90
+././linear-algebra/kernels/atax/woven_code/atax.preproc.f90:70:18: error: The SIZES clause has more entries than there are nested canonical loops.
+        !$omp tile sizes(32,32)
+                   ^^^^^^^^^^^^
+   [!] Failed to compile ./linear-algebra/kernels/atax/woven_code/atax.preproc.f90
+Building: ./linear-algebra/kernels/atax/atax.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/2mm/2mm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/2mm/woven_code/2mm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/bicg/woven_code/bicg.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90
+././linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90:87:20: error: The SIZES clause has more entries than there are nested canonical loops.
+          !$omp tile sizes(32,32)
+                     ^^^^^^^^^^^^
+   [!] Failed to compile ./linear-algebra/kernels/bicg/woven_code/bicg.preproc.f90
+Building: ./linear-algebra/kernels/bicg/bicg.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/trmm/trmm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/trmm/woven_code/trmm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/gesummv/woven_code/gesummv.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90
+././linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90:80:20: error: The SIZES clause has more entries than there are nested canonical loops.
+          !$omp tile sizes(32,32)
+                     ^^^^^^^^^^^^
+   [!] Failed to compile ./linear-algebra/kernels/gesummv/woven_code/gesummv.preproc.f90
+Building: ./linear-algebra/kernels/gesummv/gesummv.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/mvt/woven_code/mvt.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/mvt/mvt.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/3mm/3mm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/3mm/woven_code/3mm.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/syrk/syrk.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/kernels/syrk/woven_code/syrk.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/dynprog/dynprog.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/dynprog/woven_code/dynprog.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/lu/woven_code/lu.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./linear-algebra/solvers/lu/woven_code/lu.preproc.f90
+././linear-algebra/solvers/lu/woven_code/lu.preproc.f90:57:15: error: Canonical loop nest must be perfectly nested.
+          !$omp tile sizes(32,32)
+                ^^^^
+././linear-algebra/solvers/lu/woven_code/lu.preproc.f90:57:15: error: Trip count must be computable and invariant
+          !$omp tile sizes(32,32)
+                ^^^^
+   [!] Failed to compile ./linear-algebra/solvers/lu/woven_code/lu.preproc.f90
+Building: ./linear-algebra/solvers/lu/lu.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/durbin/woven_code/durbin.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/durbin/durbin.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/gramschmidt/gramschmidt.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90
+././linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90:94:20: error: The SIZES clause has more entries than there are nested canonical loops.
+          !$omp tile sizes(32,32)
+                     ^^^^^^^^^^^^
+   [!] Failed to compile ./linear-algebra/solvers/gramschmidt/woven_code/gramschmidt.preproc.f90
+Building: ./linear-algebra/solvers/ludcmp/woven_code/ludcmp.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./linear-algebra/solvers/ludcmp/ludcmp.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/seidel-2d/woven_code/seidel-2d.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/seidel-2d/seidel-2d.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/adi/woven_code/adi.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./stencils/adi/woven_code/adi.preproc.f90
+././stencils/adi/woven_code/adi.preproc.f90:69:15: error: Canonical loop nest must be perfectly nested.
+          !$omp tile sizes(32,32)
+                ^^^^
+   [!] Failed to compile ./stencils/adi/woven_code/adi.preproc.f90
+Building: ./stencils/adi/adi.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/jacobi-1d-imper/jacobi-1d-imper.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90
+././stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90:59:15: error: Canonical loop nest must be perfectly nested.
+          !$omp tile sizes(32,32)
+                ^^^^
+   [!] Failed to compile ./stencils/jacobi-1d-imper/woven_code/jacobi-1d-imper.preproc.f90
+Building: ./stencils/jacobi-2d-imper/jacobi-2d-imper.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90
+././stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90:63:15: error: Canonical loop nest must be perfectly nested.
+          !$omp tile sizes(32,32)
+                ^^^^
+   [!] Failed to compile ./stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90
+Building: ./stencils/fdtd-2d/woven_code/fdtd-2d.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in ./stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90
+././stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90:81:15: error: Canonical loop nest must be perfectly nested.
+          !$omp tile sizes(32,32)
+                ^^^^
+   [!] Failed to compile ./stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90
+Building: ./stencils/fdtd-2d/fdtd-2d.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/fdtd-apml/woven_code/fdtd-apml.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./stencils/fdtd-apml/fdtd-apml.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./datamining/correlation/woven_code/correlation.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./datamining/correlation/correlation.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./datamining/covariance/woven_code/covariance.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+Building: ./datamining/covariance/covariance.exe
+warning: OpenMP support for version 51 in flang is still incomplete
+------------------------------------------------
+Done! Compiled 48 benchmarks.
+--- execute ---
+Running Suite...
+------------------------------------------------
+Processing: reg_detect
+Processing: floyd-warshall
+Processing: floyd-warshall
+Processing: gemm
+Processing: gemm
+Processing: gemver
+Processing: gemver
+Processing: trisolv
+Processing: cholesky
+Processing: doitgen
+Processing: doitgen
+Processing: syr2k
+Processing: syr2k
+Processing: symm
+Processing: symm
+Processing: atax
+Processing: 2mm
+Processing: 2mm
+Processing: bicg
+Processing: trmm
+/root/polybench-metafor/execute.sh: line 36: 415504 Segmentation fault      (core dumped) "$exe_path" > "$output_file" 2>&1
+   [!] Error in trmm
+Processing: trmm
+Processing: gesummv
+Processing: mvt
+Processing: mvt
+Processing: 3mm
+Processing: 3mm
+Processing: syrk
+Processing: syrk
+Processing: dynprog
+Processing: dynprog
+Processing: lu
+Processing: durbin
+Processing: durbin
+Processing: gramschmidt
+Processing: ludcmp
+Processing: ludcmp
+Processing: seidel-2d
+Processing: seidel-2d
+Processing: adi
+Processing: jacobi-1d-imper
+Processing: jacobi-2d-imper
+Processing: fdtd-2d
+Processing: fdtd-apml
+Processing: fdtd-apml
+Processing: correlation
+Processing: correlation
+Processing: covariance
+Processing: covariance
+------------------------------------------------
+Done. Captured 47 benchmark results. Skipped (blacklisted): 0.
+--- compare ---
+Phase 2 finished: Wed Jun 17 18:51:21 UTC 2026
+
+=== Summary ===
+  tiling-checked: Final Results: 30 Matches (ignoring timer), 0 Mismatches, 0 Missing.
+  omp-tile: Final Results: 17 Matches (ignoring timer), 1 Mismatches, 12 Missing.
+
+=== Hypothesis verification ===
+Benchmarks SKIPPED by tilingGeneric (Transform? = NO in Phase 1):
+  trisolv
+  cholesky
+  atax
+  bicg
+  gesummv
+  durbin
+  gramschmidt
+  ludcmp
+  jacobi-1d-imper
+
+Same benchmarks in omp-tile Phase 2 (MISSING = compile error, MISMATCH = wrong output):
+  trisolv         | Result: N/A
+  cholesky        | Result: N/A
+  atax            | Result: N/A
+  bicg            | Result: N/A
+  gesummv         | Result: N/A
+  durbin          | Result: MATCH
+  gramschmidt     | Result: N/A
+  ludcmp          | Result: MATCH
+  jacobi-1d-imper | Result: N/A
+
+Full log    : /root/polybench-metafor/experiments/issues/iteration-7/run.log
+Summary     : /root/polybench-metafor/experiments/issues/iteration-7/results-summary.txt
+Done: Wed Jun 17 18:51:21 UTC 2026
+Restored preproc.sh and compile.sh.

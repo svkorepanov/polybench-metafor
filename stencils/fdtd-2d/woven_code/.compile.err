@@ -1,0 +1,5 @@
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in /root/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90
+/root/polybench-metafor/stencils/fdtd-2d/woven_code/fdtd-2d.preproc.f90:81:15: error: Canonical loop nest must be perfectly nested.
+          !$omp tile sizes(32,32)
+                ^^^^

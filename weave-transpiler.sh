@@ -68,6 +68,6 @@ while IFS= read -r bench_file; do
         echo "  [FAIL] $file_name (exit=$status)"
     fi
     echo "------------------------------------------------"
-done < <(find . -path "*/woven_code" -prune -o -type f -name "*.preproc.f90" -print)
+done < <(find . -path "*/woven_code" -prune -o -type f -name "*.preproc.f90" ! -name "*omp*" -print)
 
 echo "Done. $ok/$total succeeded."

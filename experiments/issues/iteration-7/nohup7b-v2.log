@@ -1,0 +1,106 @@
+=== run-iteration7b: OMP tile Phase 2 ===
+Source   : *.omp-tile.preproc.f90 (committed, SMALL_DATASET)
+Flags    : -O3 -fopenmp -fopenmp-version=51 -Wno-ignored-directive -L/usr/lib/llvm-20/lib -DSMALL_DATASET -DPOLYBENCH_DUMP_ARRAYS
+Started  : Wed Jun 17 22:41:45 UTC 2026
+
+Compiling fpolybench.c...
+In file included from /root/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+5 warnings generated.
+Done.
+
+Removing stale woven_code/ directories...
+Done.
+
+=== Compiling and executing (30 benchmarks) ===
+  [OK  /OK  ]  correlation
+  [OK  /OK  ]  covariance
+  [OK  /OK  ]  2mm
+  [OK  /OK  ]  3mm
+  [OK  /OK  ]  atax
+  [OK  /OK  ]  bicg
+  [OK  /OK  ]  cholesky
+  [OK  /OK  ]  doitgen
+  [OK  /OK  ]  gemm
+  [OK  /OK  ]  gemver
+  [OK  /OK  ]  gesummv
+  [OK  /OK  ]  mvt
+  [OK  /OK  ]  symm
+  [OK  /OK  ]  syr2k
+  [OK  /OK  ]  syrk
+  [OK  /OK  ]  trisolv
+  [OK  /OK  ]  trmm
+  [OK  /OK  ]  durbin
+  [OK  /OK  ]  dynprog
+  [OK  /OK  ]  gramschmidt
+  [OK  /OK  ]  lu
+  [OK  /OK  ]  ludcmp
+  [OK  /OK  ]  floyd-warshall
+  [OK  /OK  ]  reg_detect
+  [OK  /OK  ]  adi
+  [OK  /OK  ]  fdtd-2d
+  [OK  /OK  ]  fdtd-apml
+  [OK  /OK  ]  jacobi-1d-imper
+  [OK  /OK  ]  jacobi-2d-imper
+  [OK  /OK  ]  seidel-2d
+
+Compiled: originals 30/30, omp-tile 30/30
+
+=== compare.sh ===
+Output Comparison: Original vs. Woven (Metafor)
+--------------------------------------------------------------------------------------------
+Benchmark       | Status     | Transform? | Result     | Orig Time  | Speedup 
+--------------------------------------------------------------------------------------------
+reg_detect      | OK         | YES        | MATCH      | 4550       | 1.00x   
+floyd-warshall  | OK         | YES        | MATCH      | 2.00       | 1.00x   
+gemm            | OK         | YES        | MATCH      | 22044549282.79 | 1.00x   
+gemver          | OK         | YES        | MATCH      | 2781599076737293.00 | 1.00x   
+trisolv         | OK         | YES        | MATCH      |            | err     
+cholesky        | OK         | YES        | MATCH      | .01        | 1.00x   
+doitgen         | OK         | YES        | MATCH      | 14745.34   | 1.00x   
+syr2k           | OK         | YES        | MATCH      | 44088831050.99 | 1.00x   
+symm            | OK         | YES        | MATCH      | 21537985165.50 | 1.00x   
+atax            | OK         | YES        | MATCH      | 10875561215686.43 | 1.00x   
+2mm             | OK         | YES        | MATCH      | 123227535355982.91 | 1.00x   
+bicg            | OK         | YES        | MATCH      | 130637371.96 | 1.00x   
+trmm            | OK         | YES        | MATCH      | 290287848918619101610495831116879203439359931392069608413446876350405189155524658642315140032426827527007838688496223782053133937243340661023363752399771164988333816701574601910626678880048177536654801295482972238627726907721077569167221128282182759019301360916956191465633173585913687598091113324347392.00 | 1.00x   
+gesummv         | OK         | YES        | MATCH      | 4630518461.39 | 1.00x   
+mvt             | OK         | YES        | MATCH      | 83914.34   | 1.00x   
+3mm             | OK         | YES        | MATCH      | 21081654259238.20 | 1.00x   
+syrk            | OK         | YES        | MATCH      | 22044549282.79 | 1.00x   
+awk: cmd. line:1: error: division by zero attempted
+dynprog         | OK         | YES        | MATCH      | 0          |         
+awk: cmd. line:1: error: division by zero attempted
+lu              | OK         | YES        | MATCH      | .00        |         
+durbin          | OK         | YES        | MATCH      |            | err     
+gramschmidt     | OK         | YES        | MATCH      | 127.00     | 1.00x   
+ludcmp          | OK         | YES        | MATCH      |            | err     
+seidel-2d       | OK         | YES        | MATCH      | 500.00     | 1.00x   
+adi             | OK         | YES        | MATCH      | -176492.34 | 0.00x   
+jacobi-1d-imper | OK         | YES        | MATCH      | 1.00       | 1.00x   
+jacobi-2d-imper | OK         | YES        | MATCH      | 500.00     | 1.00x   
+fdtd-2d         | OK         | YES        | MATCH      | 501.00     | 1.00x   
+fdtd-apml       | OK         | YES        | MATCH      | 70.05      | 1.00x   
+correlation     | OK         | YES        | MATCH      | 1.00       | 1.00x   
+covariance      | OK         | YES        | MATCH      | 5356281897502.23 | 1.00x   
+--------------------------------------------------------------------------------------------
+Final Results: 30 Matches (ignoring timer), 0 Mismatches, 0 Missing.
+Total Transformed: 30
+
+Results : /root/polybench-metafor/experiments/issues/iteration-7/omp-tile-v2-results.txt
+Log     : /root/polybench-metafor/experiments/issues/iteration-7/run7b.log
+Done    : Wed Jun 17 22:43:01 UTC 2026

@@ -1,0 +1,5 @@
+warning: OpenMP support for version 51 in flang is still incomplete
+error: Semantic errors in /root/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90
+/root/polybench-metafor/stencils/jacobi-2d-imper/woven_code/jacobi-2d-imper.preproc.f90:63:15: error: Canonical loop nest must be perfectly nested.
+          !$omp tile sizes(32,32)
+                ^^^^

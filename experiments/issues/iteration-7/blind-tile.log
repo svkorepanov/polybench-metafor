@@ -1,0 +1,95 @@
+=== Blind ! tile sizes(32,32) experiment ===
+Rule: sizes(32,32) before EVERY outermost scop DO — no legality check
+Flags: -O3 -fopenmp -fopenmp-version=51 -Wno-ignored-directive -L/usr/lib/llvm-20/lib -DSMALL_DATASET -DPOLYBENCH_DUMP_ARRAYS
+Started: Wed Jun 17 22:50:54 UTC 2026
+
+Compiling fpolybench.c...
+In file included from /root/polybench-metafor/utilities/fpolybench.c:19:
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:390:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  390 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:395:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  395 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:399:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  399 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:404:45: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  404 |   __GOMP_NOTHROW __attribute__((__malloc__, __malloc__ (omp_free),
+      |                                             ^
+/usr/lib/gcc/x86_64-linux-gnu/15/include/omp.h:409:33: warning: '__malloc__' attribute ignored because Clang does not yet support this attribute signature [-Wignored-attributes]
+  409 |   __GOMP_NOTHROW __attribute__((__malloc__ (omp_free), __alloc_size__ (2)));
+      |                                 ^
+5 warnings generated.
+Done.
+
+warning: OpenMP support for version 51 in flang is still incomplete
+  correlation: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  covariance: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  2mm: compile=OK exec=OK compare=MATCH
+warning: OpenMP support for version 51 in flang is still incomplete
+  3mm: compile=OK exec=OK compare=MATCH
+warning: OpenMP support for version 51 in flang is still incomplete
+  atax: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  bicg: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  cholesky: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  doitgen: compile=OK exec=OK compare=MATCH
+warning: OpenMP support for version 51 in flang is still incomplete
+  gemm: compile=OK exec=OK compare=MATCH
+warning: OpenMP support for version 51 in flang is still incomplete
+  gemver: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  gesummv: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  mvt: compile=OK exec=OK compare=MATCH
+warning: OpenMP support for version 51 in flang is still incomplete
+  symm: compile=OK exec=OK compare=MATCH
+warning: OpenMP support for version 51 in flang is still incomplete
+  syr2k: compile=OK exec=OK compare=MATCH
+warning: OpenMP support for version 51 in flang is still incomplete
+  syrk: compile=OK exec=OK compare=MATCH
+warning: OpenMP support for version 51 in flang is still incomplete
+  trisolv: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  trmm: compile=OK exec=CRASH compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  durbin: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  dynprog: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  gramschmidt: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  lu: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  ludcmp: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  floyd-warshall: compile=OK exec=OK compare=MATCH
+warning: OpenMP support for version 51 in flang is still incomplete
+  reg_detect: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  adi: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  fdtd-2d: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  fdtd-apml: compile=OK exec=OK compare=MATCH
+warning: OpenMP support for version 51 in flang is still incomplete
+  jacobi-1d-imper: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  jacobi-2d-imper: compile=FAIL exec=N/A compare=N/A
+warning: OpenMP support for version 51 in flang is still incomplete
+  seidel-2d: compile=OK exec=OK compare=MATCH
+
+Compile OK   : 12 / 30
+Compile FAIL : 18 / 30
+MATCH        : 11
+MISMATCH     : 0
+CRASH        : 1
+
+Results : /root/polybench-metafor/experiments/issues/iteration-7/blind-tile-results.txt
+Log     : /root/polybench-metafor/experiments/issues/iteration-7/blind-tile.log
+Done    : Wed Jun 17 22:51:36 UTC 2026
