@@ -1,18 +1,11 @@
 PROGRAM FLOYD_WARSHALL
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: path
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(path(2000 + 0, 2000 + 0), STAT=i)
+   allocate(path(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   call init_array(2000, path)
-   call polybench_timer_start()
-   call kernel_floyd_warshall(2000, path)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(2000, path)
-   END IF
+   call init_array(128, path)
+   call kernel_floyd_warshall(128, path)
+   call print_array(128, path)
    deallocate(path)
    contains
    SUBROUTINE init_array(n, path)

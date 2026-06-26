@@ -5,26 +5,19 @@ PROGRAM BICG
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: p
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: q
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(a(8000 + 0, 8000 + 0), STAT=i)
+   allocate(a(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(r(8000 + 0), STAT=i)
+   allocate(r(500 + 0), STAT=i)
    call check_err(i)
-   allocate(s(8000 + 0), STAT=i)
+   allocate(s(500 + 0), STAT=i)
    call check_err(i)
-   allocate(p(8000 + 0), STAT=i)
+   allocate(p(500 + 0), STAT=i)
    call check_err(i)
-   allocate(q(8000 + 0), STAT=i)
+   allocate(q(500 + 0), STAT=i)
    call check_err(i)
-   call init_array(8000, 8000, a, r, p)
-   call polybench_timer_start()
-   call kernel_bicg(8000, 8000, a, s, q, p, r)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(8000, 8000, s, q)
-   END IF
+   call init_array(500, 500, a, r, p)
+   call kernel_bicg(500, 500, a, s, q, p, r)
+   call print_array(500, 500, s, q)
    deallocate(a)
    deallocate(r)
    deallocate(s)
@@ -91,9 +84,30 @@ PROGRAM BICG
       END DO
       DO i = 1, nx
       q(i) = 0.0d0
-      DO j = 1, ny
+      
+      END DO
+      DO ii = 1, nx, 32
+      DO jj = 1, ny, 32
+      DO i = ii, MIN(ii + 32 - 1, nx)
+      DO j = jj, MIN(jj + 32 - 1, ny)
       s(j) = s(j) + (r(i) * a(j, i))
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO ii = 1, nx, 32
+      DO jj = 1, ny, 32
+      DO i = ii, MIN(ii + 32 - 1, nx)
+      DO j = jj, MIN(jj + 32 - 1, ny)
       q(i) = q(i) + (a(j, i) * p(j))
+      
+      END DO
+      
+      END DO
       
       END DO
       

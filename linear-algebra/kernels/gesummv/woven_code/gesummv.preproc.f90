@@ -7,26 +7,19 @@ PROGRAM GESUMMV
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: y
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: tmp
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(a(8000 + 0, 8000 + 0), STAT=i)
+   allocate(a(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(b(8000 + 0, 8000 + 0), STAT=i)
+   allocate(b(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(x(8000 + 0), STAT=i)
+   allocate(x(500 + 0), STAT=i)
    call check_err(i)
-   allocate(y(8000 + 0), STAT=i)
+   allocate(y(500 + 0), STAT=i)
    call check_err(i)
-   allocate(tmp(8000 + 0), STAT=i)
+   allocate(tmp(500 + 0), STAT=i)
    call check_err(i)
-   call init_array(8000, alpha, beta, a, b, x)
-   call polybench_timer_start()
-   call kernel_gesummv(8000, alpha, beta, a, b, tmp, x, y)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(8000, y)
-   END IF
+   call init_array(500, alpha, beta, a, b, x)
+   call kernel_gesummv(500, alpha, beta, a, b, tmp, x, y)
+   call print_array(500, y)
    deallocate(a)
    deallocate(b)
    deallocate(x)
@@ -80,6 +73,9 @@ PROGRAM GESUMMV
       y(i) = 0.0d0
       DO j = 1, n
       tmp(i) = (a(j, i) * x(j)) + tmp(i)
+      
+      END DO
+      DO j = 1, n
       y(i) = (b(j, i) * x(j)) + y(i)
       
       END DO

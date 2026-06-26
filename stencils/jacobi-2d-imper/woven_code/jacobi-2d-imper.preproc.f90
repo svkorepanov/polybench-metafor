@@ -2,20 +2,13 @@ PROGRAM JACOBI2D
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: a
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: b
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(a(2000 + 0, 2000 + 0), STAT=i)
+   allocate(a(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(b(2000 + 0, 2000 + 0), STAT=i)
+   allocate(b(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   call init_array(2000, a, b)
-   call polybench_timer_start()
-   call kernel_jacobi_2d_imper(20, 2000, a, b)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(2000, a)
-   END IF
+   call init_array(500, a, b)
+   call kernel_jacobi_2d_imper(10, 500, a, b)
+   call print_array(500, a)
    deallocate(a)
    deallocate(b)
    contains

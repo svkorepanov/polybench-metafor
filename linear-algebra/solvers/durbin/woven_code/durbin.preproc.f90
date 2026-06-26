@@ -6,28 +6,21 @@ PROGRAM DURBIN
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: r
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: outarray
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(y(8000 + 0, 8000 + 0), STAT=i)
+   allocate(y(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(sumarray(8000 + 0, 8000 + 0), STAT=i)
+   allocate(sumarray(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(beta(8000 + 0), STAT=i)
+   allocate(beta(500 + 0), STAT=i)
    call check_err(i)
-   allocate(alpha(8000 + 0), STAT=i)
+   allocate(alpha(500 + 0), STAT=i)
    call check_err(i)
-   allocate(r(8000 + 0), STAT=i)
+   allocate(r(500 + 0), STAT=i)
    call check_err(i)
-   allocate(outarray(8000 + 0), STAT=i)
+   allocate(outarray(500 + 0), STAT=i)
    call check_err(i)
-   call init_array(8000, y, sumarray, alpha, beta, r)
-   call polybench_timer_start()
-   call kernel_durbin(8000, y, sumarray, alpha, beta, r, outarray)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(8000, outarray)
-   END IF
+   call init_array(500, y, sumarray, alpha, beta, r)
+   call kernel_durbin(500, y, sumarray, alpha, beta, r, outarray)
+   call print_array(500, outarray)
    deallocate(y)
    deallocate(sumarray)
    deallocate(beta)

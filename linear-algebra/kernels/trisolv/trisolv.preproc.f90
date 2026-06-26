@@ -13,7 +13,7 @@ program trisolv
     double precision, dimension(:,:), allocatable :: a
     double precision, dimension(:), allocatable :: x
     double precision, dimension(:), allocatable :: c
-   integer :: n = 8000, i;       character(LEN = 30) :: arg
+   integer :: n = 500, i
    !     Allocation of Arrays
    allocate(a( n+0, n+0), STAT=I); call check_err(I)
    allocate(x( n+0), STAT=I); call check_err(I)
@@ -21,14 +21,11 @@ program trisolv
    !     Initialization
    call init_array(n, a, x, c)
    !     Kernel Execution
-   call polybench_timer_start();
    call kernel_trisolv(n, &
    a, x, c)
-   call polybench_timer_stop();
-   call polybench_timer_print();
    !     Prevent dead-code elimination. All live-out data must be printed
    !     by the function call in argument.
-   CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(n, x);  end if ;
+         call print_array(n, x);   ;
    !     Deallocation of Arrays
    deallocate(a)
    deallocate(x)

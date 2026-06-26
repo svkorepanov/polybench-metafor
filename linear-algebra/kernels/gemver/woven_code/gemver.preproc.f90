@@ -10,8 +10,7 @@ PROGRAM GEMVER
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: x
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: y
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: z
-   INTEGER :: n = 8000, i
-   CHARACTER(LEN = 30) :: arg
+   INTEGER :: n = 500, i
    allocate(a(n + 0, n + 0), STAT=i)
    call check_err(i)
    allocate(u1(n + 0), STAT=i)
@@ -31,14 +30,8 @@ PROGRAM GEMVER
    allocate(z(n + 0), STAT=i)
    call check_err(i)
    call init_array(n, alpha, beta, a, u1, u2, v1, v2, w, x, y, z)
-   call polybench_timer_start()
    call kernel_gemver(n, alpha, beta, a, u1, v1, u2, v2, w, x, y, z)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(n, w)
-   END IF
+   call print_array(n, w)
    deallocate(a)
    deallocate(u1)
    deallocate(u2)

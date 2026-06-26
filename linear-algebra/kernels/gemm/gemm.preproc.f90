@@ -15,23 +15,20 @@
       double precision, dimension(:,:), allocatable :: c
       double precision, dimension(:,:), allocatable :: a
       double precision, dimension(:,:), allocatable :: b
-      integer :: i;      character(LEN = 30) :: arg
+      integer :: i
 !     Allocation of Arrays
-      allocate(c( 2000+0, 2000+0), STAT=I); call check_err(I)
-      allocate(a( 2000+0, 2000+0), STAT=I); call check_err(I)
-      allocate(b( 2000+0, 2000+0), STAT=I); call check_err(I)
+      allocate(c( 128+0, 128+0), STAT=I); call check_err(I)
+      allocate(a( 128+0, 128+0), STAT=I); call check_err(I)
+      allocate(b( 128+0, 128+0), STAT=I); call check_err(I)
 !     Initialization
-      call init_array(2000, 2000, 2000,  &
+      call init_array(128, 128, 128,  &
                            alpha, beta, c, a, b)
 !     Kernel Execution
-      call polybench_timer_start();
-      call kernel_gemm(2000, 2000, 2000, alpha, beta,  &
+      call kernel_gemm(128, 128, 128, alpha, beta,  &
                               c, a, b)
-      call polybench_timer_stop();
-      call polybench_timer_print();
 !     Prevent dead-code elimination. All live-out data must be printed
 !     by the function call in argument. 
-      CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(2000, 2000, c);  end if;
+            call print_array(128, 128, c);  ;
 !     Deallocation of Arrays 
       deallocate(c)
       deallocate(a)

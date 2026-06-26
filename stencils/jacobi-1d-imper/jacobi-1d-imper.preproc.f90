@@ -12,20 +12,17 @@
       program jacobi1d
       double precision, dimension(:), allocatable :: a
       double precision, dimension(:), allocatable :: b
-      integer :: i;      character(LEN = 30) :: arg
+      integer :: i
 !     Allocation of Arrays
-      allocate(a( 100000+0), STAT=I); call check_err(I)
-      allocate(b( 100000+0), STAT=I); call check_err(I)
+      allocate(a( 1000+0), STAT=I); call check_err(I)
+      allocate(b( 1000+0), STAT=I); call check_err(I)
 !     Initialization
-      call init_array(100000, a, b)
+      call init_array(1000, a, b)
 !     Kernel Execution
-      call polybench_timer_start();
-      call kernel_jacobi1d(1000, 100000, a, b)
-      call polybench_timer_stop();
-      call polybench_timer_print();
+      call kernel_jacobi1d(10, 1000, a, b)
 !     Prevent dead-code elimination. All live-out data must be printed
 !     by the function call in argument. 
-      CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(100000, a);  end if;
+            call print_array(1000, a);  ;
 !     Deallocation of Arrays 
       deallocate(a)
       deallocate(b)

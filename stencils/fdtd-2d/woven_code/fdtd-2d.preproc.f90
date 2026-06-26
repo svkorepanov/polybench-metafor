@@ -4,24 +4,17 @@ PROGRAM FDTD2D
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: ey
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: hz
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(fict(50 + 0), STAT=i)
+   allocate(fict(10 + 0), STAT=i)
    call check_err(i)
-   allocate(ex(2000 + 0, 2000 + 0), STAT=i)
+   allocate(ex(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(ey(2000 + 0, 2000 + 0), STAT=i)
+   allocate(ey(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(hz(2000 + 0, 2000 + 0), STAT=i)
+   allocate(hz(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   call init_array(50, 2000, 2000, ex, ey, hz, fict)
-   call polybench_timer_start()
-   call kernel_fdtd_2d(50, 2000, 2000, ex, ey, hz, fict)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(2000, 2000, ex, ey, hz)
-   END IF
+   call init_array(10, 500, 500, ex, ey, hz, fict)
+   call kernel_fdtd_2d(10, 500, 500, ex, ey, hz, fict)
+   call print_array(500, 500, ex, ey, hz)
    deallocate(fict)
    deallocate(ex)
    deallocate(ey)

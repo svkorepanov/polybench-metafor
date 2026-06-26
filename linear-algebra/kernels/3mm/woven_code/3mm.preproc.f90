@@ -7,30 +7,23 @@ PROGRAM THREE_MM
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: f
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: g
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(a(2000 + 0, 2000 + 0), STAT=i)
+   allocate(a(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(b(2000 + 0, 2000 + 0), STAT=i)
+   allocate(b(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(c(2000 + 0, 2000 + 0), STAT=i)
+   allocate(c(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(d(2000 + 0, 2000 + 0), STAT=i)
+   allocate(d(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(e(2000 + 0, 2000 + 0), STAT=i)
+   allocate(e(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(f(2000 + 0, 2000 + 0), STAT=i)
+   allocate(f(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(g(2000 + 0, 2000 + 0), STAT=i)
+   allocate(g(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   call init_array(2000, 2000, 2000, 2000, 2000, a, b, c, d)
-   call polybench_timer_start()
-   call kernel_3mm(2000, 2000, 2000, 2000, 2000, e, a, b, f, c, d, g)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(2000, 2000, g)
-   END IF
+   call init_array(128, 128, 128, 128, 128, a, b, c, d)
+   call kernel_3mm(128, 128, 128, 128, 128, e, a, b, f, c, d, g)
+   call print_array(128, 128, g)
    deallocate(a)
    deallocate(b)
    deallocate(c)
@@ -110,6 +103,18 @@ PROGRAM THREE_MM
       DO i = ii, MIN(ii + 32 - 1, ni)
       DO j = jj, MIN(jj + 32 - 1, nj)
       e(j, i) = 0.0
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO ii = 1, ni, 32
+      DO jj = 1, nj, 32
+      DO i = ii, MIN(ii + 32 - 1, ni)
+      DO j = jj, MIN(jj + 32 - 1, nj)
       DO k = 1, nk
       e(j, i) = e(j, i) + a(k, i) * b(j, k)
       
@@ -127,6 +132,18 @@ PROGRAM THREE_MM
       DO i = ii, MIN(ii + 32 - 1, nj)
       DO j = jj, MIN(jj + 32 - 1, nl)
       f(j, i) = 0.0
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO ii = 1, nj, 32
+      DO jj = 1, nl, 32
+      DO i = ii, MIN(ii + 32 - 1, nj)
+      DO j = jj, MIN(jj + 32 - 1, nl)
       DO k = 1, nm
       f(j, i) = f(j, i) + c(k, i) * d(j, k)
       
@@ -144,6 +161,18 @@ PROGRAM THREE_MM
       DO i = ii, MIN(ii + 32 - 1, ni)
       DO j = jj, MIN(jj + 32 - 1, nl)
       g(j, i) = 0.0
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO ii = 1, ni, 32
+      DO jj = 1, nl, 32
+      DO i = ii, MIN(ii + 32 - 1, ni)
+      DO j = jj, MIN(jj + 32 - 1, nl)
       DO k = 1, nj
       g(j, i) = g(j, i) + e(k, i) * f(j, k)
       

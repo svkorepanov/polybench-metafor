@@ -5,31 +5,24 @@ PROGRAM CORRELATION
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: stddev
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: mean
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(dat(2000 + 0, 2000 + 0), STAT=i)
+   allocate(dat(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(symmat(2000 + 0, 2000 + 0), STAT=i)
+   allocate(symmat(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(stddev(2000 + 0), STAT=i)
+   allocate(stddev(500 + 0), STAT=i)
    call check_err(i)
-   allocate(mean(2000 + 0), STAT=i)
+   allocate(mean(500 + 0), STAT=i)
    call check_err(i)
-   call init_array(2000, 2000, float_n, dat)
-   call polybench_timer_start()
-   call kernel_correlation(2000, 2000, float_n, dat, symmat, mean, stddev)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(2000, symmat)
-   END IF
+   call init_array(500, 500, float_n, dat)
+   call kernel_correlation(500, 500, float_n, dat, symmat, mean, stddev)
+   call print_array(500, symmat)
    deallocate(dat)
    deallocate(symmat)
    deallocate(stddev)
    deallocate(mean)
    contains
    SUBROUTINE init_array(m, n, float_n, dat)
-      DOUBLE PRECISION, DIMENSION(2000, 2000) :: dat
+      DOUBLE PRECISION, DIMENSION(500, 500) :: dat
       DOUBLE PRECISION :: float_n
       INTEGER :: m, n
       INTEGER :: i, j
@@ -44,7 +37,7 @@ PROGRAM CORRELATION
    END SUBROUTINE init_array
    
    SUBROUTINE print_array(m, symmat)
-      DOUBLE PRECISION, DIMENSION(2000, 2000) :: symmat
+      DOUBLE PRECISION, DIMENSION(500, 500) :: symmat
       INTEGER :: m
       INTEGER :: i, j
       DO i = 1, m
@@ -109,6 +102,9 @@ PROGRAM CORRELATION
       END DO
       DO j1 = 1, m - 1
       symmat(j1, j1) = 1.0d0
+      
+      END DO
+      DO j1 = 1, m - 1
       DO j2 = j1 + 1, m
       symmat(j2, j1) = 0.0d0
       DO i = 1, n

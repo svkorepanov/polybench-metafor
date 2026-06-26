@@ -3,8 +3,7 @@ PROGRAM COVARIANCE
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: dat
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: symmat
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: mean
-   INTEGER :: n = 2000, m = 2000, i
-   CHARACTER(LEN = 30) :: arg
+   INTEGER :: n = 500, m = 500, i
    allocate(dat(n + 0, m + 0), STAT=i)
    call check_err(i)
    allocate(symmat(m + 0, m + 0), STAT=i)
@@ -12,14 +11,8 @@ PROGRAM COVARIANCE
    allocate(mean(m + 0), STAT=i)
    call check_err(i)
    call init_array(m, n, float_n, dat)
-   call polybench_timer_start()
    call kernel_covariance(m, n, float_n, dat, symmat, mean)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(m, symmat)
-   END IF
+   call print_array(m, symmat)
    deallocate(dat)
    deallocate(symmat)
    deallocate(mean)

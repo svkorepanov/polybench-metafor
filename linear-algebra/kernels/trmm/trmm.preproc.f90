@@ -13,20 +13,17 @@ program trmm
    double precision :: alpha
     double precision, dimension(:,:), allocatable :: a
     double precision, dimension(:,:), allocatable :: b
-   integer :: ni = 2000, i;       character(LEN = 30) :: arg
+   integer :: ni = 128, i
    !     Allocation of Arrays
    allocate(a( ni+0, ni+0), STAT=I); call check_err(I)
    allocate(b( ni+0, ni+0), STAT=I); call check_err(I)
    !     Initialization
    call init_array(ni, alpha, a, b)
    !     Kernel Execution
-   call polybench_timer_start();
    call kernel_trmm(ni, alpha, a, b)
-   call polybench_timer_stop();
-   call polybench_timer_print();
    !     Prevent dead-code elimination. All live-out data must be printed
    !     by the function call in argument.
-   CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(ni, b);  end if ;
+         call print_array(ni, b);   ;
    !     Deallocation of Arrays
    deallocate(a)
    deallocate(b)

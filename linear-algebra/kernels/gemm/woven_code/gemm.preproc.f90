@@ -5,22 +5,15 @@ PROGRAM GEMM
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: a
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: b
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(c(2000 + 0, 2000 + 0), STAT=i)
+   allocate(c(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(a(2000 + 0, 2000 + 0), STAT=i)
+   allocate(a(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(b(2000 + 0, 2000 + 0), STAT=i)
+   allocate(b(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   call init_array(2000, 2000, 2000, alpha, beta, c, a, b)
-   call polybench_timer_start()
-   call kernel_gemm(2000, 2000, 2000, alpha, beta, c, a, b)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(2000, 2000, c)
-   END IF
+   call init_array(128, 128, 128, alpha, beta, c, a, b)
+   call kernel_gemm(128, 128, 128, alpha, beta, c, a, b)
+   call print_array(128, 128, c)
    deallocate(c)
    deallocate(a)
    deallocate(b)

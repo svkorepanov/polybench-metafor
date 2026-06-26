@@ -1,0 +1,42 @@
+=== Experiment: fission → tiling pipeline vs tiling alone ===
+Dataset: SMALL_DATASET (with POLYBENCH_DUMP_ARRAYS for correctness)
+Compiler: flang-22 -O3 -fopenmp
+
+Benchmark          | Tiling       | Correct    | Fission+Tiling   | Correct   
+-------------------------------------------------------------------------------
+correlation        | TILED        | MATCH      | FISSIONED+TILED  | MATCH     
+covariance         | TILED        | MATCH      | TILED            | MATCH     
+2mm                | TILED        | MATCH      | FISSIONED+TILED  | MATCH     
+3mm                | TILED        | MATCH      | FISSIONED+TILED  | MATCH     
+atax               | SKIPPED      | MATCH      | FISSIONED+TILED  | MATCH  <-- NEW
+bicg               | SKIPPED      | MATCH      | FISSIONED+TILED  | MATCH  <-- NEW
+cholesky           | SKIPPED      | MATCH      | SKIPPED          | MATCH     
+doitgen            | TILED        | MATCH      | FISSIONED+TILED  | MATCH     
+gemm               | TILED        | MATCH      | TILED            | MATCH     
+gemver             | TILED        | MATCH      | TILED            | MATCH     
+gesummv            | SKIPPED      | MATCH      | FISSIONED_ONLY   | MATCH     
+mvt                | TILED        | MATCH      | TILED            | MATCH     
+symm               | TILED        | MATCH      | FISSIONED+TILED  | MATCH     
+syr2k              | TILED        | MATCH      | TILED            | MATCH     
+syrk               | TILED        | MATCH      | TILED            | MATCH     
+trisolv            | SKIPPED      | MATCH      | SKIPPED          | MATCH     
+trmm               | TILED        | MATCH      | TILED            | MATCH     
+durbin             | SKIPPED      | MATCH      | SKIPPED          | MATCH     
+dynprog            | TILED        | MATCH      | FISSIONED+TILED  | MATCH     
+gramschmidt        | SKIPPED      | MATCH      | SKIPPED          | MATCH     
+lu                 | TILED        | MATCH      | TILED            | MATCH     
+ludcmp             | SKIPPED      | MATCH      | SKIPPED          | MATCH     
+floyd-warshall     | TILED        | MATCH      | TILED            | MATCH     
+reg_detect         | TILED        | MATCH      | FISSIONED+TILED  | MATCH     
+adi                | TILED        | MATCH      | TILED            | MATCH     
+fdtd-2d            | TILED        | MATCH      | TILED            | MATCH     
+fdtd-apml          | TILED        | skipped    | TILED            | skipped   
+jacobi-1d-imper    | SKIPPED      | MATCH      | SKIPPED          | MATCH     
+jacobi-2d-imper    | TILED        | MATCH      | TILED            | MATCH     
+seidel-2d          | TILED        | MATCH      | TILED            | MATCH     
+-------------------------------------------------------------------------------
+
+TILING ALONE:      21/30 tiled, 9/30 skipped, 29 correct, 0 incorrect
+FISSION+TILING:    23/30 tiled, 7/30 skipped, 29 correct, 0 incorrect
+
+Improvement:       +2 benchmarks newly tiled by fission → tiling pipeline

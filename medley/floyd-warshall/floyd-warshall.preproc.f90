@@ -11,19 +11,16 @@
 ! Default data type is double, default size is 1024. 
       program floyd_warshall
       double precision, dimension(:,:), allocatable :: path
-      integer :: i;      character(LEN = 30) :: arg
+      integer :: i
 !     Allocation of Arrays
-      allocate(path( 2000+0, 2000+0), STAT=I); call check_err(I)
+      allocate(path( 128+0, 128+0), STAT=I); call check_err(I)
 !     Initialization
-      call init_array(2000, path)
+      call init_array(128, path)
 !     Kernel Execution
-      call polybench_timer_start();
-      call kernel_floyd_warshall(2000, path)
-      call polybench_timer_stop();
-      call polybench_timer_print();
+      call kernel_floyd_warshall(128, path)
 !     Prevent dead-code elimination. All live-out data must be printed
 !     by the function call in argument. 
-      CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(2000, path);  end if;
+            call print_array(128, path);  ;
 !     Deallocation of Arrays 
       deallocate(path)
       contains

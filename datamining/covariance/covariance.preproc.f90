@@ -14,7 +14,7 @@ program covariance
     double precision, dimension(:,:), allocatable :: dat
     double precision, dimension(:,:), allocatable :: symmat
     double precision, dimension(:), allocatable :: mean
-   integer :: n = 2000, m = 2000, i;       character(LEN = 30) :: arg
+   integer :: n = 500, m = 500, i
    !     Allocation of Arrays
    allocate(dat( n+0, m+0), STAT=I); call check_err(I)
    allocate(symmat( m+0, m+0), STAT=I); call check_err(I)
@@ -22,13 +22,10 @@ program covariance
    !     Initialization
    call init_array(m, n, float_n, dat)
    !     Kernel Execution
-   call polybench_timer_start();
    call kernel_covariance(m, n, float_n, dat, symmat, mean)
-   call polybench_timer_stop();
-   call polybench_timer_print();
    !     Prevent dead-code elimination. All live-out data must be printed
    !     by the function call in argument.
-   CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(m, symmat);  end if ;
+         call print_array(m, symmat);   ;
    !     Deallocation of Arrays
    deallocate(dat)
    deallocate(symmat)

@@ -2,21 +2,14 @@ PROGRAM TRMM
    DOUBLE PRECISION :: alpha
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: a
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: b
-   INTEGER :: ni = 2000, i
-   CHARACTER(LEN = 30) :: arg
+   INTEGER :: ni = 128, i
    allocate(a(ni + 0, ni + 0), STAT=i)
    call check_err(i)
    allocate(b(ni + 0, ni + 0), STAT=i)
    call check_err(i)
    call init_array(ni, alpha, a, b)
-   call polybench_timer_start()
    call kernel_trmm(ni, alpha, a, b)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(ni, b)
-   END IF
+   call print_array(ni, b)
    deallocate(a)
    deallocate(b)
    contains

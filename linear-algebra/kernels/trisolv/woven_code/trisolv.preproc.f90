@@ -2,8 +2,7 @@ PROGRAM TRISOLV
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: a
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: x
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: c
-   INTEGER :: n = 8000, i
-   CHARACTER(LEN = 30) :: arg
+   INTEGER :: n = 500, i
    allocate(a(n + 0, n + 0), STAT=i)
    call check_err(i)
    allocate(x(n + 0), STAT=i)
@@ -11,14 +10,8 @@ PROGRAM TRISOLV
    allocate(c(n + 0), STAT=i)
    call check_err(i)
    call init_array(n, a, x, c)
-   call polybench_timer_start()
    call kernel_trisolv(n, a, x, c)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(n, x)
-   END IF
+   call print_array(n, x)
    deallocate(a)
    deallocate(x)
    deallocate(c)

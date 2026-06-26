@@ -15,24 +15,21 @@
       double precision, dimension(:), allocatable :: y1
       double precision, dimension(:), allocatable :: x2
       double precision, dimension(:), allocatable :: y2
-      integer :: i;      character(LEN = 30) :: arg
+      integer :: i
 !     Allocation of Arrays
-      allocate(a( 8000+0, 8000+0), STAT=I); call check_err(I)
-      allocate(x1( 8000+0), STAT=I); call check_err(I)
-      allocate(y1( 8000+0), STAT=I); call check_err(I)
-      allocate(x2( 8000+0), STAT=I); call check_err(I)
-      allocate(y2( 8000+0), STAT=I); call check_err(I)
+      allocate(a( 500+0, 500+0), STAT=I); call check_err(I)
+      allocate(x1( 500+0), STAT=I); call check_err(I)
+      allocate(y1( 500+0), STAT=I); call check_err(I)
+      allocate(x2( 500+0), STAT=I); call check_err(I)
+      allocate(y2( 500+0), STAT=I); call check_err(I)
 !     Initialization
-      call init_array(8000, x1, x2, y1, y2, a)
+      call init_array(500, x1, x2, y1, y2, a)
 !     Kernel Execution
-      call polybench_timer_start();
-      call kernel_mvt(8000, x1, x2, &
+      call kernel_mvt(500, x1, x2, &
                               y1, y2, a)
-      call polybench_timer_stop();
-      call polybench_timer_print();
 !     Prevent dead-code elimination. All live-out data must be printed
 !     by the function call in argument. 
-      CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(8000, x1, x2);  end if;
+            call print_array(500, x1, x2);  ;
 !     Deallocation of Arrays 
       deallocate(a)
       deallocate(x1)

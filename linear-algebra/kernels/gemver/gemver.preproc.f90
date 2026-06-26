@@ -21,7 +21,7 @@ program gemver
     double precision, dimension(:), allocatable :: x
     double precision, dimension(:), allocatable :: y
     double precision, dimension(:), allocatable :: z
-   integer :: n = 8000, i;       character(LEN = 30) :: arg
+   integer :: n = 500, i
    !     Allocation of Arrays
    allocate(a( n+0, n+0), STAT=I); call check_err(I)
    allocate(u1( n+0), STAT=I); call check_err(I)
@@ -36,15 +36,12 @@ program gemver
    call init_array(n, &
    alpha, beta, a, u1, u2, v1, v2, w, x, y, z)
    !     Kernel Execution
-   call polybench_timer_start();
    call kernel_gemver(n, alpha, beta, &
    a, u1, v1, u2, v2, &
    w, x, y, z)
-   call polybench_timer_stop();
-   call polybench_timer_print();
    !     Prevent dead-code elimination. All live-out data must be printed
    !     by the function call in argument.
-   CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(n, w);  end if ;
+         call print_array(n, w);   ;
    !     Deallocation of Arrays
    deallocate(a)
    deallocate(u1)

@@ -1,18 +1,11 @@
 PROGRAM LU
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: a
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(a(2000 + 0, 2000 + 0), STAT=i)
+   allocate(a(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   call init_array(2000, a)
-   call polybench_timer_start()
-   call kernel_lu(2000, a)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(2000, a)
-   END IF
+   call init_array(128, a)
+   call kernel_lu(128, a)
+   call print_array(128, a)
    deallocate(a)
    contains
    SUBROUTINE init_array(n, a)

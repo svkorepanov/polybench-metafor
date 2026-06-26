@@ -6,26 +6,19 @@ PROGRAM TWO_MM
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: d
    DOUBLE PRECISION :: alpha, beta
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(tmp(2000 + 0, 2000 + 0), STAT=i)
+   allocate(tmp(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(a(2000 + 0, 2000 + 0), STAT=i)
+   allocate(a(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(b(2000 + 0, 2000 + 0), STAT=i)
+   allocate(b(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(c(2000 + 0, 2000 + 0), STAT=i)
+   allocate(c(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(d(2000 + 0, 2000 + 0), STAT=i)
+   allocate(d(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   call init_array(alpha, beta, a, b, c, d, 2000, 2000, 2000, 2000)
-   call polybench_timer_start()
-   call kernel_2mm(alpha, beta, tmp, a, b, c, d, 2000, 2000, 2000, 2000)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(d, 2000, 2000)
-   END IF
+   call init_array(alpha, beta, a, b, c, d, 128, 128, 128, 128)
+   call kernel_2mm(alpha, beta, tmp, a, b, c, d, 128, 128, 128, 128)
+   call print_array(d, 128, 128)
    deallocate(tmp)
    deallocate(a)
    deallocate(b)
@@ -105,6 +98,18 @@ PROGRAM TWO_MM
       DO i = ii, MIN(ii + 32 - 1, ni)
       DO j = jj, MIN(jj + 32 - 1, nj)
       tmp(j, i) = 0.0
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO ii = 1, ni, 32
+      DO jj = 1, nj, 32
+      DO i = ii, MIN(ii + 32 - 1, ni)
+      DO j = jj, MIN(jj + 32 - 1, nj)
       DO k = 1, nk
       tmp(j, i) = tmp(j, i) + alpha * a(k, i) * b(j, k)
       

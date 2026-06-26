@@ -3,22 +3,15 @@ PROGRAM GRAMSCHMIDT
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: r
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: q
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(a(2000 + 0, 2000 + 0), STAT=i)
+   allocate(a(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(r(2000 + 0, 2000 + 0), STAT=i)
+   allocate(r(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(q(2000 + 0, 2000 + 0), STAT=i)
+   allocate(q(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   call init_array(2000, 2000, a, r, q)
-   call polybench_timer_start()
-   call kernel_gramschmidt(2000, 2000, a, r, q)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(2000, 2000, a, r, q)
-   END IF
+   call init_array(128, 128, a, r, q)
+   call kernel_gramschmidt(128, 128, a, r, q)
+   call print_array(128, 128, a, r, q)
    deallocate(a)
    deallocate(r)
    deallocate(q)

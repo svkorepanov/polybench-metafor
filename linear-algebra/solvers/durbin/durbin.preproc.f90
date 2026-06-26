@@ -16,24 +16,21 @@
       double precision, dimension(:), allocatable :: alpha
       double precision, dimension(:), allocatable :: r
       double precision, dimension(:), allocatable :: outArray
-      integer :: i;      character(LEN = 30) :: arg
+      integer :: i
 !     Allocation of Arrays
-      allocate(y( 8000+0, 8000+0), STAT=I); call check_err(I)
-      allocate(sumArray( 8000+0, 8000+0), STAT=I); call check_err(I)
-      allocate(beta( 8000+0), STAT=I); call check_err(I)
-      allocate(alpha( 8000+0), STAT=I); call check_err(I)
-      allocate(r( 8000+0), STAT=I); call check_err(I)
-      allocate(outArray( 8000+0), STAT=I); call check_err(I)
+      allocate(y( 500+0, 500+0), STAT=I); call check_err(I)
+      allocate(sumArray( 500+0, 500+0), STAT=I); call check_err(I)
+      allocate(beta( 500+0), STAT=I); call check_err(I)
+      allocate(alpha( 500+0), STAT=I); call check_err(I)
+      allocate(r( 500+0), STAT=I); call check_err(I)
+      allocate(outArray( 500+0), STAT=I); call check_err(I)
 !     Initialization
-      call init_array(8000, y, sumArray, alpha, beta, r)
+      call init_array(500, y, sumArray, alpha, beta, r)
 !     Kernel Execution
-      call polybench_timer_start();
-      call kernel_durbin(8000, y, sumArray, alpha, beta, r, outArray)
-      call polybench_timer_stop();
-      call polybench_timer_print();
+      call kernel_durbin(500, y, sumArray, alpha, beta, r, outArray)
 !     Prevent dead-code elimination. All live-out data must be printed
 !     by the function call in argument. 
-      CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(8000, outArray);  end if;
+            call print_array(500, outArray);  ;
 !     Deallocation of Arrays 
       deallocate(y)
       deallocate(sumArray)

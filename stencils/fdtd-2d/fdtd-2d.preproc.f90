@@ -14,22 +14,19 @@
       double precision, dimension(:,:), allocatable :: ex
       double precision, dimension(:,:), allocatable :: ey
       double precision, dimension(:,:), allocatable :: hz
-      integer :: i;      character(LEN = 30) :: arg
+      integer :: i
 !     Allocation of Arrays
-      allocate(fict( 50+0), STAT=I); call check_err(I)
-      allocate(ex( 2000+0, 2000+0), STAT=I); call check_err(I)
-      allocate(ey( 2000+0, 2000+0), STAT=I); call check_err(I)
-      allocate(hz( 2000+0, 2000+0), STAT=I); call check_err(I)
+      allocate(fict( 10+0), STAT=I); call check_err(I)
+      allocate(ex( 500+0, 500+0), STAT=I); call check_err(I)
+      allocate(ey( 500+0, 500+0), STAT=I); call check_err(I)
+      allocate(hz( 500+0, 500+0), STAT=I); call check_err(I)
 !     Initialization
-      call init_array(50, 2000, 2000, ex, ey, hz, fict)
+      call init_array(10, 500, 500, ex, ey, hz, fict)
 !     Kernel Execution
-      call polybench_timer_start();
-      call kernel_fdtd_2d(50, 2000, 2000, ex, ey, hz, fict)
-      call polybench_timer_stop();
-      call polybench_timer_print();
+      call kernel_fdtd_2d(10, 500, 500, ex, ey, hz, fict)
 !     Prevent dead-code elimination. All live-out data must be printed
 !     by the function call in argument. 
-      CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(2000, 2000, ex, ey, hz);  end if;
+            call print_array(500, 500, ex, ey, hz);  ;
 !     Deallocation of Arrays 
       deallocate(fict)
       deallocate(ex)

@@ -26,37 +26,34 @@
       double precision, dimension(:), allocatable :: cxph 
       double precision, dimension(:), allocatable :: czm 
       double precision, dimension(:), allocatable :: czp 
-      integer :: i;      character(LEN = 30) :: arg
+      integer :: i
 !     Allocation of Arrays
-      allocate(ex(512+1+0,512+1+0,512+1+0), STAT=I); call check_err(I)
-      allocate(ey(512+1+0,512+1+0,512+1+0), STAT=I); call check_err(I)
-      allocate(bza(512+1+0,512+1+0,512+1+0), STAT=I); call check_err(I)
-      allocate(hz(512+1+0,512+1+0,512+1+0), STAT=I); call check_err(I)
-      allocate(clf(512+1+0,512+1+0), STAT=I); call check_err(I)
-      allocate(tmp(512+1+0,512+1+0), STAT=I); call check_err(I)
-      allocate(ry(512+1+0,512+1+0), STAT=I); call check_err(I)
-      allocate(ax(512+1+0,512+1+0), STAT=I); call check_err(I)
-      allocate(cymh(512+1+0), STAT=I); call check_err(I)
-      allocate(cyph(512+1+0), STAT=I); call check_err(I)
-      allocate(cxmh(512+1+0), STAT=I); call check_err(I)
-      allocate(cxph(512+1+0), STAT=I); call check_err(I)
-      allocate(czm(512+1+0), STAT=I); call check_err(I)
-      allocate(czp(512+1+0), STAT=I); call check_err(I)
+      allocate(ex(64+1+0,64+1+0,64+1+0), STAT=I); call check_err(I)
+      allocate(ey(64+1+0,64+1+0,64+1+0), STAT=I); call check_err(I)
+      allocate(bza(64+1+0,64+1+0,64+1+0), STAT=I); call check_err(I)
+      allocate(hz(64+1+0,64+1+0,64+1+0), STAT=I); call check_err(I)
+      allocate(clf(64+1+0,64+1+0), STAT=I); call check_err(I)
+      allocate(tmp(64+1+0,64+1+0), STAT=I); call check_err(I)
+      allocate(ry(64+1+0,64+1+0), STAT=I); call check_err(I)
+      allocate(ax(64+1+0,64+1+0), STAT=I); call check_err(I)
+      allocate(cymh(64+1+0), STAT=I); call check_err(I)
+      allocate(cyph(64+1+0), STAT=I); call check_err(I)
+      allocate(cxmh(64+1+0), STAT=I); call check_err(I)
+      allocate(cxph(64+1+0), STAT=I); call check_err(I)
+      allocate(czm(64+1+0), STAT=I); call check_err(I)
+      allocate(czp(64+1+0), STAT=I); call check_err(I)
 !     Initialization
-      call init_array(512, 512, 512, &
+      call init_array(64, 64, 64, &
                           mui, ch, ax, ry, ex, ey, &
                           hz, czm, czp, cxmh, cxph, &
                           cymh, cyph)
 !     Kernel Execution
-      call polybench_timer_start();
-      call kernel_fdtd_apml(512, 512, 512, mui, ch, &
+      call kernel_fdtd_apml(64, 64, 64, mui, ch, &
                        ax, ry, clf, tmp, bza, ex, ey,  &
                        hz, czm, czp, cxmh, cxph, cymh, cyph)
-      call polybench_timer_stop();
-      call polybench_timer_print();
 !     Prevent dead-code elimination. All live-out data must be printed
 !     by the function call in argument. 
-      CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(512, 512, 512 , Bza, Ex, Ey, Hz);  end if
+            call print_array(64, 64, 64 , Bza, Ex, Ey, Hz);  
 !     Deallocation of Arrays 
       deallocate(ex)
       deallocate(ey)

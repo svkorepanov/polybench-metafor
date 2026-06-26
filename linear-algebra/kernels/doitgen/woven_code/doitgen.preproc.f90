@@ -2,8 +2,7 @@ PROGRAM DOITGEN
    DOUBLE PRECISION, DIMENSION(:, :, :), ALLOCATABLE :: a
    DOUBLE PRECISION, DIMENSION(:, :, :), ALLOCATABLE :: suma
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: cfour
-   INTEGER :: nr = 256, nq = 256, np = 256, i
-   CHARACTER(LEN = 30) :: arg
+   INTEGER :: nr = 32, nq = 32, np = 32, i
    allocate(a(np + 0, nq + 0, nr + 0), STAT=i)
    call check_err(i)
    allocate(suma(np + 0, nq + 0, nr + 0), STAT=i)
@@ -11,14 +10,8 @@ PROGRAM DOITGEN
    allocate(cfour(np + 0, np + 0), STAT=i)
    call check_err(i)
    call init_array(nr, nq, np, a, cfour)
-   call polybench_timer_start()
    call kernel_doitgen(nr, nq, np, a, cfour, suma)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(a, nr, nq, np)
-   END IF
+   call print_array(a, nr, nq, np)
    deallocate(a)
    deallocate(suma)
    deallocate(cfour)
@@ -81,6 +74,9 @@ PROGRAM DOITGEN
       DO q = qq, MIN(qq + 32 - 1, nq)
       DO p = 1, np
       suma(p, q, r) = 0.0d0
+      
+      END DO
+      DO p = 1, np
       DO s = 1, np
       suma(p, q, r) = suma(p, q, r) + (a(s, q, r) * cfour(p, s))
       

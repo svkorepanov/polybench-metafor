@@ -3,8 +3,7 @@ PROGRAM ATAX
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: x
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: y
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: tmp
-   INTEGER :: nx = 8000, ny = 8000, i
-   CHARACTER(LEN = 30) :: arg
+   INTEGER :: nx = 500, ny = 500, i
    allocate(a(ny + 0, nx + 0), STAT=i)
    call check_err(i)
    allocate(x(ny + 0), STAT=i)
@@ -14,14 +13,8 @@ PROGRAM ATAX
    allocate(tmp(ny + 0), STAT=i)
    call check_err(i)
    call init_array(a, x, nx, ny)
-   call polybench_timer_start()
    call kernel_atax(nx, ny, a, x, y, tmp)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(y, ny)
-   END IF
+   call print_array(y, ny)
    deallocate(a)
    deallocate(x)
    deallocate(y)
@@ -72,12 +65,30 @@ PROGRAM ATAX
       END DO
       DO i = 1, nx
       tmp(i) = 0.0d0
-      DO j = 1, ny
+      
+      END DO
+      DO ii = 1, nx, 32
+      DO jj = 1, ny, 32
+      DO i = ii, MIN(ii + 32 - 1, nx)
+      DO j = jj, MIN(jj + 32 - 1, ny)
       tmp(i) = tmp(i) + (a(j, i) * x(j))
       
       END DO
-      DO j = 1, ny
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO ii = 1, nx, 32
+      DO jj = 1, ny, 32
+      DO i = ii, MIN(ii + 32 - 1, nx)
+      DO j = jj, MIN(jj + 32 - 1, ny)
       y(j) = y(j) + a(j, i) * tmp(i)
+      
+      END DO
+      
+      END DO
       
       END DO
       

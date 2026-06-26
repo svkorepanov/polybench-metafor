@@ -5,26 +5,19 @@ PROGRAM MVT
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: x2
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: y2
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(a(8000 + 0, 8000 + 0), STAT=i)
+   allocate(a(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(x1(8000 + 0), STAT=i)
+   allocate(x1(500 + 0), STAT=i)
    call check_err(i)
-   allocate(y1(8000 + 0), STAT=i)
+   allocate(y1(500 + 0), STAT=i)
    call check_err(i)
-   allocate(x2(8000 + 0), STAT=i)
+   allocate(x2(500 + 0), STAT=i)
    call check_err(i)
-   allocate(y2(8000 + 0), STAT=i)
+   allocate(y2(500 + 0), STAT=i)
    call check_err(i)
-   call init_array(8000, x1, x2, y1, y2, a)
-   call polybench_timer_start()
-   call kernel_mvt(8000, x1, x2, y1, y2, a)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(8000, x1, x2)
-   END IF
+   call init_array(500, x1, x2, y1, y2, a)
+   call kernel_mvt(500, x1, x2, y1, y2, a)
+   call print_array(500, x1, x2)
    deallocate(a)
    deallocate(x1)
    deallocate(y1)

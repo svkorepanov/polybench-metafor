@@ -3,22 +3,15 @@ PROGRAM ADI
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: a
    DOUBLE PRECISION, DIMENSION(:, :), ALLOCATABLE :: b
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(x(2000 + 0, 2000 + 0), STAT=i)
+   allocate(x(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(a(2000 + 0, 2000 + 0), STAT=i)
+   allocate(a(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   allocate(b(2000 + 0, 2000 + 0), STAT=i)
+   allocate(b(500 + 0, 500 + 0), STAT=i)
    call check_err(i)
-   call init_array(2000, x, a, b)
-   call polybench_timer_start()
-   call kernel_adi(50, 2000, x, a, b)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(2000, x)
-   END IF
+   call init_array(500, x, a, b)
+   call kernel_adi(10, 500, x, a, b)
+   call print_array(500, x)
    deallocate(x)
    deallocate(a)
    deallocate(b)

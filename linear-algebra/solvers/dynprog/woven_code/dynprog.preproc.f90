@@ -4,22 +4,15 @@ PROGRAM DYNPROG
    INTEGER, DIMENSION(:, :), ALLOCATABLE :: c
    INTEGER, DIMENSION(:, :), ALLOCATABLE :: w
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(sumc(500 + 0, 500 + 0, 500 + 0), STAT=i)
+   allocate(sumc(50 + 0, 50 + 0, 50 + 0), STAT=i)
    call check_err(i)
-   allocate(c(500 + 0, 500 + 0), STAT=i)
+   allocate(c(50 + 0, 50 + 0), STAT=i)
    call check_err(i)
-   allocate(w(500 + 0, 500 + 0), STAT=i)
+   allocate(w(50 + 0, 50 + 0), STAT=i)
    call check_err(i)
-   call init_array(500, c, w)
-   call polybench_timer_start()
-   call kernel_dynprog(1000, 500, c, w, sumc, output)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(output)
-   END IF
+   call init_array(50, c, w)
+   call kernel_dynprog(100, 50, c, w, sumc, output)
+   call print_array(output)
    deallocate(sumc)
    deallocate(c)
    deallocate(w)
@@ -53,11 +46,11 @@ PROGRAM DYNPROG
       continue
       !DIR$ scop
       output = 0
-      DO iter = 1, tsteps
+      DO iteriter = 1, tsteps, 32
       DO ii = 1, length, 32
-      DO jj = 1, length, 32
+      DO iter = iteriter, MIN(iteriter + 32 - 1, tsteps)
       DO i = ii, MIN(ii + 32 - 1, length)
-      DO j = jj, MIN(jj + 32 - 1, length)
+      DO j = 1, length
       c(j, i) = 0
       
       END DO
@@ -67,7 +60,12 @@ PROGRAM DYNPROG
       END DO
       
       END DO
-      DO i = 1, length - 1
+      
+      END DO
+      DO iteriter = 1, tsteps, 32
+      DO ii = 1, length - 1, 32
+      DO iter = iteriter, MIN(iteriter + 32 - 1, tsteps)
+      DO i = ii, MIN(ii + 32 - 1, length - 1)
       DO j = i + 1, length
       sumc(i, j, i) = 0
       DO k = i + 1, j - 1
@@ -79,6 +77,13 @@ PROGRAM DYNPROG
       END DO
       
       END DO
+      
+      END DO
+      
+      END DO
+      
+      END DO
+      DO iter = 1, tsteps
       output = output + c(length, 1)
       
       END DO

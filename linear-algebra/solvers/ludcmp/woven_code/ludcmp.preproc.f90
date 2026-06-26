@@ -4,24 +4,17 @@ PROGRAM LUDCMP
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: y
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: b
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(a(2000 + 1 + 0, 2000 + 1 + 0), STAT=i)
+   allocate(a(128 + 1 + 0, 128 + 1 + 0), STAT=i)
    call check_err(i)
-   allocate(x(2000 + 1 + 0), STAT=i)
+   allocate(x(128 + 1 + 0), STAT=i)
    call check_err(i)
-   allocate(y(2000 + 1 + 0), STAT=i)
+   allocate(y(128 + 1 + 0), STAT=i)
    call check_err(i)
-   allocate(b(2000 + 1 + 0), STAT=i)
+   allocate(b(128 + 1 + 0), STAT=i)
    call check_err(i)
-   call init_array(2000, a, b, x, y)
-   call polybench_timer_start()
-   call kernel_ludcmp(2000, a, b, x, y)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(2000, x)
-   END IF
+   call init_array(128, a, b, x, y)
+   call kernel_ludcmp(128, a, b, x, y)
+   call print_array(128, x)
    deallocate(a)
    deallocate(x)
    deallocate(y)

@@ -14,7 +14,7 @@ program atax
     double precision, dimension(:), allocatable :: x
     double precision, dimension(:), allocatable :: y
     double precision, dimension(:), allocatable :: tmp
-   integer :: nx = 8000, ny = 8000, i;       character(LEN = 30) :: arg
+   integer :: nx = 500, ny = 500, i
    !     Allocation of Arrays
    allocate(a( ny+0, nx+0), STAT=I); call check_err(I)
    allocate(x( ny+0), STAT=I); call check_err(I)
@@ -23,13 +23,10 @@ program atax
    !     Initialization
    call init_array(a, x, nx, ny)
    !     Kernel Execution
-   call polybench_timer_start();
    call kernel_atax(nx, ny, a, x, y, tmp)
-   call polybench_timer_stop();
-   call polybench_timer_print();
    !     Prevent dead-code elimination. All live-out data must be printed
    !     by the function call in argument.
-   CALL GET_COMMAND_ARGUMENT(1, arg);                               if( COMMAND_ARGUMENT_COUNT() > 42 .AND.  arg .EQ. '' ) then;      call print_array(y, ny);  end if ;
+         call print_array(y, ny);   ;
    !     Deallocation of Arrays
    deallocate(a)
    deallocate(x)

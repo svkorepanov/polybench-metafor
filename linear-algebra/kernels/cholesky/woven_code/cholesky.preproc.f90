@@ -3,20 +3,13 @@ PROGRAM CHOLESKY
    DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: p
    DOUBLE PRECISION :: x
    INTEGER :: i
-   CHARACTER(LEN = 30) :: arg
-   allocate(a(2000 + 0, 2000 + 0), STAT=i)
+   allocate(a(128 + 0, 128 + 0), STAT=i)
    call check_err(i)
-   allocate(p(2000 + 0), STAT=i)
+   allocate(p(128 + 0), STAT=i)
    call check_err(i)
-   call init_array(2000, p, a)
-   call polybench_timer_start()
-   call kernel_cholesky(2000, p, a)
-   call polybench_timer_stop()
-   call polybench_timer_print()
-   call get_command_argument(1, arg)
-   IF (command_argument_count() > 42 .and. arg == "") THEN
-      call print_array(2000, a)
-   END IF
+   call init_array(128, p, a)
+   call kernel_cholesky(128, p, a)
+   call print_array(128, a)
    deallocate(a)
    deallocate(p)
    contains
